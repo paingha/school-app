@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "638073687773",
+    "firebase_url": "https://theacademist-2c4da.firebaseio.com",
+    "project_id": "theacademist-2c4da",
+    "storage_bucket": "theacademist-2c4da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638073687773:android:2b399b437b65a293",
+        "android_client_info": {
+          "package_name": "com.theacademist_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638073687773-vupcu2t138prniovb5nquqigi7qupuhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theacademist_app",
+            "certificate_hash": "4d93d74f46ee12c2cf482c3d89b489ed9a93a77a"
+          }
+        },
+        {
+          "client_id": "638073687773-9gbmv4083vn8556mq22gcf8dnoisgn79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theacademist_app",
+            "certificate_hash": "7b70b0f79d0598e94ae6b19d68542db152012cc7"
+          }
+        },
+        {
+          "client_id": "638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnEbN1jNfE6mbrNn1fZsCbf_MG8WvBroA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
