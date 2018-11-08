@@ -41,13 +41,13 @@ export function user(state=init, action) {
         case 'REQUEST_USER':
             return {
                 ...state,
-                data: action.user,
+                data: undefined,
                 is_fetching: true,
             };
         case 'RECEIVE_USER':
             return {
                 ...state,
-                data: action.data.user,
+                data: action.user,
                 is_fetching: false,
             };
         case 'REGISTER_USER':

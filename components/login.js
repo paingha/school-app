@@ -31,15 +31,16 @@ class LoginScreen extends React.Component {
         GoogleSignin.configure({
           webClientId: '638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com',
           offlineAccess: false,
+          forceConsentPrompt: true,
         });
       }
       _signIn = async (e) => {
         try {
           //await GoogleSignin.hasPlayServices();
           const userInfo = await GoogleSignin.signIn();
-          this.setState({ userInfo, error: null },()=>{
+          this.setState({ email: userInfo.user.email, error: null },()=>{
             //alert(userInfo.user.email)
-            this.props.googleLogin(loginGoogle, userInfo.user.email, e)
+            this.props.googleLogin(loginGoogle, this.state.email, e)
           });
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {

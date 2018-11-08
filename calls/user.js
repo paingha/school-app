@@ -1,7 +1,7 @@
 import {requestLogin, receiveLogin, errorLogin, receiveUser, requestUser, errorRegister, registerUser, errorForgot, forgotUser} from '../actions/user';
 import { AsyncStorage } from "react-native"
 
-export function getUserCall(url, userID, token){
+export function getUserCall(userID, token){
     return (dispatch) => {
         dispatch(requestUser())
         fetch(`https://www.theacademist.com/api/v1/user/${userID}`, {
@@ -13,14 +13,35 @@ export function getUserCall(url, userID, token){
             .then(json=>{
                 if (json.error)
                     throw new Error(json.error.message);
-                    alert(json.user.id)
                     dispatch(receiveUser(json))
+                    //alert(json)
                 //alert(json.token);
             })
             .catch(error=>dispatch(errorLogin(error.message)));
         }
 }
 
+export function updateUserCall(url, userID, token, to, change){
+    return (dispatch) => {
+        const obj = {};
+        obj[`${to}`] = `${change}`;
+        fetch(`${url.replace('{user_id}', userID)}`, {
+                         method: 'PATCH',  
+                         headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+                         mode: 'cors',
+                         body: JSON.stringify(obj)
+                     })
+            .then(response=>response.json())
+            .then(json=>{
+                if (json.error)
+                    throw new Error(json.error.message);
+                    dispatch(receiveUser(json))
+                    //alert(json)
+                //alert(json.token);
+            })
+            .catch(error=>dispatch(errorLogin(error.message)));
+        }
+}
 
 export function loginUserCall(url, email, password, nav){
     if(url && email && password){
@@ -179,3 +200,4 @@ export function forgotUserCall(url, email, nav){
     };
 }
 }
+

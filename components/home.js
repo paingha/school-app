@@ -1,18 +1,42 @@
 import React from 'react';
-import { StyleSheet, View, Text, StatusBar, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, AsyncStorage, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import { onSignOut } from "../lib/auth";
 import NavCard from "./card"
 import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {getMajors, getCountries, updateUser} from '../settings'
+import {getMajorsCall, getApplicantCountriesCall} from '../calls/misc'
+import {updateUserCall} from '../calls/user'
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
+import ImagePicker from 'react-native-image-picker';
+
+const options = [
+  <Text style={{color: 'red', fontSize: 20}}>Close</Text>,
+  <Text style={{color: '#000', fontSize: 20}}>First Name</Text>,
+  <Text style={{color: '#000', fontSize: 20}}>Last Name</Text>,
+  //<Text style={{color: '#000', fontSize: 20}}>Profile Picture</Text>
+]
 
 class HomeScreen extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      visible: false
+      visible: false,
+      majors: null,
+      countries: null,
+      level: '',
+      major: '',
+      gpa: 0,
+      applicantCountry: '',
+      scholarshipCountry: '',
+      criteria: '',
+      token: '',
+      firstName: '',
+      lastName: '',
+      avatarSource: ''
     }
   }
     static navigationOptions = ({ navigation }) =>{
@@ -28,7 +52,8 @@ class HomeScreen extends React.Component {
             size={30}
             onPress={()=> {
               let e = navigation;
-              onSignOut(e)
+              //onSignOut(e)
+              navigation.openDrawer();
               //navigation.navigate('Drawer')
             }}        
             style={{
@@ -45,9 +70,78 @@ class HomeScreen extends React.Component {
       }
       };
   componentDidMount(){
-    //console.log(this.props.firstName.toString())
+    //alert(this.props.firstName.toString())
+    this.props.fetchMajors(getMajors)
+    this.props.fetchCountries(getCountries)
+    AsyncStorage.getItem('TOKEN', (err, result)=>{
+      if (result){
+        //get user here
+        this.setState({token: result})
+      }
+    })
+  }
+  /*selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      //alert('Response = ', response);
+
+      if (response.didCancel) {
+        alert('User cancelled photo picker');
+      }
+      else if (response.error) {
+        alert('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        alert('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        }, ()=>{
+          alert(source.toString())
+        });
+      }
+    });
+  }*/
+  showActionSheet = () => {
+    this.ActionSheet.show()
+  }
+  levelChange(value){
+    this.setState({level: value})
+  }
+  majorChange(value){
+    this.setState({major: value})
+  }
+  criteriaChange(value){
+    this.setState({criteria: value})
+  }
+  gpaChange(value){
+    this.setState({gpa: parseFloat(value)}, ()=>{
+      //alert(parseFloat(value))
+    })
+  }
+  applicantCountryChange(value){
+    this.setState({applicantCountry: value})
+  }
+  scholarshipCountryChange(value){
+    this.setState({scholarshipCountry: value})
   }
   render() {
+    const {id, firstName, lastName, coin, major, image, referralToken, scholarshipCountry, gpa, applicantCountry, saved, criteria, level} = this.props.currentUser;
+    const savedNumber = saved.length
     const {height, width} = Dimensions.get('window');
     const deviceWidth = width;
     const bannerHeight = height/20;
@@ -55,9 +149,9 @@ class HomeScreen extends React.Component {
     const btnWidth1 = width - 45;
     const deviceWidthinner = width - 40;
     const navWidth = ((width/3) - (10 + 10));
-    const navHeight = (height/3) - 80;
+    const navHeight = (height/3) - 40;
     const BContent = <Icon style={[styles.btn, styles.btnModal]} name='close' size={30} color="#085078" />;
-    let level = [{
+    let levels = [{
       value: 'Graduate',
       label: 'Graduate',
     }, {
@@ -71,14 +165,8 @@ class HomeScreen extends React.Component {
       value: 'Need',
       label: 'Need',
     }];
-    let countries = [{
-      value: 'Ghana',
-      label: 'Ghana',
-    }, {
-      value: 'Nigeria',
-      label: 'Nigeria',
-    }];
-    let scholarshipCountry = [{
+    let countries = this.props.countries;
+    let scholarshipCountries = [{
       value: 'US',
       label: 'US',
     }, {
@@ -149,25 +237,7 @@ class HomeScreen extends React.Component {
       value: '4.0',
       label: '4.0',
     }];
-    let major = [{
-      value: 'Accounting',
-      label: 'Accounting',
-    }, {
-      value: 'Business',
-      label: 'Business',
-    },{
-      value: 'Computer Science',
-      label: 'Computer Science',
-    },{
-      value: 'Computer Engineering',
-      label: 'Computer Engineering',
-    },{
-      value: 'Mechanical Engineering',
-      label: 'Mechanical Engineering',
-    },{
-      value: 'Business',
-      label: 'Business',
-    }];
+    let majors = this.props.majors;
     return (
     <React.Fragment>
     <View style={styles.mainContent}>
@@ -177,17 +247,16 @@ class HomeScreen extends React.Component {
         />
         <View style={{flex: 1, alignSelf: 'stretch', minHeight:bannerHeight, marginBottom: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', elevation: 3}}>
         <ImageBackground source={require('../assets/banner-img.png')} style={{backgroundColor:'#085078', flex: 1, width: '100%', height: '100%', flexDirection: 'column', alignItems: 'center', justifyContent:'space-evenly'}}>
-          <View style={{width: 120, height:120, borderRadius: 60, backgroundColor:'white', marginTop:12}}>
-          </View>
+          <Image source={{uri: `${image}`}} style={{width: 120, height:120, borderRadius: 60, backgroundColor:'white', marginTop:12}}/>
           <View style={{flex: 1, width: '100%', flexDirection: 'row', justifyContent:'space-between', marginTop:-20, paddingLeft:15, paddingRight:15}}>
           <View style={{}}>
             <Text onPress={() => this.refs.modal4.open()} style={{alignSelf:'center', color:'white', fontSize: 18}}>
-              name
+              {firstName} {lastName}
             </Text>
             </View>
             <View style={{}}>
             <Text onPress={() => this.refs.modal9.open()} style={{alignSelf:'center',color:'white', fontSize: 18}}>
-              coin
+              {coin} {coin > 0 ? <React.Fragment>coins</React.Fragment>: <React.Fragment>coin</React.Fragment>}
             </Text>
           </View>
           </View>
@@ -198,21 +267,21 @@ class HomeScreen extends React.Component {
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="graduation-cap" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Level</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>Undergraduate</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{level}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.refs.modal5.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="book" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Major</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>Business</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{major}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.refs.modal6.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="globe" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Scholarship's Country</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>US</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{scholarshipCountry}</Text>
         </View>
         </TouchableOpacity>
        </View>
@@ -221,43 +290,140 @@ class HomeScreen extends React.Component {
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="trophy" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>My GPA</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>3.3</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{gpa}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.refs.modal8.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="clipboard" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Criteria</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>Merit</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{criteria}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> console.log('saved')}>
+        <TouchableOpacity onPress={()=> {
+          this.refs.savedModal.open()
+        }}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="download" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Saved</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>2</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{savedNumber}</Text>
         </View>
         </TouchableOpacity>
        </View>
-       <View style={{flex: 1, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
-       <TouchableOpacity onPress={()=> alert('hey')}>
+       <View style={{flex: 1, height: '100%', marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+       <TouchableOpacity style={{height: '100%'}} >
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="tachometer" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>My Referral</Text>
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Points</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>3</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{referralToken}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=> this.refs.modal9.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="flag" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>My Country</Text>
-          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>Nigeria</Text>
+          <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{applicantCountry}</Text>
         </View>
         </TouchableOpacity>
-       <NavCard icon="ellipsis-h" title="More" width={navWidth} height={navHeight} />
+        <TouchableOpacity onPress={this.showActionSheet}>
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="ellipsis-h" size={30} color="#085078" />
+          <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>More</Text>
+        </View>
+        </TouchableOpacity>
        </View>
     </View>
+    <ActionSheet
+          ref={o => this.ActionSheet = o}
+          title={<Text style={{color: '#085078', fontSize: 20}}>Update Your Profile</Text>}
+          options={options}
+          cancelButtonIndex={0}
+          onPress={(index) => { 
+            if (index == 1){
+              this.refs.profile1.open()
+            }
+            else if(index == 2){
+              this.refs.profile2.open()
+            }
+            /*else if(index == 3){
+              this.selectPhotoTapped()
+            }*/
+           }}
+        />
+    <Modal style={[styles.modal, styles.modal6]} position={"bottom"} ref={"profile1"} backdropContent={BContent}>
+    <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}> Update First Name</Text>
+    <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
+    <TextInput
+      autoCapitalize='none'
+      autoCorrect={false}
+      spellCheck={false}
+      placeholder='First Name'
+      onChangeText={(firstName)=> this.setState({firstName})}
+        style={{marginTop: 15, height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+      />
+    </View>
+    <TouchableHighlight
+        onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "firstName", this.state.firstName)
+        },3000)
+      })
+      }
+      }
+         style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
+        >
+         <Text style={{fontSize: 20, color: 'white'}}> Update</Text>
+        </TouchableHighlight>
+    </Modal>
+    <Modal style={[styles.modal, styles.modal6]} position={"bottom"} ref={"profile2"} backdropContent={BContent}>
+    <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}> Update Last Name</Text>
+    <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
+    <TextInput
+      autoCapitalize='none'
+      autoCorrect={false}
+      spellCheck={false}
+      placeholder='Last Name'
+      onChangeText={(lastName)=> this.setState({lastName})}
+        style={{marginTop: 15, height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+      />
+    </View>
+    <TouchableHighlight
+        onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "lastName", this.state.lastName)
+        },3000)
+      })
+      }
+      }
+         style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
+        >
+         <Text style={{fontSize: 20, color: 'white'}}> Update </Text>
+        </TouchableHighlight>
+    </Modal>
+    <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+    <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}> Update Level</Text>
+    <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
+    <Dropdown
+        label='My Level'
+        baseColor='#085078'
+        textColor='#085078'
+        fontSize={20}
+        data={levels}
+      />
+    </View>
+    <TouchableHighlight
+        
+         style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
+        >
+         <Text style={{fontSize: 20, color: 'white'}}> Update</Text>
+        </TouchableHighlight>
+    </Modal>
+    
     <Modal style={[styles.modal, styles.modal4]} position={"bottom"} ref={"modal4"} backdropContent={BContent}>
     <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}> Update Level</Text>
     <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
@@ -266,10 +432,20 @@ class HomeScreen extends React.Component {
         baseColor='#085078'
         textColor='#085078'
         fontSize={20}
-        data={level}
+        data={levels}
+        onChangeText={this.levelChange.bind(this)}
       />
     </View>
     <TouchableHighlight
+        onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "level", this.state.level)
+        },3000)
+      })
+      }
+      }
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
         >
          <Text style={{fontSize: 20, color: 'white'}}> Update My Level</Text>
@@ -283,10 +459,20 @@ class HomeScreen extends React.Component {
         baseColor='#085078'
         textColor='#085078'
         fontSize={20}
-        data={major}
+        data={majors}
+        onChangeText={this.majorChange.bind(this)}
       />
     </View>
     <TouchableHighlight
+       onPress={()=>{
+        this.setState({visible: true}, ()=>{
+          setTimeout(()=>{
+          this.setState({visible: false})
+        this.props.updateProfile(updateUser, id, this.state.token, "major", this.state.major)
+      },3000)
+    })
+    }
+    }
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
         >
          <Text style={{fontSize: 20, color: 'white'}}> Update My Major</Text>
@@ -300,10 +486,20 @@ class HomeScreen extends React.Component {
         baseColor='#085078'
         textColor='#085078'
         fontSize={20}
-        data={scholarshipCountry}
+        data={scholarshipCountries}
+        onChangeText={this.scholarshipCountryChange.bind(this)}
       />
     </View>
     <TouchableHighlight
+         onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "scholarshipCountry", this.state.scholarshipCountry)
+        },3000)
+      })
+      }
+      }
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
         >
          <Text style={{fontSize: 20, color: 'white'}}> Update Scholarship Country</Text>
@@ -318,9 +514,19 @@ class HomeScreen extends React.Component {
         textColor='#085078'
         fontSize={20}
         data={gpas}
+        onChangeText={this.gpaChange.bind(this)}
       />
     </View>
     <TouchableHighlight
+        onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "gpa", this.state.gpa)
+        },3000)
+      })
+      }
+      } 
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
         >
          <Text style={{fontSize: 20, color: 'white'}}> Update My GPA</Text>
@@ -335,9 +541,19 @@ class HomeScreen extends React.Component {
         textColor='#085078'
         fontSize={20}
         data={criterias}
+        onChangeText={this.criteriaChange.bind(this)}
       />
     </View>
     <TouchableHighlight
+        onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "criteria", this.state.criteria)
+        },3000)
+      })
+      }
+      }
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
         >
          <Text style={{fontSize: 20, color: 'white'}}> Update My Criteria</Text>
@@ -352,10 +568,19 @@ class HomeScreen extends React.Component {
         textColor='#085078'
         fontSize={20}
         data={countries}
+        onChangeText={this.applicantCountryChange.bind(this)}
       />
     </View>
     <TouchableHighlight
-        onPress={()=>{this.setState({visible: !this.state.visible})}}
+        onPress={()=>{
+          this.setState({visible: true}, ()=>{
+            setTimeout(()=>{
+            this.setState({visible: false})
+          this.props.updateProfile(updateUser, id, this.state.token, "applicantCountry", this.state.applicantCountry)
+        },3000)
+      })
+      }
+      }
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
         >
          <Text style={{fontSize: 20, color: 'white'}}> Update My Country</Text>
@@ -373,6 +598,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   modal4: {
+    height: 250
+  },
+  modal5: {
+    height: 450
+  },
+  modal6: {
     height: 250
   },
   mainContent: {
@@ -424,15 +655,33 @@ const styles = StyleSheet.create({
 function mapper(state) {
   return {
       is_fetching: state.user.is_fetching,
-      //firstName: state.user,
+      currentUser: state.user.data,
+      majors: state.major.data,
+      countries: state.country.data,
       error: state.user.error,
       redirect: state.user.redirect
   }
 }
-/*const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    
+    updateProfile: (url, userID, token, toChange, change) => 
+      {
+        dispatch(
+          updateUserCall(url, userID, token, toChange, change)
+        );
+      },
+    fetchMajors: (url) => 
+      {
+        dispatch(
+          getMajorsCall(url)
+        );
+      },fetchCountries: (url) => 
+      {
+        dispatch(
+          getApplicantCountriesCall(url)
+        );
+      },
   };
-};*/
+};
 
-export default connect(mapper/*, mapDispatchToProps*/)(HomeScreen);
+export default connect(mapper, mapDispatchToProps)(HomeScreen);

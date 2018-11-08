@@ -32,12 +32,13 @@ class RegisterScreen extends React.Component {
     GoogleSignin.configure({
       webClientId: '638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com',
       offlineAccess: false,
+      forceConsentPrompt: true,
     });
   }
   _googleSignIn = async (e) =>{
     try {
       const userInfo = await GoogleSignin.signIn();
-      await this.setState({ email: userInfo.user.email, firstName: userInfo.user.first_name, lastName: userInfo.user.lastName, error: null },()=>{
+      this.setState({ email: userInfo.user.email, firstName: userInfo.user.givenName, lastName: userInfo.user.familyName, error: null },()=>{
         alert(userInfo.user.email)
         const {email, firstName, lastName} = this.state;
         this.props.googleRegister(registerGoogle, email, firstName, lastName, e)
@@ -99,7 +100,12 @@ class RegisterScreen extends React.Component {
     <ImageBackground source={require('../assets/login-bg.jpg')} style={styles.mainContent}>
         <Image style={styles.logo} source={require('../assets/logo.png')}/>
       <Text style={styles.title}>Create An Account</Text>
-      
+      {
+        this.props.error?
+        <Text>{this.props.error}</Text>
+        :
+        null
+      }
       <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
         autoCapitalize='none'

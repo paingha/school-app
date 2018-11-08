@@ -38,7 +38,7 @@ export default class App extends React.Component {
   }
 }
 componentWillMount(){
-  isSignedIn()
+  isSignedIn(store)
       .then(res => this.setState({ signedIn: res, checkedSignIn: true}, ()=>{
         AsyncStorage.getItem('@OnBoarded', (err, result) => {
           //if (result){
