@@ -5,6 +5,8 @@ import {major} from './major'
 import {usState} from './state'
 import {scholarship} from './scholarship'
 import {gpaSchool} from './gpaSchool'
+import {blog} from './blog'
+import {forum} from './forum'
 
 export const rootReducer = combineReducers({
     user,
@@ -12,5 +14,7 @@ export const rootReducer = combineReducers({
     major,
     usState,
     scholarship,
-    gpaSchool
+    gpaSchool,
+    blog,
+    forum
 });

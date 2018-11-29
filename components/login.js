@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Alert, ImageBackground, Text, Image, TextInput, TouchableOpacity, Dimensions, TouchableHighlight, KeyboardAvoidingView  } from 'react-native';
+import { StyleSheet, View, Alert, ScrollView, ImageBackground, Text, Image, TextInput, TouchableOpacity, Dimensions, TouchableHighlight, KeyboardAvoidingView  } from 'react-native';
 import {login, loginFacebook, loginGoogle} from '../settings'
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FBSDK, {LoginManager, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import {loginUserCall, facebookLoginUserCall, googleLoginUserCall} from '../calls/user';
-
+const { height } = Dimensions.get('window');
 class LoginScreen extends React.Component {
     constructor(props){
         super(props)
@@ -17,11 +17,15 @@ class LoginScreen extends React.Component {
             userId: '',
             token: '',
             userInfo: null,
-            visible: false
+            visible: false,
+            screenHeight: height,
         }
     }
     static navigationOptions = {
         header: null
+      };
+      onContentSizeChange = (contentWidth, contentHeight) => {
+        this.setState({ screenHeight: contentHeight });
       };
       async componentDidMount() {
         this._configureGoogleSignIn();
@@ -100,7 +104,15 @@ class LoginScreen extends React.Component {
     const deviceWidth = width - 30;
     const deviceWidthinner = width - 40;
     const {email, password} = this.state
+    const scrollEnabled = this.state.screenHeight > height;
     return (
+      <ScrollView 
+      style={{flex:1}}
+      contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
+      scrollEnabled={scrollEnabled}
+      onContentSizeChange={this.onContentSizeChange}
+      >
+      <KeyboardAvoidingView style={{flexGrow:1}} behavior="padding" enabled>
       <ImageBackground source={require('../assets/login-bg.jpg')} style={styles.mainContent}>
         <Image style={styles.logo} source={require('../assets/logo.png')}/>
       <Text style={styles.title}>Login</Text>
@@ -191,6 +203,8 @@ class LoginScreen extends React.Component {
         <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} cancelable={false} animation="fade"/>
       </View>
       </ImageBackground>
+      </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

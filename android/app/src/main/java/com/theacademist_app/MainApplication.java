@@ -3,6 +3,8 @@ package com.theacademist_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import cl.json.RNSharePackage;
+import com.dooboolab.RNIap.RNIapPackage;
 import com.imagepicker.ImagePickerPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.CallbackManager;
@@ -36,6 +38,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSharePackage(),
+            new RNIapPackage(),
             new ImagePickerPackage(),
               new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),

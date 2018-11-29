@@ -15,6 +15,11 @@ const urls = {
     "scholarship_search": `${baseUrl}api/v1/scholarship/search`,
     "gpa_search": `${baseUrl}api/v1/school/search-by-gpa`,
     "getStates": `${baseUrl}services/get-state`,
+    "save_scholarship": `${baseUrl}api/v1/scholarship/save/{user_id}`,
+    "unsave_scholarship": `${baseUrl}api/v1/scholarship/unsave/{user_id}`,
+    "getBlogs": `${baseUrl}api/v1/blog?offset={off}`,
+    "getForums": `${baseUrl}api/v1/forum?offset={off}`,
+    "searchForum": `${baseUrl}api/v1/forum/search`
 }
 
 module.exports = urls;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, StatusBar, AsyncStorage, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, AsyncStorage, FlatList, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import { onSignOut } from "../lib/auth";
 import NavCard from "./card"
 import {connect} from 'react-redux';
@@ -116,6 +116,38 @@ class HomeScreen extends React.Component {
       }
     });
   }*/
+  renderFooter = () => {
+    return (
+      <View
+        style={{
+          paddingVertical: 20,
+          borderTopWidth: 1,
+          marginVertical: 20,
+          borderColor: "#CED0CE",
+          alignSelf: 'center'
+        }}
+      >
+        <TouchableOpacity style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+      <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+      <Text style={{fontSize:20, color:"white"}}>Load More</Text>
+      </View>
+      </TouchableOpacity>
+      </View>
+    );
+  };
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          marginTop:10,
+          marginBottom:10,
+          width: "100%",
+          backgroundColor: "#CED0CE"
+        }}
+      />
+    );
+  };
   showActionSheet = () => {
     this.ActionSheet.show()
   }
@@ -263,21 +295,21 @@ class HomeScreen extends React.Component {
         </ImageBackground>
         </View>
        <View style={{flex: 1, marginTop: 0, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
-       <TouchableOpacity onPress={()=> this.refs.modal4.open()}>
+       <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal4.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="graduation-cap" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Level</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{level}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.refs.modal5.open()}>
+        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal5.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="book" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Major</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{major}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.refs.modal6.open()}>
+        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal6.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="globe" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Scholarship's Country</Text>
@@ -286,21 +318,21 @@ class HomeScreen extends React.Component {
         </TouchableOpacity>
        </View>
        <View style={{flex: 1, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
-       <TouchableOpacity onPress={()=> this.refs.modal7.open()}>
+       <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal7.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="trophy" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>My GPA</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{gpa}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.refs.modal8.open()}>
+        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal8.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="clipboard" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>Criteria</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{criteria}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> {
+        <TouchableOpacity style={{flex:1}} onPress={()=> {
           this.refs.savedModal.open()
         }}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
@@ -311,7 +343,7 @@ class HomeScreen extends React.Component {
         </TouchableOpacity>
        </View>
        <View style={{flex: 1, height: '100%', marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
-       <TouchableOpacity style={{height: '100%'}} >
+       <TouchableOpacity style={{flex:1}} >
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="tachometer" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>My Referral</Text>
@@ -319,14 +351,14 @@ class HomeScreen extends React.Component {
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{referralToken}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this.refs.modal9.open()}>
+        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal9.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="flag" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>My Country</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 14}}>{applicantCountry}</Text>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.showActionSheet}>
+        <TouchableOpacity style={{flex:1}} onPress={this.showActionSheet}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="ellipsis-h" size={30} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontSize: 15, fontWeight:'bold'}}>More</Text>
@@ -406,22 +438,39 @@ class HomeScreen extends React.Component {
         </TouchableHighlight>
     </Modal>
     <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
-    <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}> Update Level</Text>
-    <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
-    <Dropdown
-        label='My Level'
-        baseColor='#085078'
-        textColor='#085078'
-        fontSize={20}
-        data={levels}
-      />
-    </View>
-    <TouchableHighlight
-        
-         style={{alignItems: 'center', height: 50, marginBottom: 15, width: btnWidth1, elevation: 1, backgroundColor: '#085078', paddingBottom: 8, paddingTop: 12}}
-        >
-         <Text style={{fontSize: 20, color: 'white'}}> Update</Text>
-        </TouchableHighlight>
+    <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:10, paddingBottom:0}}>Saved Scholarships</Text>
+    {saved ?
+        <FlatList
+        style={{alignSelf: 'center', paddingRight:5, paddingLeft:5, fontSize:25, width:'90%'}}
+            data={saved}
+            keyExtractor={item => item.id.toString()}
+            ListFooterComponent={this.renderFooter}
+            ItemSeparatorComponent={this.renderSeparator}
+            renderItem={({item}) => 
+            <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
+            <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
+            <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
+            <Text >Country: {item.country}</Text>
+            <Text>Criteria: {item.criteria}</Text>
+            </View>
+            <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+            <Text>Level: {item.level}</Text>
+            <Text>GPA: {item.gpa? <React.Fragment>{item.gpa.toFixed(2)}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+            </View>
+            <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+            <TouchableOpacity onPress={()=> this.setState({shows: true})}>
+            <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="share-alt" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Share</Text>
+            </View>
+            </TouchableOpacity>
+            </View>
+            </View>
+        }
+            />
+         
+            :
+            <Text style={{fontSize: 20, marginTop:20, alignSelf:'center'}}>No Search Results </Text>
+        }
     </Modal>
     
     <Modal style={[styles.modal, styles.modal4]} position={"bottom"} ref={"modal4"} backdropContent={BContent}>
@@ -601,7 +650,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   modal5: {
-    height: 450
+    height: 500
   },
   modal6: {
     height: 250

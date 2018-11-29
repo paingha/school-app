@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { NavigationActions } from 'react-navigation'
+import {onSignOut} from '../lib/auth';
 
 export default class DrawerContainer extends React.Component {
 
@@ -36,22 +37,36 @@ export default class DrawerContainer extends React.Component {
           GPA Calculator
         </Text>
         <Text
-          onPress={() => navigation.navigate('SecondViewStack')}
+          onPress={() => navigation.navigate('SixthViewStack')}
           style={styles.uglyDrawerItem}>
           Buy Coins
         </Text>
         <Text
-          onPress={() => navigation.navigate('SecondViewStack')}
+          onPress={() => navigation.navigate('SeventhViewStack')}
+          style={styles.uglyDrawerItem}>
+          Blog
+        </Text>
+        <Text
+          onPress={() => navigation.navigate('EightthViewStack')}
+          style={styles.uglyDrawerItem}>
+          Forum
+        </Text>
+        <Text
+          onPress={() => navigation.navigate('NinethViewStack')}
           style={styles.uglyDrawerItem}>
           About Us
         </Text>
         <Text
-          onPress={() => navigation.navigate('SecondViewStack')}
+          onPress={() => navigation.navigate('TenthViewStack')}
           style={styles.uglyDrawerItem}>
           Legal 
         </Text>
         <Text
-          onPress={()=>alert('logout')}
+          onPress={()=> {
+            let e = navigation;
+            onSignOut(e)
+          }
+        }
           style={styles.uglyDrawerItem1}>
           Log Out
         </Text>
@@ -64,23 +79,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    paddingTop: 20,
+    paddingTop: 15,
     paddingHorizontal: 20
   },
   uglyDrawerItem: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: 'black',
     padding: 15,
-    margin: 5,
+    margin: 0,
     textAlign: 'center'
   },
   uglyDrawerItem1: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#E73536',
     padding: 15,
-    margin: 5,
+    margin: 3,
     borderRadius: 2,
     borderColor: '#E73536',
     borderWidth: 1,

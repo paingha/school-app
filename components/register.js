@@ -6,7 +6,8 @@ import {register, registerFacebook, registerGoogle} from '../settings'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FBSDK, {LoginManager, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import { StyleSheet, ImageBackground, View, Alert, Text, Image, TextInput, TouchableOpacity, Dimensions, TouchableHighlight, KeyboardAvoidingView  } from 'react-native';
+import { StyleSheet, ImageBackground, ScrollView, View, Alert, Text, Image, TextInput, TouchableOpacity, Dimensions, TouchableHighlight, KeyboardAvoidingView  } from 'react-native';
+const { height } = Dimensions.get('window');
 
 class RegisterScreen extends React.Component {
     static navigationOptions = {
@@ -21,13 +22,16 @@ class RegisterScreen extends React.Component {
       password: '',
       userId: '',
       visible: false,
-      userInfo: null
+      userInfo: null,
+      screenHeight: height,
     }
   }
   async componentDidMount() {
     this._configureGoogleSignIn();
   }
-
+  onContentSizeChange = (contentWidth, contentHeight) => {
+    this.setState({ screenHeight: contentHeight });
+  };
   _configureGoogleSignIn() {
     GoogleSignin.configure({
       webClientId: '638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com',
@@ -96,7 +100,15 @@ class RegisterScreen extends React.Component {
     const deviceWidth = width - 30;
     const deviceWidthinner = width - 40;
     const {email, password, confirmPassword, firstName, lastName} = this.state
+    const scrollEnabled = this.state.screenHeight > height;
     return (
+      <ScrollView 
+      style={{flex:1}}
+      contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
+      scrollEnabled={scrollEnabled}
+      onContentSizeChange={this.onContentSizeChange}
+      >
+      <KeyboardAvoidingView style={{flexGrow:1}} behavior="padding" enabled>
     <ImageBackground source={require('../assets/login-bg.jpg')} style={styles.mainContent}>
         <Image style={styles.logo} source={require('../assets/logo.png')}/>
       <Text style={styles.title}>Create An Account</Text>
@@ -207,7 +219,8 @@ class RegisterScreen extends React.Component {
         <Text style={{alignItems: 'center', fontSize: 16, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Locked Out? <Text onPress={() => this.props.navigation.navigate("ForgotPassword")} style={{fontWeight: 'bold', fontSize: 17}}>Reset Password</Text></Text>
         <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} cancelable={false} animation="fade"/>
     </ImageBackground>
-    
+    </KeyboardAvoidingView>
+    </ScrollView>
     );
   }
 }

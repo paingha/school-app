@@ -20,6 +20,13 @@ import RegisteredScreen from "./components/registered";
 import SentScreen from "./components/sent";
 import FirstLoginScreen from "./components/firstLogin";
 import DrawerContainer from './containers/DrawerContainer'
+import BuyCoinScreen from "./components/buy_coin";
+import BlogScreen from "./components/blog";
+import BlogDetailScreen from "./components/blogDetail";
+import ForumDetailScreen from "./components/forumDetail";
+import ForumScreen from "./components/forum";
+import AboutScreen from "./components/about";
+import LegalScreen from "./components/legal";
 //import Profile from "./screens/Profile";
 
 const headerStyle = {
@@ -66,6 +73,19 @@ export const SignedOut = createStackNavigator({
 const drawerList = [
 
 ];
+const Blog = createStackNavigator({
+  Blog: {
+      screen: BlogScreen,
+  },
+  BlogDetail: {
+      screen: BlogDetailScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `${navigation.state.params.topic}`,
+      }),
+  }
+},{ initialRouteName: 'Blog' });
+
+
 const Stack = {
 	FirstView: {
 		screen: HomeScreen
@@ -81,6 +101,27 @@ const Stack = {
   },
   FifthView: {
     screen: CalculatorScreen
+  },
+  SixthView: {
+    screen: BuyCoinScreen
+  },
+  SeventhView: {
+    screen: BlogScreen
+  },
+  EightthView: {
+    screen: ForumScreen
+  },
+  NinethView: {
+    screen: AboutScreen
+  },
+  TenthView: {
+    screen: LegalScreen
+  },
+  BlogDetailView: {
+		screen: BlogDetailScreen
+  },
+  ForumDetailView: {
+    screen: ForumDetailScreen
   }
 };
 
@@ -104,6 +145,34 @@ const DrawerRoutes = {
   FifthViewStack: {
 		name: 'FifthViewStack',
 		screen: createStackNavigator(Stack, { initialRouteName: 'FifthView' })
+  },
+  SixthViewStack: {
+		name: 'SixthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'SixthView' })
+  },
+  SeventhViewStack: {
+		name: 'SeventhViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'SeventhView' })
+  },
+  EightthViewStack: {
+		name: 'EightthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'EightthView' })
+  },
+  NinethViewStack: {
+		name: 'NinethViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'NinethView' })
+  },
+  TenthViewStack: {
+		name: 'TenthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'TenthView' })
+  },
+  EleventhViewStack: {
+		name: 'EleventhViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'BlogDetailView' })
+  },
+  TwelvethViewStack: {
+		name: 'TwelvethViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'ForumDetailView' })
 	},
 };
 
