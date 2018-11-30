@@ -27,7 +27,7 @@ export default class DrawerContainer extends React.Component {
           School Search by GPA
         </Text>
         <Text
-          onPress={() => navigation.navigate('SecondViewStack')}
+          onPress={() => navigation.navigate('ThirteenthViewStack')}
           style={styles.uglyDrawerItem}>
           School Search by Major
         </Text>

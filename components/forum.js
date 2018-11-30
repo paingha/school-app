@@ -6,6 +6,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {connect} from 'react-redux';
 import {getForums, searchForum} from '../settings';
 import {getForumCall, searchForumCall} from '../calls/forum';
+import Loader from '../disc/loader';
 const { height } = Dimensions.get('window');
 
 class ForumScreen extends React.Component{
@@ -95,13 +96,25 @@ static navigationOptions = ({ navigation }) =>{
                 <View style={{marginHorizontal:10, alignContent:'center', alignItems:'center', marginVertical: 10, backgroundColor:'white', flex:1, elevation:2, width:'90%'}}>
                     <Text style={{fontSize:18, fontWeight:'bold', marginVertical:10}}>Recent Articles</Text>
                     <View style={{flexDirection:'column', width:'80%'}}>
+                    {this.props.forums ?
+                    <React.Fragment>
+                    {this.props.forums.rows.map(forum =>{
                       <TouchableOpacity
-                      onPress={() => navigate('TwelvethViewStack')}>
+                      onPress={() => navigate('TwelvethViewStack',{ 
+                        forum_id: `${forum.id}`
+                    }
+                  )
+                      }>
                     <View style={{flexDirection:'row', marginVertical:10}}>
-                      <Icon name="book" size={20} style={{marginLeft:3, color:'#085078', marginTop: 1, marginRight: 10}}/><Text numberOfLines={1} style={{flex:1, fontSize:16}}>How to Buy Coin</Text>
+                      <Icon name="book" size={20} style={{marginLeft:3, color:'#085078', marginTop: 1, marginRight: 10}}/><Text numberOfLines={1} style={{flex:1, fontSize:16}}>{forum.topic}</Text>
                       </View>
                       </TouchableOpacity>
-
+                      })
+                    }
+                    </React.Fragment>
+                    :
+                    <Loader />
+                    }
 
 
                     </View>
@@ -114,8 +127,8 @@ static navigationOptions = ({ navigation }) =>{
 
 function mapper(state) {
   return {
+      forums: state.forum.data,
       currentUser: state.user.data,
-      forums: state.forum.data
   }
 }
 const mapDispatchToProps = (dispatch) => {

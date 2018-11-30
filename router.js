@@ -15,6 +15,7 @@ import LoginScreen from "./components/login";
 import HomeScreen from "./components/home";
 import ScholarshipScreen from "./components/scholarshipSearch";
 import GpaScreen from "./components/gpa";
+import MajorScreen from "./components/major";
 import CalculatorScreen from "./components/calculator";
 import RegisteredScreen from "./components/registered";
 import SentScreen from "./components/sent";
@@ -122,6 +123,9 @@ const Stack = {
   },
   ForumDetailView: {
     screen: ForumDetailScreen
+  },
+  MajorView: {
+    screen: MajorScreen
   }
 };
 
@@ -173,6 +177,10 @@ const DrawerRoutes = {
   TwelvethViewStack: {
 		name: 'TwelvethViewStack',
 		screen: createStackNavigator(Stack, { initialRouteName: 'ForumDetailView' })
+  },
+  ThirteenthViewStack: {
+		name: 'ThirteenthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'MajorView' })
 	},
 };
 
