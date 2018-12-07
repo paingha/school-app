@@ -36,3 +36,23 @@ export function receiveForumResult(result) {
         result
     }
 }
+
+export function requestSingleForum() {
+    return {
+        type: 'REQUEST_SINGLE_FORUM'
+    }
+}
+
+export function receiveSingleForum(singleForum) {
+    return {
+        type: 'RECEIVE_SINGLE_FORUM',
+        singleForum
+    }
+}
+
+export function errorSingleForum(errorSingle) {
+    return {
+        type: 'ERROR_SINGLE_FORUM',
+        errorSingle
+    }
+}

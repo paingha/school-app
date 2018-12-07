@@ -1,6 +1,8 @@
 const init = {
     data: null,
     is_fetching: false,
+    single: null,
+    error_single_forum: null,
     result: null,
     error: null,
 }
@@ -45,12 +47,29 @@ export function forum(state=init, action) {
                 is_fetching: false,
                 error: action.error
         };
-            case 'ERROR_FORUM':
+        case 'REQUEST_SINGLE_FORUM':
+            return {
+                ...state,
+                is_fetching: true,
+                single: undefined
+            };
+        case 'RECEIVE_SINGLE_FORUM':
+            return {
+                ...state,
+                single: action.singleForum,
+                is_fetching: false,
+            };
+        case 'ERROR_FORUM':
                 return {
                     ...state,
                     is_fetching: false,
                     error: action.error
             };
+        case 'ERROR_SINGLE_FORUM':
+            return {
+                ...state,
+                error_single_forum: action.errorSingle
+        };
         default:
             return state
     }

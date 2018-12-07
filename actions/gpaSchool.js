@@ -17,3 +17,23 @@ export function receiveGpaSchool(gpaSchool) {
         gpaSchool
     }
 }
+
+export function errorSingleGpa(error) {
+    return {
+        type: 'ERROR_SINGLE_GPASCHOOL',
+        error
+    }
+}
+
+export function requestSingleGpa() {
+    return {
+        type: 'REQUEST_SINGLE_GPASCHOOL'
+    }
+}
+
+export function receiveSingleGpa(singleSchool) {
+    return {
+        type: 'RECEIVE_SINGLE_GPASCHOOL',
+        singleSchool
+    }
+}

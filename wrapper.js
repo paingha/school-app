@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, AsyncStorage, StatusBar, View, Text, Image } from 'react-native';
+import { StyleSheet, AsyncStorage, StatusBar, View, Text, Image, NetInfo } from 'react-native';
 import { createRootNavigator } from "./router";
 import { isSignedIn } from "./lib/auth";
 import AppIntroSlider from 'react-native-app-intro-slider';
+import OfflineNotice from './components/offline';
+
 const styles = StyleSheet.create({
   image1: {
     width: 180,
@@ -98,13 +100,19 @@ export default class Wrapper extends React.Component {
   this.state = {
     signedIn: null,
     checkedSignIn: false,
-    boardingState: this.props.boardState
+    boardingState: this.props.boardState,
+    isConnected: true
   }
 }
 componentWillMount() {
-    
+  NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
   }
-
+  componentWillUnmount() {
+    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
+ }
+  handleConnectivityChange = isConnected => {
+    this.setState({ isConnected });
+  }
   _onDone = () => {
     AsyncStorage.setItem('@OnBoarded', "true").then(()=>
       this.setState({boardingState: "true"})
@@ -112,12 +120,17 @@ componentWillMount() {
   }
   render() { 
     const { checkedSignIn, signedIn } = this.props;
+    const {isConnected} = this.state;
     if (!checkedSignIn) {
       return null;
     }
       if(this.state.boardingState == "true") {
         const Layout = createRootNavigator(signedIn);
-        return <Layout />;
+        if (isConnected){
+          return <Layout />
+        }else{
+          return <OfflineNotice />
+        }
       
     } else {
       return <AppIntroSlider slides={slides} onDone={this._onDone} onSkip={this._onDone} scrollEnabled={false} showSkipButton={true} bottomButton/>;

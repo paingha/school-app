@@ -2,19 +2,19 @@ import React from 'react';
 import { StyleSheet, FlatList, Clipboard,
   ToastAndroid,
   AlertIOS,
-  Platform, View, Text, StatusBar, AsyncStorage, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+  Platform, View, Text, StatusBar, AsyncStorage, Linking, ScrollView, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {getMajors, getCountries, scholarship_search, save_scholarship, unsave_scholarship} from '../settings'
+import {getMajors, getCountries, scholarship_search, save_scholarship, unsave_scholarship, singleScholarship} from '../settings'
 import {getMajorsCall, getApplicantCountriesCall} from '../calls/misc'
-import {scholarshipSearchCall, scholarshipUnSaveCall, scholarshipSaveCall} from '../calls/scholarship'
+import {scholarshipSearchCall, scholarshipUnSaveCall, scholarshipSaveCall, singleScholarshipCall} from '../calls/scholarship'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
 import Share, {ShareSheet, Button} from 'react-native-share';
 import _ from 'lodash';
-
+const { height } = Dimensions.get('window');
 
 class ScholarshipScreen extends React.Component {
   constructor(props){
@@ -34,6 +34,8 @@ class ScholarshipScreen extends React.Component {
       criteria: '',
       token: '',
       offset: 0,
+      loadMore: false,
+      screenHeight: height,
     }
   }
     static navigationOptions = ({ navigation }) =>{
@@ -78,6 +80,30 @@ class ScholarshipScreen extends React.Component {
       }
     })
   }
+  onContentSizeChange = (contentWidth, contentHeight) => {
+    this.setState({ screenHeight: contentHeight });
+  };
+  loadMore = () => {
+    const {offset} = this.state;
+    const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
+    this.setState({offset: offset + 10}, ()=>{
+      if (this.props.scholarships.rows){
+        let data = this.props.scholarships.rows
+        this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, data)
+        this.setState({loadMore: true})
+      }
+      else{
+        let data = []
+        this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, data)
+      
+      }
+      
+    })
+  }
+  moreData = (e) => {
+    this.props.singleScholarship(singleScholarship, this.state.token, e)
+    this.refs.savedModal.open()
+  }
   renderHeader = () => {
     return <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> {this.props.scholarships.count} {this.props.scholarships.count == 1 ? <Text>Scholarship Found</Text>:  <Text>Scholarships Found</Text> }</Text>;
   };
@@ -88,6 +114,10 @@ class ScholarshipScreen extends React.Component {
     this.setState({shows:true});
   }
   renderFooter = () => {
+    if (this.state.offset >= this.props.scholarships.count){
+      return null
+    }
+    else {
     return (
       <View
         style={{
@@ -98,13 +128,14 @@ class ScholarshipScreen extends React.Component {
           alignSelf: 'center'
         }}
       >
-        <TouchableOpacity style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+        <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <Text style={{fontSize:20, color:"white"}}>Load More</Text>
       </View>
       </TouchableOpacity>
       </View>
-    );
+    )
+  }
   };
   renderSeparator = () => {
     return (
@@ -147,7 +178,7 @@ class ScholarshipScreen extends React.Component {
   }
   _keyExtractor = (item, index) => item.id;
   render() {
-    
+    const scrollEnabled = this.state.screenHeight > 550;
     const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
     let shareOptions = {
       title: "The Academist",
@@ -301,14 +332,17 @@ class ScholarshipScreen extends React.Component {
         <View style={{flex: 0.75, alignSelf: 'stretch', height: 50, marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
         {this.props.scholarships ?
         <View style={{paddingVertical: 15, backgroundColor:'white'}}>
+        
         <FlatList
         style={{alignSelf: 'center', paddingRight:25, paddingLeft:25, fontSize:25, width:'100%'}}
             data={this.props.scholarships.rows}
             keyExtractor={item => item.id.toString()}
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
+            extraData={this.state.loadMore}
             ItemSeparatorComponent={this.renderSeparator}
             renderItem={({item}) => 
+            <TouchableOpacity onPress={()=> this.moreData(item.id)}> 
             <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}} key={item.id}>
             <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
@@ -344,6 +378,7 @@ class ScholarshipScreen extends React.Component {
             }
             </View>
             </View>
+            </TouchableOpacity>
         }
             />
             </View>
@@ -352,7 +387,44 @@ class ScholarshipScreen extends React.Component {
         }
         </View>
     </View>
+    <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
     
+    {
+      this.props.singleOne?
+      <ScrollView 
+                style={{flex:1}}
+                contentContainerStyle={{flexGrow: 1, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                scrollEnabled={scrollEnabled}
+                onContentSizeChange={this.onContentSizeChange}
+                >
+      <View style={{flex:1, marginBottom:15}}>
+      <Text style={{fontSize: 25, color: 'black', marginTop:10, marginBottom:10, paddingBottom:0}}>{this.props.singleOne.name}</Text>
+      <View style={{flex:1, width:'90%', marginHorizontal:5}}>
+    <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Description:</Text> {this.props.singleOne.description? <React.Fragment>{this.props.singleOne.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Amount:</Text> {this.props.singleOne.amount? <React.Fragment>{this.props.singleOne.amount}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Level:</Text> {this.props.singleOne.level? <React.Fragment>{this.props.singleOne.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GPA:</Text> {this.props.singleOne.gpa? <React.Fragment>{this.props.singleOne.gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>CRITERIA:</Text> {this.props.singleOne.criteria? <React.Fragment>{this.props.singleOne.criteria}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>APPLICANT COUNTRY:</Text> {this.props.singleOne.applicantCountry? <React.Fragment>{this.props.singleOne.applicantCountry}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COUNTRY:</Text> {this.props.singleOne.country? <React.Fragment>{this.props.singleOne.country}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>DEADLINE:</Text> {this.props.singleOne.deadline? <React.Fragment>{this.props.singleOne.deadline}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>INSTITUTION:</Text> {this.props.singleOne.institution? <React.Fragment>{this.props.singleOne.institution}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COMMENT:</Text> {this.props.singleOne.comment? <React.Fragment>{this.props.singleOne.comment}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <TouchableOpacity onPress={
+          ()=>{ Linking.openURL(`${this.props.singleOne.url}`)}
+        } style={{paddingVertical: 10, marginTop:5, marginBottom: 20, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+      <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+      <Text style={{fontSize:20, color:"white"}}>Apply</Text>
+      </View>
+      </TouchableOpacity>
+      </View>
+      </View>
+      </ScrollView>
+      :
+      <Text style={{fontSize: 20, color: 'black', marginTop:25, marginBottom:10, paddingBottom:0}}>Select A School to View More Information</Text>
+      
+    }
+    </Modal>
     <Modal style={[styles.modal, styles.modal4]} position={"bottom"} ref={"modal9"} backdropContent={BContent}>
     <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}>No Coin</Text>
     <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
@@ -529,7 +601,7 @@ class ScholarshipScreen extends React.Component {
         this.setState({visible: true}, ()=>{
           setTimeout(()=>{
           this.setState({visible: false, hide: true})
-          this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset)
+          this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, [])
         },3000)
     })
     }
@@ -554,6 +626,42 @@ class ScholarshipScreen extends React.Component {
         }
         </View>
     </View>
+    <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+    
+    {
+      this.props.singleOne?
+      <ScrollView 
+                style={{flex:1}}
+                contentContainerStyle={{flexGrow: 1, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                scrollEnabled={scrollEnabled}
+                onContentSizeChange={this.onContentSizeChange}
+                >
+      <Text style={{fontSize: 25, color: 'black', marginTop:10, marginBottom:10, paddingBottom:0}}>{this.props.singleOne.name}</Text>
+      <View style={{flex:1, width:'90%', marginHorizontal:5, marginBottom: 15}}>
+    <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Description:</Text> {this.props.singleOne.description? <React.Fragment>{this.props.singleOne.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Amount:</Text> {this.props.singleOne.amount? <React.Fragment>{this.props.singleOne.amount}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Level:</Text> {this.props.singleOne.level? <React.Fragment>{this.props.singleOne.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GPA:</Text> {this.props.singleOne.gpa? <React.Fragment>{this.props.singleOne.gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>CRITERIA:</Text> {this.props.singleOne.criteria? <React.Fragment>{this.props.singleOne.criteria}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>APPLICANT COUNTRY:</Text> {this.props.singleOne.applicantCountry? <React.Fragment>{this.props.singleOne.applicantCountry}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COUNTRY:</Text> {this.props.singleOne.country? <React.Fragment>{this.props.singleOne.country}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>DEADLINE:</Text> {this.props.singleOne.deadline? <React.Fragment>{this.props.singleOne.deadline}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>INSTITUTION:</Text> {this.props.singleOne.institution? <React.Fragment>{this.props.singleOne.institution}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COMMENT:</Text> {this.props.singleOne.comment? <React.Fragment>{this.props.singleOne.comment}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <TouchableOpacity onPress={
+          ()=>{ Linking.openURL(`${this.props.singleOne.url}`)}
+        } style={{paddingVertical: 10, marginBottom: 20, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+      <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+      <Text style={{fontSize:20, color:"white"}}>Apply</Text>
+      </View>
+      </TouchableOpacity>
+      </View>
+      </ScrollView>
+      :
+      <Text style={{fontSize: 20, color: 'black', marginTop:25, marginBottom:10, paddingBottom:0}}>Select A School to View More Information</Text>
+      
+    }
+    </Modal>
     <ShareSheet visible={this.state.shows} onCancel={this.onCancel.bind(this)}>
           <Button iconSrc={{ uri: TWITTER_ICON }}
                   onPress={()=>{
@@ -650,7 +758,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   modal5: {
-    height: 450
+    height: 550
   },
   modal6: {
     height: 250
@@ -734,17 +842,24 @@ function mapper(state) {
       majors: state.major.data,
       countries: state.country.data,
       scholarships: state.scholarship.data,
+      singleOne: state.scholarship.single,
       error: state.user.error,
       redirect: state.user.redirect
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    scholarshipSearch: (url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset)=>
+    scholarshipSearch: (url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset, e)=>
     {
         dispatch(
-            scholarshipSearchCall(url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset)
+            scholarshipSearchCall(url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset, e)
         )
+    },
+    singleScholarship: (url, token, scholarshipID) =>
+    {
+      dispatch(
+        singleScholarshipCall(url, token, scholarshipID)
+      )
     },
     unsaveScholarship: (url, token, user_id, scholarship_id, savedArray) => 
       {

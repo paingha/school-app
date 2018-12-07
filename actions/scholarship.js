@@ -17,3 +17,23 @@ export function receiveScholarship(scholarship) {
         scholarship
     }
 }
+
+export function errorSingleScholarship(error) {
+    return {
+        type: 'ERROR_SINGLE_SCHOLARSHIP',
+        error
+    }
+}
+
+export function requestSingleScholarship() {
+    return {
+        type: 'REQUEST_SINGLE_SCHOLARSHIP'
+    }
+}
+
+export function receiveSingleScholarship(singleScholarship) {
+    return {
+        type: 'RECEIVE_SINGLE_SCHOLARSHIP',
+        singleScholarship
+    }
+}

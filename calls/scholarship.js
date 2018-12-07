@@ -1,8 +1,8 @@
-import {requestScholarship, receiveScholarship, errorScholarship} from '../actions/scholarship';
+import {requestScholarship, receiveScholarship, errorScholarship, requestSingleScholarship, receiveSingleScholarship, errorSingleScholarship} from '../actions/scholarship';
 import { AsyncStorage, Alert } from "react-native"
 import {getUserCall} from './user';
 
-export function scholarshipSearchCall(url, token, major, amount, gpa, level, criteria, applicantCountry, country, user_id, offset){
+export function scholarshipSearchCall(url, token, major, amount, gpa, level, criteria, applicantCountry, country, user_id, offset, more){
     if(url && major && amount && gpa && level && criteria && applicantCountry && country){
     return (dispatch) => {
         dispatch(requestScholarship())
@@ -16,8 +16,11 @@ export function scholarshipSearchCall(url, token, major, amount, gpa, level, cri
             .then(json=>{
                 if (json.error)
                     throw new Error(json.error.message);
-                
-                    dispatch(receiveScholarship(json))
+                    let modify = {
+                        "count": json.count,
+                        "rows": more.concat(json.rows)
+                    }
+                    dispatch(receiveScholarship(modify))
                     
                 //alert(json.token);
             })
@@ -25,6 +28,27 @@ export function scholarshipSearchCall(url, token, major, amount, gpa, level, cri
         }
     }
 }
+
+export function singleScholarshipCall(url, token, scholarshipID){
+    return (dispatch) => {
+        dispatch(requestSingleScholarship())
+        fetch(`${url}`.replace('{scholarship_id}', scholarshipID), {
+                         method: 'GET',
+                         headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+                         mode: 'cors'
+                     })
+            .then(response=>response.json())
+            .then(json=>{
+                if (json.error)
+                    throw new Error(json.error.message);
+                    dispatch(receiveSingleScholarship(json))
+                    
+                //alert(json.token);
+            })
+            .catch(error=>dispatch(errorSingleScholarship(error.message)));
+        }
+}
+
 
 export function scholarshipSaveCall(url, token, user_id, scholarship_id, savedArray){
     if(url && user_id && scholarship_id && savedArray && token){

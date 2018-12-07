@@ -7,9 +7,9 @@ import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {getStates, getCountries, gpa_search} from '../settings'
+import {getStates, getCountries, major_search} from '../settings'
 import {getStatesCall, getApplicantCountriesCall} from '../calls/misc'
-import {gpaSearchCall} from '../calls/gpaSchool'
+import {majorSearchCall} from '../calls/majorSchool'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
 import Share, {ShareSheet, Button} from 'react-native-share';
@@ -26,8 +26,8 @@ class MajorScreen extends React.Component {
       hide: false,
       level: '',
       major: '',
-      gpa: '',
       usState: '',
+      country: 'US',
       token: '',
       offset: 0,
     }
@@ -126,8 +126,8 @@ class MajorScreen extends React.Component {
   stateChange(value){
     this.setState({usState: value})
   }
-  gpaChange(value){
-    this.setState({gpa: value}, ()=>{
+  majorChange(value){
+    this.setState({major: value}, ()=>{
       //alert(parseFloat(value))
     })
   }
@@ -156,76 +156,19 @@ class MajorScreen extends React.Component {
       value: 'Undergraduate',
       label: 'Undergraduate',
     }];
-    let gpas = [{
-      value: '2.0',
-      label: '2.0',
-    },{
-      value: '2.1',
-      label: '2.1',
-    },{
-      value: '2.2',
-      label: '2.2',
-    },{
-      value: '2.3',
-      label: '2.3',
-    },{
-      value: '2.4',
-      label: '2.4',
-    },{
-      value: '2.5',
-      label: '2.5',
-    },{
-      value: '2.6',
-      label: '2.6',
-    },{
-      value: '2.7',
-      label: '2.7',
-    },{
-      value: '2.8',
-      label: '2.8',
-    },{
-      value: '2.9',
-      label: '2.9',
-    },{
-      value: '3.0',
-      label: '3.0',
-    },{
-      value: '3.1',
-      label: '3.1',
-    },{
-      value: '3.2',
-      label: '3.2',
-    },{
-      value: '3.3',
-      label: '3.3',
-    },{
-      value: '3.4',
-      label: '3.4',
-    },{
-      value: '3.5',
-      label: '3.5',
-    },{
-      value: '3.6',
-      label: '3.6',
-    },{
-      value: '3.7',
-      label: '3.7',
-    },{
-      value: '3.8',
-      label: '3.8',
-    },{
-      value: '3.9',
-      label: '3.9',
-    },{
-      value: '4.0',
-      label: '4.0',
-    }];
     let states = [{
         value: 'AL',
         label: 'AL',
       }, {
         value: 'AK',
         label: 'AK',
+      }];
+      let countries = [{
+        value: 'US',
+        label: 'US',
+      }, {
+        value: 'Canada',
+        label: 'Canada',
       }];
     
     return (
@@ -245,7 +188,7 @@ class MajorScreen extends React.Component {
         textColor='#085078'
         fontSize={18}
         data={this.props.majors}
-        onChangeText={this.gpaChange.bind(this)}
+        onChangeText={this.majorChange.bind(this)}
       />
       </View>
       <View style={{flex: 1, width: btnWidth1-80, paddingRight:10, paddingLeft:10}}>
@@ -261,6 +204,15 @@ class MajorScreen extends React.Component {
       </View>
       <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
+        {this.props.statesData?
+      <Dropdown
+        label='State'
+        baseColor='#085078'
+        textColor='#085078'
+        fontSize={20}
+        data={this.props.statesData}
+        onChangeText={this.stateChange.bind(this)}
+      />:
       <Dropdown
         label='State'
         baseColor='#085078'
@@ -269,6 +221,7 @@ class MajorScreen extends React.Component {
         data={states}
         onChangeText={this.stateChange.bind(this)}
       />
+      }
       </View>
       <View style={{flex: 1, width: btnWidth1, marginRight:10, paddingLeft:10}}>
       <TouchableHighlight
@@ -276,7 +229,7 @@ class MajorScreen extends React.Component {
         this.setState({visible: true}, ()=>{
           setTimeout(()=>{
           this.setState({visible: false, hide: true})
-          this.props.gpaSearch(gpa_search, this.state.token, this.state.gpa, this.state.level, this.state.usState, id, this.state.offset)
+          this.props.majorSearch(major_search, this.state.token, this.state.major, this.state.level, this.state.country, this.state.usState, this.state.offset)
         },3000)
     })
     }
@@ -302,12 +255,12 @@ class MajorScreen extends React.Component {
             <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
             <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text >SAT: {item.sat}</Text>
-            <Text>ACT: {item.act}</Text>
+            <Text >SAT: {item.sat ? <React.Fragment>{item.sat}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+            <Text>ACT: {item.act ? <React.Fragment>{item.act}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text>Level: {item.level}</Text>
-            <Text>GPA: {item.gpa.toFixed(2)}</Text>
+            <Text>Level: {item.level ? <React.Fragment>{item.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+            <Text>GPA: {item.gpa ? <React.Fragment>{item.gpa.toFixed(2)}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
             <TouchableOpacity onPress={()=> this.setState({shows: true})}>
@@ -483,17 +436,17 @@ function mapper(state) {
       statesData: state.usState.data,
       countries: state.country.data,
       majors: state.major.data,
-      schools: state.gpaSchool.data,
+      schools: state.majorSchool.data,
       error: state.user.error,
       redirect: state.user.redirect
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    gpaSearch: (url, token, gpa, level, state, id, offset)=>
+    majorSearch: (url, token, major, level, country, state, offset)=>
     {
         dispatch(
-            gpaSearchCall(url, token, gpa, level, state, id, offset)
+            majorSearchCall(url, token, major, level, country, state, offset)
         )
     },
     fetchStates: (url) => 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, AsyncStorage, ImageBackground, StatusBar, View, Text, Image } from 'react-native';
+import { StyleSheet, ActivityIndicator, AsyncStorage, ImageBackground, StatusBar, View, Text, Image } from 'react-native';
 
 export default class Loading extends React.Component{
     render(){
@@ -10,8 +10,9 @@ export default class Loading extends React.Component{
                 />
                 <Image style={styles.logo} source={require('../assets/logo.png')}/>
                 <Text style={styles.welcome}>
-                Loading...
+                Loading
                 </Text>
+                <ActivityIndicator size="large" color="#ffffff"/>
               </ImageBackground>
             )
     }
@@ -32,5 +33,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       marginTop: 20,
       color: '#F5FCFF',
+      marginBottom: 15
     }
   });

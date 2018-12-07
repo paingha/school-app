@@ -13,12 +13,18 @@ const urls = {
     "getCountries": `${baseUrl}services/get-country`,
     "upload": `${baseUrl}services/aws-signed-url`,
     "scholarship_search": `${baseUrl}api/v1/scholarship/search`,
+    "singleScholarship": `${baseUrl}api/v1/scholarship/{scholarship_id}`,
     "gpa_search": `${baseUrl}api/v1/school/search-by-gpa`,
+    "singleGpa": `${baseUrl}api/v1/school/{school_id}`,
+    "major_search": `${baseUrl}api/v1/major/search-by-major`,
     "getStates": `${baseUrl}services/get-state`,
     "save_scholarship": `${baseUrl}api/v1/scholarship/save/{user_id}`,
     "unsave_scholarship": `${baseUrl}api/v1/scholarship/unsave/{user_id}`,
     "getBlogs": `${baseUrl}api/v1/blog?offset={off}`,
+    "getBlog": `${baseUrl}api/v1/blog/{blog_id}`,
     "getForums": `${baseUrl}api/v1/forum?offset={off}`,
+    "getForum": `${baseUrl}api/v1/forum/{forum_id}`,
+    "newReply": `${baseUrl}api/v1/reply`,
     "searchForum": `${baseUrl}api/v1/forum/search`
 }
 
