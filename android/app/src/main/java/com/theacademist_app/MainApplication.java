@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import cl.json.RNSharePackage;
 import com.dooboolab.RNIap.RNIapPackage;
-import com.imagepicker.ImagePickerPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -40,7 +39,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNSharePackage(),
             new RNIapPackage(),
-            new ImagePickerPackage(),
               new RNGoogleSigninPackage(),
           new FBSDKPackage(mCallbackManager),
           new VectorIconsPackage()

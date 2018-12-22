@@ -21,6 +21,23 @@ export function getUserCall(userID, token){
         }
 }
 
+export function refreshUserCall(userID, token){
+    return (dispatch) => {
+        fetch(`https://www.theacademist.com/api/v1/user/${userID}`, {
+                         method: 'GET',  
+                         headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+                         mode: 'cors'
+                     })
+            .then(response=>response.json())
+            .then(json=>{
+                if (json.error)
+                    throw new Error(json.error.message);
+                    dispatch(receiveUser(json))
+            })
+            .catch(error=>console.log(error));
+        }
+}
+
 export function updateUserCall(url, userID, token, to, change){
     return (dispatch) => {
         const obj = {};
@@ -86,7 +103,7 @@ export function facebookLoginUserCall(url, email, userId, token, nav){
                         dispatch(receiveLogin(json))
                         nav.navigate("SignedIn")
                       })
-                    alert(json.token);
+                    //alert(json.token);
                 })
                 .catch(error=>dispatch(errorLogin(error.message)));
             }
@@ -109,7 +126,7 @@ export function googleLoginUserCall(url, email, nav){
                     dispatch(receiveLogin(json))
                     nav.navigate("SignedIn")
                   })
-                alert(json.token);
+                //alert(json.token);
             })
             .catch(error=>dispatch(errorLogin(error.message)));
         }

@@ -54,6 +54,13 @@ export function gpaSchool(state=init, action) {
                     is_fetching: false,
                     error: action.error
             };
+            case 'CLEAR_GPA':
+                return {
+                    ...state,
+                    data: undefined,
+                    single: undefined
+                }
+
         default:
             return state
     }

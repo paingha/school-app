@@ -11,7 +11,6 @@ import {getMajorsCall, getApplicantCountriesCall} from '../calls/misc'
 import {updateUserCall} from '../calls/user'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
-import ImagePicker from 'react-native-image-picker';
 
 const options = [
   <Text style={{color: 'red', fontSize: 20}}>Close</Text>,
@@ -80,42 +79,6 @@ class HomeScreen extends React.Component {
       }
     })
   }
-  /*selectPhotoTapped() {
-    const options = {
-      quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
-      storageOptions: {
-        skipBackup: true
-      }
-    };
-
-    ImagePicker.showImagePicker(options, (response) => {
-      //alert('Response = ', response);
-
-      if (response.didCancel) {
-        alert('User cancelled photo picker');
-      }
-      else if (response.error) {
-        alert('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        alert('User tapped custom button: ', response.customButton);
-      }
-      else {
-        let source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        this.setState({
-          avatarSource: source
-        }, ()=>{
-          alert(source.toString())
-        });
-      }
-    });
-  }*/
   renderFooter = () => {
     return (
       <View
@@ -294,7 +257,7 @@ class HomeScreen extends React.Component {
           </View>
         </ImageBackground>
         </View>
-       <View style={{flex: 1, marginTop: 0, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+        <View style={{flex: 1, marginTop: 0, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal4.open()}>
         <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
           <Icon style={{textAlign: 'center'}} name="graduation-cap" size={30} color="#085078" />
@@ -441,7 +404,7 @@ class HomeScreen extends React.Component {
     <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:10, paddingBottom:0}}>Saved Scholarships</Text>
     {saved ?
         <FlatList
-        style={{alignSelf: 'center', paddingRight:5, paddingLeft:5, fontSize:25, width:'90%'}}
+        style={{alignSelf: 'center', paddingRight:5, paddingLeft:5, marginBottom:15, fontSize:25, width:'90%'}}
             data={saved}
             keyExtractor={item => item.id.toString()}
             ListFooterComponent={this.renderFooter}

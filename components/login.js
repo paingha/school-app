@@ -41,6 +41,7 @@ class LoginScreen extends React.Component {
       _signIn = async (e) => {
         try {
           //await GoogleSignin.hasPlayServices();
+          await GoogleSignin.signOut();
           const userInfo = await GoogleSignin.signIn();
           this.setState({ email: userInfo.user.email, error: null },()=>{
             //alert(userInfo.user.email)
@@ -61,6 +62,7 @@ class LoginScreen extends React.Component {
         }
       };
       _fbAuth(e){
+        LoginManager.logOut();
         LoginManager.logInWithReadPermissions(['public_profile']).then((res)=>{
           if(res.isCancelled){
             alert('Facebook Login was Cancelled')

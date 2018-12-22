@@ -46,7 +46,7 @@ export function searchForumCall(url, q){
         }
 }
 
-export function postCommentCall(url, content, by, forumId, firstName, lastName, token, reload){
+export function postCommentCall(url, content, by, forumId, firstName, lastName, token, reload, e){
     return (dispatch) => {
         fetch(`${url}`, {
                          method: 'POST',  
@@ -58,7 +58,7 @@ export function postCommentCall(url, content, by, forumId, firstName, lastName, 
             .then(json=>{
                 if (json.error)
                     throw new Error(json.error.message);
-                dispatch(getSingleForumCall(reload, forumId))
+                dispatch(getSingleForumCall(reload, forumId, e))
                     //alert(json)
                 //alert(json.token);
             })
@@ -66,7 +66,7 @@ export function postCommentCall(url, content, by, forumId, firstName, lastName, 
         }
 }
 
-export function getSingleForumCall(url, id){
+export function getSingleForumCall(url, id, e){
     return (dispatch) => {
         dispatch(requestSingleForum())
         fetch(`${url}`.replace('{forum_id}', id), {
@@ -78,7 +78,11 @@ export function getSingleForumCall(url, id){
             .then(json=>{
                 if (json.error)
                     throw new Error(json.error.message);
-                    dispatch(receiveSingleForum(json))
+                    let modify = {
+                        ...json,
+                        "replies": e.concat(json.replies)
+                    }
+                    dispatch(receiveSingleForum(modify))
                     //alert(json)
                 //alert(json.token);
             })

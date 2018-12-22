@@ -9,7 +9,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {getStates, getCountries, gpa_search, singleGpa} from '../settings'
 import {getStatesCall, getApplicantCountriesCall} from '../calls/misc'
-import {gpaSearchCall, singleGpaCall} from '../calls/gpaSchool'
+import {gpaSearchCall, singleGpaCall, clearGpaCall} from '../calls/gpaSchool'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
 import Share, {ShareSheet, Button} from 'react-native-share';
@@ -98,6 +98,10 @@ class GpaScreen extends React.Component {
           
         })
       }
+      componentWillUnmount(){
+    
+        this.props.clearGpa()
+      }
   async componentDidMount(){
     //alert(this.props.firstName.toString())
     await this.props.fetchStates(getStates)
@@ -112,7 +116,10 @@ class GpaScreen extends React.Component {
   renderHeader = () => {
   return <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> {this.props.schools.count} {this.props.schools.count == 1 ? <Text>School Found</Text>:  <Text>Schools Found</Text> }</Text>;
   };
-  renderFooter = () => {
+  renderFooter = (e) => {
+    console.log(e)
+    //console.log(this.state.offset)
+    //console.log(this.props.schools.count)
     if (this.state.offset >= this.props.schools.count){
       return null
     }
@@ -324,10 +331,13 @@ class GpaScreen extends React.Component {
     })
     }
     }
-         style={{alignItems: 'center', height: 50, marginBottom: 10, width: 150, elevation: 2, backgroundColor: '#FFBF71', paddingBottom: 8, paddingTop: 12}}
-        >
-         <Text style={{fontSize: 20, color: 'white'}}>Search </Text>
-        </TouchableHighlight>
+    style={{height: 50, paddingHorizontal:25, marginRight:10, flexDirection:'row', padding:4, alignItems: 'center', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}
+    >
+    <React.Fragment>
+    <Icon style={{textAlign: 'center', marginRight:15}} name="search" size={25} color="#085078" />
+     <Text style={{fontSize: 20, color: '#085078'}}>Search </Text>
+     </React.Fragment>
+    </TouchableHighlight>
       </View>
       </View>
       
@@ -590,6 +600,12 @@ const mapDispatchToProps = (dispatch) => {
     {
       dispatch(
         singleGpaCall(url, token, schoolID)
+      )
+    },
+    clearGpa: () =>
+    {
+      dispatch(
+        clearGpaCall()
       )
     },
     fetchStates: (url) => 

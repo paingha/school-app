@@ -1,5 +1,6 @@
 const init = {
     data: null,
+    nocoin: null,
     single: null,
     is_fetching: false,
     error: null,
@@ -53,6 +54,38 @@ export function scholarship(state=init, action) {
                     is_fetching: false,
                     error: action.error
             };
+
+            case 'CLEAR_SCHOLARSHIP':
+                return {
+                    ...state,
+                    data: undefined,
+                    single: undefined
+                }
+
+            case 'CLEAR_SCHOLARSHIPS':
+                return {
+                    ...state,
+                    data: undefined
+                }
+                case 'REQUEST_NOCOIN':
+                return {
+                    ...state,
+                    nocoin: undefined,
+                    is_fetching: true,
+                };
+            case 'RECEIVE_NOCOIN':
+                return {
+                    ...state,
+                    nocoin: action.coin,
+                    is_fetching: false,
+                };
+    
+                case 'ERROR_NOCOIN':
+                    return {
+                        ...state,
+                        is_fetching: false,
+                        error: action.error
+                };
         default:
             return state
     }

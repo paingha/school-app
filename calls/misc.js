@@ -1,7 +1,39 @@
 import {errorMajor, receiveMajor, requestMajor} from '../actions/major';
 import {errorStates, receiveStates, requestStates} from '../actions/state';
 import {errorCountry, receiveCountry, requestCountry} from '../actions/country';
-import { AsyncStorage } from "react-native"
+import { AsyncStorage, Alert } from "react-native"
+import {getUserCall, refreshUserCall} from './user';
+
+export function verifyAndroidCall(url, token, coin, receipt, packageName, product, user_id, nav, e){
+    return (dispatch) => {
+        //console.log(JSON.stringify({coin, receipt, packageName, product, user}))
+        fetch(`${url}`, {
+            method: 'POST',  
+            headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+            mode: 'cors',
+            body: JSON.stringify({coin, receipt, packageName, product, user_id})
+              })
+          .then(response=>response.json())
+          .then(json=>{
+                if (json.error)
+                    throw new Error(json.error.message);
+            //console.log(json)
+                e();
+                
+          })
+          .catch(error=>{
+            Alert.alert(
+                'Success!',
+                `${coin} coins successfully added to your wallet`,
+                [
+                       {text: 'Close', onPress: () => console.log('OK Pressed')},
+                       {text: 'Find Scholarships', onPress: () => {nav.navigate('ThirdView')}},
+                ]
+            )
+            dispatch(refreshUserCall(user_id, token))
+          });
+    }
+}
 
 export function getMajorsCall(url){
     return (dispatch) => {
@@ -16,8 +48,6 @@ export function getMajorsCall(url){
                 if (json.error)
                     throw new Error(json.error.message);
                     dispatch(receiveMajor(json))
-                    //alert(json)
-                //alert(json.token);
             })
             .catch(error=>dispatch(errorMajor(error.message)));
         }
@@ -36,8 +66,6 @@ export function getStatesCall(url){
                 if (json.error)
                     throw new Error(json.error.message);
                     dispatch(receiveStates(json))
-                    //alert(json)
-                //alert(json.token);
             })
             .catch(error=>dispatch(errorStates(error.message)));
         }
@@ -56,8 +84,6 @@ export function getApplicantCountriesCall(url){
                 if (json.error)
                     throw new Error(json.error.message);
                     dispatch(receiveCountry(json))
-                    //alert(json)
-                //alert(json.token);
             })
             .catch(error=>dispatch(errorCountry(error.message)));
         }

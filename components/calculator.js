@@ -116,6 +116,7 @@ class CalculatorScreen extends React.Component {
       option: '',
       token: '',
       offset: 0,
+      clearingRows: false,
       rowNumber: 4,
             rows: [{
               id: 1,
@@ -195,10 +196,13 @@ class CalculatorScreen extends React.Component {
         {
           id: 4,
         }]
+        
+        await this.setState({clearingRows: true})
         await rows.forEach((e)=>{
           this.removeRow(e.id)
         })
-        await this.setState({rows: newRow, rowNumber: 4})
+        await this.setState({rows: newRow, rowNumber: 4, clearingRows: false})
+        await this.setState({resultOverview: null})
       }
       removeRow(e){
         const {rows} = this.state;
@@ -220,7 +224,9 @@ class CalculatorScreen extends React.Component {
           });
           this.setState({pureGrade: newGrade, credit: newCredit, currentCourse: newCourse, gpa: newGpa},()=>{
             if(this.state.resultOverview){
+              if(!this.state.clearingRows){
               this.calcGpa()
+              }
             }
           })
 

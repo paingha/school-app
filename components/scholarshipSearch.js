@@ -2,18 +2,22 @@ import React from 'react';
 import { StyleSheet, FlatList, Clipboard,
   ToastAndroid,
   AlertIOS,
+  Alert,
   Platform, View, Text, StatusBar, AsyncStorage, Linking, ScrollView, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {getMajors, getCountries, scholarship_search, save_scholarship, unsave_scholarship, singleScholarship} from '../settings'
+import {getMajors, getCountries, scholarship_search, save_scholarship, unsave_scholarship, singleScholarship, no_coin} from '../settings'
 import {getMajorsCall, getApplicantCountriesCall} from '../calls/misc'
-import {scholarshipSearchCall, scholarshipUnSaveCall, scholarshipSaveCall, singleScholarshipCall} from '../calls/scholarship'
+import {getUserCall, refreshUserCall} from '../calls/user'
+import {scholarshipSearchCall, noCoinCall, scholarshipUnSaveCall, scholarshipSaveCall, singleScholarshipCall, clearScholarshipCall, clearScholarshipsCall} from '../calls/scholarship'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
 import Share, {ShareSheet, Button} from 'react-native-share';
 import _ from 'lodash';
+import { rejects } from 'assert';
+import { resolve } from 'url';
 const { height } = Dimensions.get('window');
 
 class ScholarshipScreen extends React.Component {
@@ -36,6 +40,8 @@ class ScholarshipScreen extends React.Component {
       offset: 0,
       loadMore: false,
       screenHeight: height,
+      refresh: false,
+      refreshUnsave: false
     }
   }
     static navigationOptions = ({ navigation }) =>{
@@ -68,15 +74,22 @@ class ScholarshipScreen extends React.Component {
         },
       }
       };
-      
+  componentWillUnmount(){
+    
+    this.props.clearScholarship()
+  }   
   componentDidMount(){
     //alert(this.props.firstName.toString())
+    const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
+    
     this.props.fetchMajors(getMajors)
     this.props.fetchCountries(getCountries)
     AsyncStorage.getItem('TOKEN', (err, result)=>{
       if (result){
         //get user here
-        this.setState({token: result})
+        this.setState({token: result},()=>{
+          this.props.refreshUser(id, this.state.token)
+        })
       }
     })
   }
@@ -107,6 +120,45 @@ class ScholarshipScreen extends React.Component {
   renderHeader = () => {
     return <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> {this.props.scholarships.count} {this.props.scholarships.count == 1 ? <Text>Scholarship Found</Text>:  <Text>Scholarships Found</Text> }</Text>;
   };
+  renderHeaderNoCoin = (e) => {
+    let {id, name, amount, description, criteria, level, applicantCountry, country, gpa, deadline, institution, comment, url} = e;
+    return (
+      <React.Fragment>
+      <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> <Text>Buy Coin to Complete Search</Text></Text>
+      <TouchableOpacity onPress={()=> this.props.navigation.navigate('SixthView')}> 
+                  <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}}>
+                  <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{name}</Text></View>
+                  <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
+                  <Text >Deadline: {deadline ? <React.Fragment>{deadline}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+                   
+                    <Text>Criteria: {criteria}</Text>
+
+                  </View>
+                  <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+                  <Text>Level: {level}</Text>
+                  <Text>Amount: {amount}</Text>
+                  </View>
+                  <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+                  <TouchableOpacity onPress={()=> {this.props.navigation.navigate('SixthView')}}>
+                  <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
+                  <Icon style={{textAlign: 'center', marginRight:5}} name="shopping-cart" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Buy Coin</Text>
+                  </View>
+                  </TouchableOpacity>
+                  </View>
+                  </View>
+                  </TouchableOpacity>
+                  <View
+                    style={{
+                      height: 1,
+                      marginTop:10,
+                      marginBottom:10,
+                      width: "100%",
+                      backgroundColor: "#CED0CE"
+                    }}
+                  />
+                  </React.Fragment>
+    )
+    };
   onCancel() {
     this.setState({shows:false});
   }
@@ -334,7 +386,7 @@ class ScholarshipScreen extends React.Component {
         <View style={{paddingVertical: 15, backgroundColor:'white'}}>
         
         <FlatList
-        style={{alignSelf: 'center', paddingRight:25, paddingLeft:25, fontSize:25, width:'100%'}}
+        style={{alignSelf: 'center', paddingRight:25, paddingLeft:25, fontSize:25, maxWidth:'100%', width:'100%'}}
             data={this.props.scholarships.rows}
             keyExtractor={item => item.id.toString()}
             ListHeaderComponent={this.renderHeader}
@@ -343,10 +395,10 @@ class ScholarshipScreen extends React.Component {
             ItemSeparatorComponent={this.renderSeparator}
             renderItem={({item}) => 
             <TouchableOpacity onPress={()=> this.moreData(item.id)}> 
-            <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}} key={item.id}>
+            <View styles={{flex: 1, maxWidth:'90%', width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}} key={item.id}>
             <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text >Major: {item.major}</Text>
+            <Text >Major: {item.major ? <React.Fragment>{item.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
             <Text>Criteria: {item.criteria}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
@@ -359,23 +411,11 @@ class ScholarshipScreen extends React.Component {
             <Icon style={{textAlign: 'center', marginRight:5}} name="share-alt" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Share</Text>
             </View>
             </TouchableOpacity>
-            { _.includes(savedID, item.id) ?
-            <TouchableOpacity onPress={()=>{
-              this.props.unsaveScholarship(unsave_scholarship, this.state.token, id, item.id, savedID)
-            }}>
+            <TouchableOpacity onPress={()=> this.moreData(item.id)}>
             <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="bookmark" size={25} color="red" /><Text style={{marginLeft:5, fontSize:20, color:"red"}}>UnSave</Text>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="eye" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>View More</Text>
             </View>
             </TouchableOpacity>
-            :
-            <TouchableOpacity onPress={()=>{
-              this.props.saveScholarship(save_scholarship, this.state.token, id, item.id, savedID)
-            }}>
-            <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="bookmark" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Save</Text>
-            </View>
-            </TouchableOpacity>
-            }
             </View>
             </View>
             </TouchableOpacity>
@@ -383,7 +423,54 @@ class ScholarshipScreen extends React.Component {
             />
             </View>
             :
-            <Text>No Search Results</Text>
+            <React.Fragment>
+              {this.props.noCoins?
+              <View style={{paddingVertical: 15, backgroundColor:'white'}}>
+        
+              <FlatList
+              style={{alignSelf: 'center', paddingRight:25, paddingLeft:25, fontSize:25, width:'100%'}}
+                  data={this.props.noCoins.splice(1)}
+                  keyExtractor={item => item.id.toString()}
+                  ListHeaderComponent={this.renderHeaderNoCoin(this.props.noCoins[0])}
+                  ItemSeparatorComponent={this.renderSeparator}
+                  renderItem={({item}) => 
+                  <TouchableOpacity onPress={()=> 
+                    Alert.alert(
+                      'Error!',
+                      'Not Enough Coin to Complete Search!',
+                      [
+                             {text: 'Cancel', onPress: () => console.log('OK Pressed')},
+                             {text: 'Buy Coin', onPress: () => {this.props.navigation.navigate('SixthView')}},
+                      ]
+                  )
+                  }> 
+                  <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}} key={item.id}>
+                  <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>{item.name}</Text></View>
+                  <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
+                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Major: {item.major}</Text>
+                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Criteria: {item.criteria}</Text>
+                  
+                  </View>
+                  <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Level: {item.level}</Text>
+                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Amount: {item.amount}</Text>
+                  </View>
+                  <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+                  <TouchableOpacity onPress={()=> this.props.navigation.navigate('SixthView')}>
+                  <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
+                  <Icon style={{textAlign: 'center', marginRight:5}} name="shopping-cart" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Buy Coin</Text>
+                  </View>
+                  </TouchableOpacity>
+                  </View>
+                  </View>
+                  </TouchableOpacity>
+              }
+                  />
+                  </View>
+                :
+                <Text>No Search Results</Text>
+              }
+            </React.Fragment>
         }
         </View>
     </View>
@@ -400,16 +487,39 @@ class ScholarshipScreen extends React.Component {
       <View style={{flex:1, marginBottom:15}}>
       <Text style={{fontSize: 25, color: 'black', marginTop:10, marginBottom:10, paddingBottom:0}}>{this.props.singleOne.name}</Text>
       <View style={{flex:1, width:'90%', marginHorizontal:5}}>
-    <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Description:</Text> {this.props.singleOne.description? <React.Fragment>{this.props.singleOne.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Amount:</Text> {this.props.singleOne.amount? <React.Fragment>{this.props.singleOne.amount}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Level:</Text> {this.props.singleOne.level? <React.Fragment>{this.props.singleOne.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+    <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>DESCRIPTION:</Text> {this.props.singleOne.description? <React.Fragment>{this.props.singleOne.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>AMOUNT:</Text> {this.props.singleOne.amount? <React.Fragment>{this.props.singleOne.amount}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>LEVEL:</Text> {this.props.singleOne.level? <React.Fragment>{this.props.singleOne.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GPA:</Text> {this.props.singleOne.gpa? <React.Fragment>{this.props.singleOne.gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>MAJOR:</Text> {this.props.singleOne.major ? <React.Fragment>{this.props.singleOne.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>CRITERIA:</Text> {this.props.singleOne.criteria? <React.Fragment>{this.props.singleOne.criteria}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>APPLICANT COUNTRY:</Text> {this.props.singleOne.applicantCountry? <React.Fragment>{this.props.singleOne.applicantCountry}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COUNTRY:</Text> {this.props.singleOne.country? <React.Fragment>{this.props.singleOne.country}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>DEADLINE:</Text> {this.props.singleOne.deadline? <React.Fragment>{this.props.singleOne.deadline}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>INSTITUTION:</Text> {this.props.singleOne.institution? <React.Fragment>{this.props.singleOne.institution}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COMMENT:</Text> {this.props.singleOne.comment? <React.Fragment>{this.props.singleOne.comment}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'space-between', marginVertical:10}}>
+        { _.includes(savedID, this.props.singleOne.id) ?
+            <TouchableOpacity onPress={()=>{
+              this.props.unsaveScholarship(unsave_scholarship, this.state.token, id, this.props.singleOne.id, savedID)
+              //this.props.refreshUser(id, this.props.token)
+              this.setState({refreshUnsave: false})
+            }}>
+            <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="bookmark" size={25} color="red" /><Text style={{marginLeft:5, fontSize:20, color:"red"}}>UnSave</Text>
+            </View>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={()=>{
+              this.props.saveScholarship(save_scholarship, this.state.token, id, this.props.singleOne.id, savedID)
+              //.props.refreshUser(id, this.props.token)
+              this.setState({refresh: false})
+            }}>
+            <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="bookmark" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Save</Text>
+            </View>
+            </TouchableOpacity>
+            }
         <TouchableOpacity onPress={
           ()=>{ Linking.openURL(`${this.props.singleOne.url}`)}
         } style={{paddingVertical: 10, marginTop:5, marginBottom: 20, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
@@ -417,6 +527,8 @@ class ScholarshipScreen extends React.Component {
       <Text style={{fontSize:20, color:"white"}}>Apply</Text>
       </View>
       </TouchableOpacity>
+      
+      </View>
       </View>
       </View>
       </ScrollView>
@@ -601,14 +713,18 @@ class ScholarshipScreen extends React.Component {
         this.setState({visible: true}, ()=>{
           setTimeout(()=>{
           this.setState({visible: false, hide: true})
-          this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, [])
+          this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, [], coin, this.props.navigation)
+          
         },3000)
     })
     }
     }
-         style={{alignItems: 'center', height: 50, marginBottom: 10, width: 150, elevation: 2, backgroundColor: '#FFBF71', paddingBottom: 8, paddingTop: 12}}
+    style={{height: 50, paddingHorizontal:25, marginRight:10, flexDirection:'row', padding:4, alignItems: 'center', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}
         >
-         <Text style={{fontSize: 20, color: 'white'}}>Search </Text>
+        <React.Fragment>
+        <Icon style={{textAlign: 'center', marginRight:15}} name="search" size={25} color="#085078" />
+         <Text style={{fontSize: 20, color: '#085078'}}>Search </Text>
+         </React.Fragment>
         </TouchableHighlight>
       </View>
       </View>
@@ -642,6 +758,7 @@ class ScholarshipScreen extends React.Component {
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Amount:</Text> {this.props.singleOne.amount? <React.Fragment>{this.props.singleOne.amount}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Level:</Text> {this.props.singleOne.level? <React.Fragment>{this.props.singleOne.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GPA:</Text> {this.props.singleOne.gpa? <React.Fragment>{this.props.singleOne.gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>MAJOR:</Text> {this.props.singleOne.major ? <React.Fragment>{this.props.singleOne.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>CRITERIA:</Text> {this.props.singleOne.criteria? <React.Fragment>{this.props.singleOne.criteria}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>APPLICANT COUNTRY:</Text> {this.props.singleOne.applicantCountry? <React.Fragment>{this.props.singleOne.applicantCountry}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>COUNTRY:</Text> {this.props.singleOne.country? <React.Fragment>{this.props.singleOne.country}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
@@ -843,22 +960,41 @@ function mapper(state) {
       countries: state.country.data,
       scholarships: state.scholarship.data,
       singleOne: state.scholarship.single,
+      noCoins: state.scholarship.nocoin,
       error: state.user.error,
       redirect: state.user.redirect
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    scholarshipSearch: (url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset, e)=>
+    scholarshipSearch: (url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset, e, coin, nav)=>
     {
+      if(coin < 0.5 && offset < 15){
+        dispatch(
+          noCoinCall(no_coin, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset, nav)
+        )
+      }else{
         dispatch(
             scholarshipSearchCall(url, token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry, id, offset, e)
         )
+      }
+    },
+    refreshUser: (user_id, token) =>
+    {
+      dispatch(
+        refreshUserCall(user_id, token)
+      )
     },
     singleScholarship: (url, token, scholarshipID) =>
     {
       dispatch(
         singleScholarshipCall(url, token, scholarshipID)
+      )
+    },
+    clearScholarship: () => 
+    {
+      dispatch(
+        clearScholarshipCall()
       )
     },
     unsaveScholarship: (url, token, user_id, scholarship_id, savedArray) => 

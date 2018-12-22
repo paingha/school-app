@@ -1,5 +1,11 @@
-import {requestGpaSchool, receiveGpaSchool, errorGpaSchool, requestSingleGpa, receiveSingleGpa, errorSingleGpa} from '../actions/gpaSchool';
+import {requestGpaSchool, receiveGpaSchool, errorGpaSchool, requestSingleGpa, receiveSingleGpa, errorSingleGpa, clearGpa} from '../actions/gpaSchool';
 import { AsyncStorage } from "react-native"
+
+export function clearGpaCall (){
+    return (dispatch)=> {
+        dispatch(clearGpa());
+    }
+}
 
 export function gpaSearchCall(url, token, gpa, level, state, user_id, offset, more){
     if(url && gpa && level && state){

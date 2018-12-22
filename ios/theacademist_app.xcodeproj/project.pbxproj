@@ -58,9 +58,9 @@
 		3DFB0E134F754943886E4A5B /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44947DE74744C5D8AB59BBE /* SafariServices.framework */; };
 		AA3233A7646646FFA84B74EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B305D776DBE04185BD939599 /* SystemConfiguration.framework */; };
 		7A034C649C514F5889541F25 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACC3B5191124053AE53DCE4 /* AddressBook.framework */; };
-		8311EA834125474785556A4B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADA4E65260C4EF485C470AE /* libRNImagePicker.a */; };
 		82C03B69DBB64D93851370DD /* libRNIap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB27EDAD25F462686D3DEB9 /* libRNIap.a */; };
 		DF31230251E44683870D056F /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B72AE099CD3448B68C348CC3 /* libRNShare.a */; };
+		B8F35310928A4F5EA6BEFE28 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAE4CF55783F4AC5AE164EC8 /* AntDesign.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,12 +390,11 @@
 		C44947DE74744C5D8AB59BBE /* SafariServices.framework */ = {isa = PBXFileReference; name = "SafariServices.framework"; path = "System/Library/Frameworks/SafariServices.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		B305D776DBE04185BD939599 /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		6ACC3B5191124053AE53DCE4 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		F3AE716A1E9744B88C402765 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		1ADA4E65260C4EF485C470AE /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		3C08DC6BEF194C54807F05CD /* RNIap.xcodeproj */ = {isa = PBXFileReference; name = "RNIap.xcodeproj"; path = "../node_modules/react-native-iap/ios/RNIap.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		3CB27EDAD25F462686D3DEB9 /* libRNIap.a */ = {isa = PBXFileReference; name = "libRNIap.a"; path = "libRNIap.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		45971A8C898D40FF980AFC1C /* RNShare.xcodeproj */ = {isa = PBXFileReference; name = "RNShare.xcodeproj"; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		B72AE099CD3448B68C348CC3 /* libRNShare.a */ = {isa = PBXFileReference; name = "libRNShare.a"; path = "libRNShare.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		BAE4CF55783F4AC5AE164EC8 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,7 +429,6 @@
 				3DFB0E134F754943886E4A5B /* SafariServices.framework in Frameworks */,
 				AA3233A7646646FFA84B74EA /* SystemConfiguration.framework in Frameworks */,
 				7A034C649C514F5889541F25 /* AddressBook.framework in Frameworks */,
-				8311EA834125474785556A4B /* libRNImagePicker.a in Frameworks */,
 				82C03B69DBB64D93851370DD /* libRNIap.a in Frameworks */,
 				DF31230251E44683870D056F /* libRNShare.a in Frameworks */,
 			);
@@ -626,7 +624,6 @@
 				0A5B3FB95E1E4B2BB91BE57E /* RNVectorIcons.xcodeproj */,
 				0B647D308B344AD99464F279 /* RCTFBSDK.xcodeproj */,
 				163CF21D72E54257AA7E9461 /* RNGoogleSignin.xcodeproj */,
-				F3AE716A1E9744B88C402765 /* RNImagePicker.xcodeproj */,
 				3C08DC6BEF194C54807F05CD /* RNIap.xcodeproj */,
 				45971A8C898D40FF980AFC1C /* RNShare.xcodeproj */,
 			);
@@ -694,6 +691,7 @@
 				CD518A6B09C54B23882DEE77 /* Octicons.ttf */,
 				9D98E2721FE240088C52D5F8 /* SimpleLineIcons.ttf */,
 				6B867A4096604B6DACC00833 /* Zocial.ttf */,
+				BAE4CF55783F4AC5AE164EC8 /* AntDesign.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1159,6 +1157,7 @@
 				A4E2418031F74D7F84857488 /* Octicons.ttf in Resources */,
 				AAECCE5FAB5140D7BF4561E5 /* SimpleLineIcons.ttf in Resources */,
 				2DED9DDD6FCC4831822232AE /* Zocial.ttf in Resources */,
+				B8F35310928A4F5EA6BEFE28 /* AntDesign.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,19 +1292,12 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/theacademist_app.app/theacademist_app";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1329,19 +1321,12 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/theacademist_app.app/theacademist_app";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1369,7 +1354,6 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1396,7 +1380,6 @@
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1428,19 +1411,12 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1472,19 +1448,12 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1515,19 +1484,12 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);
@@ -1558,19 +1520,12 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
 					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin/**",
-					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-iap\ios",
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 				);

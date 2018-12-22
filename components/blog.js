@@ -92,7 +92,7 @@ static navigationOptions = ({ navigation }) =>{
                 }}
             useForeground={true}
             background={TouchableNativeFeedback.SelectableBackground()}>
-                <View style={{borderBottomWidth: 4, borderBottomColor:'#085078', alignItems:'center', marginHorizontal:10, marginVertical: 10, backgroundColor:'white', height:300, elevation:2, width:'80%'}}>
+                <View style={{flex:1, borderBottomWidth: 4, borderBottomColor:'#085078', alignItems:'center', marginHorizontal:10, marginVertical: 10, backgroundColor:'white', minHeight:300, elevation:2, width:'80%'}}>
                     <Image source={{uri: `${blog.featuredImage}`}} style={{width: '100%', height:180, backgroundColor:'white'}}/>
                     <Text style={{fontSize:16, color:'black', marginVertical:3}} numberOfLines={2}>{blog.topic}</Text>
                     <View style={{alignSelf:'center', marginTop:-10, paddingHorizontal:10}}>

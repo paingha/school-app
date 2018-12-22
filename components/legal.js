@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Image, Alert, Text, Dimensions, ScrollView} from 'react-native'
+import {View, Image, Alert, Text, Dimensions, ScrollView, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 const { height } = Dimensions.get('window');
 
@@ -8,7 +8,10 @@ constructor(props){
     super(props)
     this.state = {
       screenHeight: height,
-      index: 3
+      index: 3,
+      indexColor1:'#FFFFFF',
+      indexColor2:'#FFFFFF',
+      indexColor3:'#FFBF71',
     }
 }
 static navigationOptions = ({ navigation }) =>{
@@ -48,22 +51,54 @@ static navigationOptions = ({ navigation }) =>{
     //where e is the tabe index number to navigate to
     this.setState({index: e})
   }
+  renderSection(){
+    const {index} = this.state;
+
+    if (index == 1){
+      return <Disclaimer />
+    }
+    else if(index == 2){
+      return <PrivacyPolicy />
+    }
+    else if(index == 3){
+      return <Terms />
+    }
+    else{
+      return <Disclaimer />
+    }
+  }
 
     render(){
       const scrollEnabled = this.state.screenHeight > height;
-      const {index} = this.state;
-      if (index == 1){
-        return <Disclaimer />
-      }
-      else if(index == 2){
-        return <PrivacyPolicy />
-      }
-      else if(index == 3){
-        return <Terms />
-      }
-      else{
-        return <Disclaimer />
-      }
+      const {indexColor1, indexColor2, indexColor3} = this.state;
+      return(
+        <View style={{flex:1, width:'100%'}}>
+          <View style={{width:'100%', justifyContent:'space-evenly', alignItems:'stretch', paddingHorizontal:20, flexDirection:'row', height:50, backgroundColor:'#085078'}}>
+            <TouchableOpacity onPress={()=> this.setState({index: 3, indexColor3:'#FFBF71', indexColor2:'#FFFFFF', indexColor1:'#FFFFFF'})} style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
+            <View style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
+              <Text style={{color:`${indexColor3}`, fontSize:18}}>
+                Terms
+              </Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> this.setState({index: 1, indexColor1:'#FFBF71', indexColor3:'#FFFFFF', indexColor2:'#FFFFFF'})} style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
+            <View style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
+              <Text style={{color:`${indexColor1}`, fontSize:18}}>
+                Disclaimer
+              </Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> this.setState({index: 2, indexColor2:'#FFBF71', indexColor3:'#FFFFFF', indexColor1:'#FFFFFF'})} style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
+            <View style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
+              <Text style={{color:`${indexColor2}`, fontSize:18}}>
+                Privacy Policy
+              </Text>
+            </View>
+            </TouchableOpacity>
+          </View>
+          {this.renderSection()}
+        </View>
+      )
     }
 }
 
@@ -75,7 +110,7 @@ class Terms extends React.Component{
     }
   }
   render(){
-    const scrollEnabled = this.state.screenHeight > height;
+    const scrollEnabled = this.state.screenHeight > height - 50;
     onContentSizeChange = (contentWidth, contentHeight) => {
       this.setState({ screenHeight: contentHeight });
     };
@@ -86,7 +121,7 @@ class Terms extends React.Component{
         scrollEnabled={scrollEnabled}
         onContentSizeChange={this.onContentSizeChange}
         >
-        <View style={{flex:1, flexDirection:'column', alignItems:'center', alignContent:'space-between', width:'100%'}}>
+        <View style={{flex:1, flexDirection:'column', marginBottom:15, alignItems:'center', alignContent:'space-between', width:'100%'}}>
           <View style={{backgroundColor:'white', height:'100%', elevation:2, width:'100%'}}>
             <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingHorizontal:10}}>
             <Text style={{fontSize:16, color:'black', marginTop:5}}>The Academist Terms and Conditions</Text>
@@ -195,7 +230,7 @@ class Disclaimer extends React.Component{
     }
   }
   render(){
-    const scrollEnabled = this.state.screenHeight > height;
+    const scrollEnabled = this.state.screenHeight > height - 50;
     onContentSizeChange = (contentWidth, contentHeight) => {
       this.setState({ screenHeight: contentHeight });
     };
@@ -248,7 +283,7 @@ class PrivacyPolicy extends React.Component{
 }
 
   render(){
-    const scrollEnabled = this.state.screenHeight > height;
+    const scrollEnabled = this.state.screenHeight > height - 50;
     onContentSizeChange = (contentWidth, contentHeight) => {
       this.setState({ screenHeight: contentHeight });
     };

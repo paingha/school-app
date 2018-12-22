@@ -59,7 +59,7 @@ static navigationOptions = ({ navigation }) =>{
   };
   loadMore = () => {
     const {offset} = this.state;
-    this.setState({offset: offset + 10}, ()=>{
+    this.setState({offset: offset + 20}, ()=>{
       if (this.props.forums.rows){
         let data = this.props.forums.rows
         this.props.getForum(getForums, this.state.offset, data);
@@ -83,6 +83,7 @@ static navigationOptions = ({ navigation }) =>{
 //TODO: Implement load more button
     render(){
         const scrollEnabled = this.state.screenHeight > height;
+        const scrollEnabled1 = this.state.screenHeight > 500;
         const {payload} = this.state
         const { navigate } = this.props.navigation;
         const BContent = <Icon style={[styles.btn, styles.btnModal]} name='close' size={30} color="#085078" />;
@@ -152,7 +153,7 @@ static navigationOptions = ({ navigation }) =>{
           alignSelf: 'center'
         }}
       >
-        <TouchableOpacity style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+        <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <Text style={{fontSize:20, color:"white"}}>Load More</Text>
       </View>
@@ -168,6 +169,13 @@ static navigationOptions = ({ navigation }) =>{
             
             </ScrollView>
           <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+          <ScrollView 
+                style={{flex:1, width:'100%', paddingLeft:20, paddingRight:20}}
+                contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
+                scrollEnabled={scrollEnabled1}
+                onContentSizeChange={this.onContentSizeChange}
+                >
+          <View style={{flex:1, alignContent:'center', paddingLeft:10, marginBottom:15, paddingRight:10}}>
           <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:10, paddingBottom:0}}>Search Results</Text>
           {this.props.results ?
               <React.Fragment>
@@ -191,6 +199,8 @@ static navigationOptions = ({ navigation }) =>{
                   :
                   <Text style={{fontSize: 20, marginTop:20, alignSelf:'center'}}>No Search Results </Text>
               }
+              </View>
+            </ScrollView>
           </Modal>
             </React.Fragment>
         )

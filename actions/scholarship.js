@@ -37,3 +37,35 @@ export function receiveSingleScholarship(singleScholarship) {
         singleScholarship
     }
 }
+
+export function clearScholarship(){
+    return {
+        type: 'CLEAR_SCHOLARSHIP'
+    }
+}
+
+export function clearScholarships(){
+    return {
+        type: 'CLEAR_SCHOLARSHIPS'
+    }
+}
+
+export function errorNoCoin(error) {
+    return {
+        type: 'ERROR_NOCOIN',
+        error
+    }
+}
+
+export function requestNoCoin() {
+    return {
+        type: 'REQUEST_NOCOIN'
+    }
+}
+
+export function receiveNoCoin(coin) {
+    return {
+        type: 'RECEIVE_NOCOIN',
+        coin
+    }
+}

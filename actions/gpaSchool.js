@@ -37,3 +37,9 @@ export function receiveSingleGpa(singleSchool) {
         singleSchool
     }
 }
+
+export function clearGpa(){
+    return {
+        type: 'CLEAR_GPA'
+    }
+}

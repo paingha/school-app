@@ -74,18 +74,6 @@ export const SignedOut = createStackNavigator({
 const drawerList = [
 
 ];
-const Blog = createStackNavigator({
-  Blog: {
-      screen: BlogScreen,
-  },
-  BlogDetail: {
-      screen: BlogDetailScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: `${navigation.state.params.topic}`,
-      }),
-  }
-},{ initialRouteName: 'Blog' });
-
 
 const Stack = {
 	FirstView: {

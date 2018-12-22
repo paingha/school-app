@@ -67,11 +67,31 @@ static navigationOptions = ({ navigation }) =>{
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight });
   };
+  loadMore = () => {
+    const {offset} = this.state;
+    this.setState({offset: offset + 5}, ()=>{
+      if (this.props.forum && this.props.forum.replies){
+        let data = this.props.forum.replies
+        //this.props.getForum(getForums, this.state.offset, data);
+        const { navigation } = this.props
+        const forumId = navigation.getParam('forum_id', 'NO-ID');
+        this.props.getForum(getForum, forumId, data);
+      }
+      else{
+        let data = []
+        //this.props.getForum(getForums, this.state.offset, data);
+        const { navigation } = this.props
+        const forumId = navigation.getParam('forum_id', 'NO-ID');
+        this.props.getForum(getForum, forumId, data);
+      }
+      
+    })
+  }
   componentDidMount(){
     //call getForum here
     const { navigation } = this.props
     const forumId = navigation.getParam('forum_id', 'NO-ID');
-    this.props.getForum(getForum, forumId);
+    this.props.getForum(getForum, forumId, []);
     AsyncStorage.getItem('TOKEN', (err, result)=>{
       if (result){
         //get user here
@@ -85,6 +105,7 @@ static navigationOptions = ({ navigation }) =>{
         const forum_id = navigation.getParam('forum_id', 'NO-ID');
         const topic = navigation.getParam('topic', 'no topic');
         const {id, firstName, lastName} = this.props.currentUser;
+        const array = ((this.props.forum && this.props.forum.replies) ? this.props.forum.replies : []);
         return(
           <ScrollView 
             style={{flex:1}}
@@ -125,6 +146,9 @@ static navigationOptions = ({ navigation }) =>{
         </React.Fragment>
         :null
       }
+      {this.props.forum && this.props.forum.replies?
+      <React.Fragment>
+      {this.props.forum.replies.length >= 5?
             
             <View
         style={{
@@ -133,22 +157,31 @@ static navigationOptions = ({ navigation }) =>{
           alignSelf: 'center'
         }}
       >
-        <TouchableOpacity style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+        <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <Text style={{fontSize:20, color:"white"}}>Load More</Text>
       </View>
       </TouchableOpacity>
       </View>
+      :
+      null
+      }
+      </React.Fragment>
+      :null
+      }
             <View style={{flex:1, marginTop:10, marginBottom:10, flexDirection:'column', width:'100%' , paddingLeft:5, paddingRight:5}}>
             <TextInput
             style={{borderColor:'#085078', textAlignVertical: "top", borderWidth:2, width:'100%', height:100, paddingLeft:10, paddingRight:10, backgroundColor:'white'}}
-            value={this.state.comment}
+            value={this.state.content}
             placeholder="Post a Comment"
             onChangeText={(content) => {this.setState({content})}}
             multiline={true}
             underlineColorAndroid='transparent'
             />
-            <TouchableOpacity onPress={()=>{this.props.postComment(newReply, this.state.content, id, forum_id, firstName, lastName, this.state.token, getForum)}} style={{marginTop:10, height: 35, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'flex-end', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
+            <TouchableOpacity onPress={()=>{
+              this.props.postComment(newReply, this.state.content, id, forum_id, firstName, lastName, this.state.token, getForum, array)
+              this.setState({content:''})
+              }} style={{marginTop:10, height: 35, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'flex-end', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
             <Icon name="pencil" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", marginHorizontal:10}}>Post Comment</Text>
             </TouchableOpacity>
             </View>
@@ -165,14 +198,14 @@ function mapper(state) {
   }
   const mapDispatchToProps = (dispatch) => {
     return {
-      getForum: (url, id) => {
+      getForum: (url, id, e) => {
         dispatch(
-          getSingleForumCall(url, id)
+          getSingleForumCall(url, id, e)
         );
       },
-      postComment: (url, content, by, forumId, firstName, lastName, token, reload) => {
+      postComment: (url, content, by, forumId, firstName, lastName, token, reload, e) => {
         dispatch(
-          postCommentCall(url, content, by, forumId, firstName, lastName, token, reload)
+          postCommentCall(url, content, by, forumId, firstName, lastName, token, reload, e)
         );
       },
     }

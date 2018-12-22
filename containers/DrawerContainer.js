@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import {onSignOut} from '../lib/auth';
+const {height, width} = Dimensions.get('window');
 
 export default class DrawerContainer extends React.Component {
 
@@ -11,6 +12,7 @@ export default class DrawerContainer extends React.Component {
     const { navigation } = this.props
     return (
       <View style={styles.container}>
+      <View style={{flex:1, minHeight: height, maxHeight:height}}>
         <Text
           onPress={() => navigation.navigate('FirstViewStack')}
           style={styles.uglyDrawerItem}>
@@ -70,6 +72,7 @@ export default class DrawerContainer extends React.Component {
           style={styles.uglyDrawerItem1}>
           Log Out
         </Text>
+        </View>
       </View>
     )
   }
@@ -80,7 +83,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
     paddingTop: 15,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    maxHeight: height,
+    minHeight: height
   },
   uglyDrawerItem: {
     fontSize: 16,

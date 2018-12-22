@@ -17,6 +17,7 @@ const urls = {
     "gpa_search": `${baseUrl}api/v1/school/search-by-gpa`,
     "singleGpa": `${baseUrl}api/v1/school/{school_id}`,
     "major_search": `${baseUrl}api/v1/major/search-by-major`,
+    "singleMajor": `${baseUrl}api/v1/major/{school_id}`,
     "getStates": `${baseUrl}services/get-state`,
     "save_scholarship": `${baseUrl}api/v1/scholarship/save/{user_id}`,
     "unsave_scholarship": `${baseUrl}api/v1/scholarship/unsave/{user_id}`,
@@ -25,7 +26,9 @@ const urls = {
     "getForums": `${baseUrl}api/v1/forum?offset={off}`,
     "getForum": `${baseUrl}api/v1/forum/{forum_id}`,
     "newReply": `${baseUrl}api/v1/reply`,
-    "searchForum": `${baseUrl}api/v1/forum/search`
+    "searchForum": `${baseUrl}api/v1/forum/search`,
+    "no_coin": `${baseUrl}api/v1/scholarship/no-coin`,
+    "verify_android": `${baseUrl}services/verify-android`
 }
 
 module.exports = urls;
