@@ -21,6 +21,9 @@ export function verifyAndroidCall(url, token, coin, receipt, packageName, produc
                 e();
                 
           })
+          .then(()=>{
+            dispatch(refreshUserCall(user_id, token))
+          })
           .catch(error=>{
             Alert.alert(
                 'Success!',
