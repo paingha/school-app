@@ -10,7 +10,7 @@ export default class Loading extends React.Component{
                 />
                 <Image style={styles.logo} source={require('../assets/logo.png')}/>
                 <Text style={styles.welcome}>
-                Loading
+                
                 </Text>
                 <ActivityIndicator size="large" color="#ffffff"/>
               </ImageBackground>

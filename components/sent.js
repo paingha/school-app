@@ -42,21 +42,24 @@ const styles = StyleSheet.create({
       marginTop: -10
     },
     welcome: {
-      fontSize: 20,
+      fontSize: 25,
       textAlign: 'center',
       marginTop: 20,
       color: '#F5FCFF',
+      fontFamily: 'AdventPro-Regular',
     },
     welcome1: {
-      fontSize: 20,
+      fontSize: 25,
       textAlign: 'center',
       marginTop: 3,
       color: '#F5FCFF',
+      fontFamily: 'AdventPro-Regular',
     },
     link: {
-        fontSize: 20,
+        fontSize: 25,
         textAlign: 'center',
         marginTop: 80,
         color: '#F5FCFF',
+        fontFamily: 'AdventPro-Medium',
       }
   });

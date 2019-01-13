@@ -94,14 +94,12 @@ static navigationOptions = ({ navigation }) =>{
             background={TouchableNativeFeedback.SelectableBackground()}>
                 <View style={{flex:1, borderBottomWidth: 4, borderBottomColor:'#085078', alignItems:'center', marginHorizontal:10, marginVertical: 10, backgroundColor:'white', minHeight:300, elevation:2, width:'80%'}}>
                     <Image source={{uri: `${blog.featuredImage}`}} style={{width: '100%', height:180, backgroundColor:'white'}}/>
-                    <Text style={{fontSize:16, color:'black', marginVertical:3}} numberOfLines={2}>{blog.topic}</Text>
+                    <Text style={{fontSize:22, color:'black', fontFamily: 'AdventPro-Regular', marginVertical:3}} numberOfLines={2}>{blog.topic}</Text>
                     <View style={{alignSelf:'center', marginTop:-10, paddingHorizontal:10}}>
-                    <HTML ptSize={12} html={truncate(blog.content, 20, { byWords: true })} imagesMaxWidth={Dimensions.get('window').width} />
+                    <HTML ptSize={16} html={truncate(blog.content, 20, { byWords: true })} baseFontStyle={{fontSize:16, fontFamily:'AdventPro-Regular'}} imagesMaxWidth={Dimensions.get('window').width} />
                     </View>
                     <View style={{flexDirection:'row', justifyContent:'space-between', width:'100%'}}>
                     <View></View>
-                    <View style={{paddingRight:10}}><Text style={{fontSize:15, color:'#085078', marginVertical:-10}}>Read More</Text></View>
-                    
                     </View>
                 </View>
             </TouchableNativeFeedback>
@@ -125,7 +123,7 @@ static navigationOptions = ({ navigation }) =>{
       >
         <TouchableOpacity  onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, color:"white"}}>Load More</Text>
+      <Text style={{fontSize:20, fontFamily:'AdventPro-Regular', color:"white"}}>Load More</Text>
       </View>
       </TouchableOpacity>
       </View>

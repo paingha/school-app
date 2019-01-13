@@ -115,8 +115,8 @@ android {
         applicationId "com.theacademist_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 14
-        versionName "1.12"
+        versionCode 17
+        versionName "1.15"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

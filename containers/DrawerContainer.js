@@ -1,16 +1,32 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { Alert, StyleSheet, FlatList, View, Text, ScrollView, StatusBar, AsyncStorage, TouchableNativeFeedback, Platform, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import { NavigationActions } from 'react-navigation'
 import {onSignOut} from '../lib/auth';
 const {height, width} = Dimensions.get('window');
 
 export default class DrawerContainer extends React.Component {
-
-  
+  constructor(props){
+    super(props)
+    this.state = {
+        screenHeight: height,
+        clicked: false,
+        paddingValue: 50
+    }
+}
+onContentSizeChange = (contentWidth, contentHeight) => {
+  this.setState({ screenHeight: contentHeight + 180 });
+};
 
   render() {
     const { navigation } = this.props
+    const scrollEnabled = this.state.screenHeight > height - 150;
     return (
+      <ScrollView 
+                style={{flex:1, paddingBottom: this.state.paddingValue}}
+                contentContainerStyle={{flexGrow: 1, alignContent:'center', paddingBottom: this.state.paddingValue}}
+                scrollEnabled={scrollEnabled}
+                onContentSizeChange={this.onContentSizeChange}
+                >
       <View style={styles.container}>
       <View style={{flex:1, minHeight: height, maxHeight:height}}>
         <Text
@@ -59,10 +75,31 @@ export default class DrawerContainer extends React.Component {
           About Us
         </Text>
         <Text
-          onPress={() => navigation.navigate('TenthViewStack')}
+          onPress={() => this.setState({clicked: !this.state.clicked, paddingValue: 90, scrollEnabled: true})/*navigation.navigate('TenthViewStack')*/}
           style={styles.uglyDrawerItem}>
-          Legal 
+          Legal Terms
         </Text>
+        {this.state.clicked?
+        <View>
+          <Text
+            onPress={() => this.setState({clicked: !this.state.clicked})/*navigation.navigate('TenthViewStack')*/}
+            style={styles.uglyDrawerItem}>
+            Disclaimer
+          </Text>
+          <Text
+          onPress={() => this.setState({clicked: !this.state.clicked})/*navigation.navigate('TenthViewStack')*/}
+          style={styles.uglyDrawerItem}>
+          Privacy Policy
+        </Text>
+        <Text
+          onPress={() => this.setState({clicked: !this.state.clicked})/*navigation.navigate('TenthViewStack')*/}
+          style={styles.uglyDrawerItem}>
+          Terms and Conditions
+        </Text>
+        </View>
+        :
+        null
+        }
         <Text
           onPress={()=> {
             let e = navigation;
@@ -74,6 +111,7 @@ export default class DrawerContainer extends React.Component {
         </Text>
         </View>
       </View>
+      </ScrollView>
     )
   }
 }
@@ -88,16 +126,16 @@ const styles = StyleSheet.create({
     minHeight: height
   },
   uglyDrawerItem: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'AdventPro-Medium',
     color: 'black',
     padding: 15,
     margin: 0,
     textAlign: 'center'
   },
   uglyDrawerItem1: {
-    fontSize: 15,
-    fontWeight: 'bold',
+    fontSize: 19,
+    fontFamily: 'AdventPro-Medium',
     color: '#E73536',
     padding: 15,
     margin: 3,

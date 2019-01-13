@@ -104,6 +104,8 @@ static navigationOptions = ({ navigation }) =>{
                     label='Need Help?'
                     baseColor='#085078'
                     textColor='#085078'
+                    labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+                    style={{fontFamily:'AdventPro-Bold'}}
                     onChangeText={(searchTerm) => this.setState({searchTerm})}
                     />
                     </View>
@@ -112,12 +114,12 @@ static navigationOptions = ({ navigation }) =>{
                         this.refs.savedModal.open()
                       }} 
                       style={{height: 35, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'flex-end', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
-                    <Icon name="search" size={20} style={{marginLeft:3, color:'#085078', marginTop: 1}}/><Text style={{fontSize:18, color:"#085078", marginHorizontal:10}}>SEARCH</Text>
+                    <Icon name="search" size={20} style={{marginLeft:3, color:'#085078', marginTop: 1}}/><Text style={{fontFamily:'AdventPro-Bold', fontSize:18, color:"#085078", marginHorizontal:10}}>SEARCH</Text>
                     </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{marginHorizontal:10, alignContent:'center', alignItems:'center', marginVertical: 10, backgroundColor:'white', flex:1, elevation:2, width:'90%'}}>
-                    <Text style={{fontSize:18, fontWeight:'bold', marginVertical:10}}>Recent Articles</Text>
+                    <Text style={{fontSize:20, fontFamily:'AdventPro-Bold', marginVertical:10}}>Recent Articles</Text>
                     <View style={{flexDirection:'column', width:'80%'}}>
                     {this.props.forums ?
                     <React.Fragment>
@@ -130,7 +132,7 @@ static navigationOptions = ({ navigation }) =>{
                     >
                       <View style={{flexDirection:'row', marginVertical:10}}>
                         <Icon name="book" size={20} style={{marginLeft:3, color:'#085078', marginTop: 1, marginRight: 10}}/>
-                        <Text numberOfLines={1} style={{flex:1, fontSize:16}}>{forum.topic}</Text>
+                        <Text numberOfLines={1} style={{flex:1, fontSize:18, fontFamily:'AdventPro-Regular'}}>{forum.topic}</Text>
                       </View>
                     </TouchableOpacity>
                     )
@@ -155,7 +157,7 @@ static navigationOptions = ({ navigation }) =>{
       >
         <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, color:"white"}}>Load More</Text>
+      <Text style={{fontSize:20, fontFamily:'AdventPro-Bold', color:"white"}}>Load More</Text>
       </View>
       </TouchableOpacity>
       </View>
@@ -197,7 +199,7 @@ static navigationOptions = ({ navigation }) =>{
               </React.Fragment>
                
                   :
-                  <Text style={{fontSize: 20, marginTop:20, alignSelf:'center'}}>No Search Results </Text>
+                  <Text style={{fontSize: 20, fontFamily:'AdventPro-Bold', marginTop:20, alignSelf:'center'}}>No Search Results </Text>
               }
               </View>
             </ScrollView>

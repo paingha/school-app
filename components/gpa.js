@@ -116,8 +116,8 @@ class GpaScreen extends React.Component {
   renderHeader = () => {
   return <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> {this.props.schools.count} {this.props.schools.count == 1 ? <Text>School Found</Text>:  <Text>Schools Found</Text> }</Text>;
   };
-  renderFooter = (e) => {
-    console.log(e)
+  renderFooter = () => {
+    //console.log(e)
     //console.log(this.state.offset)
     //console.log(this.props.schools.count)
     if (this.state.offset >= this.props.schools.count){
@@ -371,7 +371,7 @@ class GpaScreen extends React.Component {
             </View>
             </TouchableOpacity>
             <View style={{flex: 1, justifyContent: 'flex-end', alignContent:'flex-end', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="link" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Visit</Text>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="link" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>More</Text>
             </View>
             </View>
             </View>
@@ -451,7 +451,7 @@ class GpaScreen extends React.Component {
       this.props.singleSchool?
       <ScrollView 
                 style={{flex:1}}
-                contentContainerStyle={{flexGrow: 1, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                contentContainerStyle={{flexGrow: 1, marginBottom: 15, alignContent:'center', paddingLeft:15, paddingRight:15}}
                 scrollEnabled={scrollEnabled}
                 onContentSizeChange={this.onContentSizeChange}
                 >
@@ -501,7 +501,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   modal5: {
-    height: 550
+    height: height - 200
   },
   modal6: {
     height: 250

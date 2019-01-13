@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import {registerUserCall, facebookRegisterUserCall, googleRegisterUserCall} from '../calls/user';
+import {registerUserCall, facebookRegisterUserCall, googleRegisterUserCall, clearErrorCall} from '../calls/user';
 import {register, registerFacebook, registerGoogle} from '../settings'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FBSDK, {LoginManager, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import { StyleSheet, ImageBackground, ScrollView, View, Alert, Text, Image, TextInput, TouchableOpacity, Dimensions, TouchableHighlight, KeyboardAvoidingView  } from 'react-native';
 const { height } = Dimensions.get('window');
-
+import CheckBox from './checkbox';
 class RegisterScreen extends React.Component {
     static navigationOptions = {
         header: null
@@ -22,13 +22,20 @@ class RegisterScreen extends React.Component {
       password: '',
       userId: '',
       visible: false,
+      checkSelected: false,
       userInfo: null,
       screenHeight: height,
     }
   }
   async componentDidMount() {
     this._configureGoogleSignIn();
+    this.props.clearError();
   }
+  toggleCheckBox = (isCheck) => {
+    this.setState({ checkSelected: isCheck });
+    }
+
+  
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight });
   };
@@ -100,7 +107,7 @@ class RegisterScreen extends React.Component {
     const deviceWidth = width - 30;
     const deviceWidthinner = width - 40;
     const {email, password, confirmPassword, firstName, lastName} = this.state
-    const scrollEnabled = this.state.screenHeight > height;
+    const scrollEnabled = this.state.screenHeight > height - 150;
     return (
       <ScrollView 
       style={{flex:1}}
@@ -114,11 +121,16 @@ class RegisterScreen extends React.Component {
       <Text style={styles.title}>Create An Account</Text>
       {
         this.props.error?
-        <Text>{this.props.error}</Text>
+        <View style={{flexDirection:'column', padding:10, marginBottom: 6, flexWrap:'wrap', alignContent:'center', alignItems:'center', justifyContent:'space-between', maxWidth:'95%', backgroundColor:'red'}}>
+         <Icon style={{textAlign: 'center', fontWeight: 200, marginBottom:7}} name="exclamation-triangle" size={18} color="#ffffff" />
+        <View style={{flexWrap:'wrap', maxWidth:'100%'}}>
+        <Text style={{color: '#ffffff', fontSize:16, flexWrap:'wrap', fontFamily: 'AdventPro-Regular'}}>{this.props.error}</Text>
+        </View>
+        </View>
         :
         null
       }
-      <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
+      <View style={{height: 50, width: deviceWidth, fontFamily: 'AdventPro-Medium', color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
         autoCapitalize='none'
         autoCorrect={false}
@@ -126,10 +138,10 @@ class RegisterScreen extends React.Component {
         textContentType='givenName'
         placeholder='First Name'
         onChangeText={(firstName)=> this.setState({firstName})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
-      <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
+      <View style={{height: 50, width: deviceWidth, fontFamily: 'AdventPro-Medium', color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
       autoCapitalize='none'
       autoCorrect={false}
@@ -137,10 +149,10 @@ class RegisterScreen extends React.Component {
       textContentType='familyName'
       placeholder='Last Name'
       onChangeText={(lastName)=> this.setState({lastName})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
-      <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
+      <View style={{height: 50, width: deviceWidth, fontFamily: 'AdventPro-Medium', color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
       autoCapitalize='none'
       autoCorrect={false}
@@ -148,10 +160,10 @@ class RegisterScreen extends React.Component {
       textContentType='emailAddress'
       placeholder='Email'
       onChangeText={(email)=> this.setState({email})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
-      <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
+      <View style={{height: 50, marginBottom: 0, fontFamily: 'AdventPro-Medium', width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
       autoCapitalize='none'
       autoCorrect={false}
@@ -160,8 +172,14 @@ class RegisterScreen extends React.Component {
       textContentType='password'
       placeholder='Password'
       onChangeText={(password)=> this.setState({password})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
+      </View>
+      <View style={{flexDirection: 'row', maxWidth: '100%', marginBottom: 0}}>
+      <CheckBox style={{marginTop: 0, padding: 0,}} clicked={(isCheck) => this.toggleCheckBox(isCheck)}></CheckBox>
+      <View style={{flexDirection: 'row', maxWidth: '75%', alignSelf:'center'}}>
+      <Text style={{color: '#ffffff', fontSize: 18, fontFamily: 'AdventPro-Regular', }}>By signing up you agree to our Terms and Conditions and Privacy Policy</Text>
+      </View>
       </View>
       <TouchableHighlight
         onPress={()=> {
@@ -169,16 +187,16 @@ class RegisterScreen extends React.Component {
             setTimeout(()=>{
             this.setState({visible: false})
             let e = this.props.navigation;
-            this.props.fetchData(register, email, password, firstName, lastName, e)
+            this.props.fetchData(register, email, password, firstName, lastName, e, this.state.checkSelected)
             },3000)
           })
         }
       }
          style={{alignItems: 'center', height: 50, marginBottom: 10, width: deviceWidth, elevation: 3, backgroundColor: '#FFBF71', paddingBottom: 8, paddingTop: 12}}
         >
-         <Text style={{fontSize: 20, color: 'white'}}> Register </Text>
+         <Text style={{fontSize: 25, color: 'white', fontFamily: 'AdventPro-Medium'}}> Register </Text>
         </TouchableHighlight>
-        <View style={{marginTop: -15, flexDirection: 'row', marginBottom: 10}}>
+        <View style={{marginTop: -15, flexDirection: 'row', marginTop: 5, marginBottom: 10}}>
         <View style={{paddingRight: 5}}>
         <TouchableHighlight 
         style={{alignItems: 'center', height: 48, marginBottom:0, width: 170, elevation: 3, backgroundColor: '#3B5998', paddingBottom: 8, paddingTop: 12}}
@@ -215,8 +233,8 @@ class RegisterScreen extends React.Component {
           } }/>
         </View>
         </View>
-        <Text style={{alignItems: 'center', fontSize: 16, marginTop: -5, marginBottom: 5, color: '#ffffff'}}>Already have an account? <Text onPress={() => this.props.navigation.navigate("SignIn")} style={{fontWeight: 'bold', fontSize: 17}}>Login</Text></Text>
-        <Text style={{alignItems: 'center', fontSize: 16, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Locked Out? <Text onPress={() => this.props.navigation.navigate("ForgotPassword")} style={{fontWeight: 'bold', fontSize: 17}}>Reset Password</Text></Text>
+        <Text style={{alignItems: 'center', fontFamily: 'AdventPro-Regular', fontSize: 18, marginTop: -5, marginBottom: 5, color: '#ffffff'}}>Already have an account? <Text onPress={() => this.props.navigation.navigate("SignIn")} style={{fontWeight: 'bold', fontSize: 17}}>Login</Text></Text>
+        <Text style={{alignItems: 'center', fontFamily: 'AdventPro-Regular', fontSize: 18, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Locked Out? <Text onPress={() => this.props.navigation.navigate("ForgotPassword")} style={{fontWeight: 'bold', fontSize: 17}}>Reset Password</Text></Text>
         <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} cancelable={false} animation="fade"/>
     </ImageBackground>
     </KeyboardAvoidingView>
@@ -241,6 +259,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     textAlign: 'center',
     paddingHorizontal: 16,
+    fontFamily: 'AdventPro-Regular',
   },
   title: {
     fontSize: 25,
@@ -249,6 +268,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 3,
     marginTop: -10,
+    fontFamily: 'AdventPro-Regular'
   }
 });
 
@@ -261,6 +281,12 @@ function mapper(state) {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    clearError: () =>
+    {
+      dispatch(
+        clearErrorCall()
+      )
+    },
     facebookRegister: (url, email, firstName, lastName, userId, token, e) => 
       {
         dispatch(
@@ -273,8 +299,9 @@ const mapDispatchToProps = (dispatch) => {
           googleRegisterUserCall(url, email, firstName, lastName, e)
         );
       },
-      fetchData: (url, email, password, firstName, lastName, e) => 
+      fetchData: (url, email, password, firstName, lastName, e, agree) => 
       {
+        if(agree){
         if (url && email && password && firstName && lastName && e) {
           dispatch(
             registerUserCall(url, email, firstName, lastName, password, e)
@@ -283,7 +310,10 @@ const mapDispatchToProps = (dispatch) => {
           alert("Required Details Missing")
         }
       
-      }
+      }else {
+      Alert.alert("Error", "Agreeing to our Terms and Conditions and Privacy Policy is required")
+    }
+    }
   };
 };
 export default connect(mapper, mapDispatchToProps)(RegisterScreen);

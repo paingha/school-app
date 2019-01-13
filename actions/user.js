@@ -25,6 +25,12 @@ export function errorRegister(error) {
     }
 }
 
+export function clearError(){
+    return {
+        type: 'CLEAR_ERROR'
+    }
+}
+
 export function requestUser() {
     return {
         type: 'REQUEST_USER'

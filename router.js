@@ -70,6 +70,13 @@ export const SignedOut = createStackNavigator({
       headerStyle
     }
   },
+  FirstLogin: {
+    screen: FirstLoginScreen,
+    navigationOptions: {
+      title: "First Login",
+      headerStyle
+    }
+  },
 });
 const drawerList = [
 

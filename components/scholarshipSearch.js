@@ -16,8 +16,6 @@ import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
 import Share, {ShareSheet, Button} from 'react-native-share';
 import _ from 'lodash';
-import { rejects } from 'assert';
-import { resolve } from 'url';
 const { height } = Dimensions.get('window');
 
 class ScholarshipScreen extends React.Component {
@@ -875,7 +873,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   modal5: {
-    height: 550
+    height: height - 200
   },
   modal6: {
     height: 250

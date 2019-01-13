@@ -6,7 +6,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FBSDK, {LoginManager, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import {loginUserCall, facebookLoginUserCall, googleLoginUserCall} from '../calls/user';
+import {loginUserCall, facebookLoginUserCall, googleLoginUserCall, clearErrorCall} from '../calls/user';
 const { height } = Dimensions.get('window');
 class LoginScreen extends React.Component {
     constructor(props){
@@ -29,11 +29,12 @@ class LoginScreen extends React.Component {
       };
       async componentDidMount() {
         this._configureGoogleSignIn();
+        this.props.clearError();
       }
     
       _configureGoogleSignIn() {
         GoogleSignin.configure({
-          webClientId: '638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com',
+          webClientId: '638073687773-j6bcon34q7jv0tkobs98ip8v9n6j8ups.apps.googleusercontent.com',
           offlineAccess: false,
           forceConsentPrompt: true,
         });
@@ -50,7 +51,7 @@ class LoginScreen extends React.Component {
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // sign in was cancelled
-            Alert.alert('cancelled');
+            Alert.alert('Login Cancelled', 'Google Login cancelled');
           } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
             Alert.alert('play services not available or outdated');
           } else {
@@ -109,8 +110,8 @@ class LoginScreen extends React.Component {
     const scrollEnabled = this.state.screenHeight > height;
     return (
       <ScrollView 
-      style={{flex:1}}
-      contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
+      style={{flex:1, fontFamily: 'AdventPro-Regular',}}
+      contentContainerStyle={{flexGrow: 1, alignContent:'center', fontFamily: 'AdventPro-Regular',}}
       scrollEnabled={scrollEnabled}
       onContentSizeChange={this.onContentSizeChange}
       >
@@ -120,12 +121,17 @@ class LoginScreen extends React.Component {
       <Text style={styles.title}>Login</Text>
       {
         this.props.error?
-        <Text>{this.props.error}</Text>
+        <View style={{flexDirection:'column', padding:10, marginBottom: 6, flexWrap:'wrap', alignContent:'center', alignItems:'center', justifyContent:'space-between', maxWidth:'95%', backgroundColor:'red'}}>
+         <Icon style={{textAlign: 'center', fontWeight: 200, marginBottom:7}} name="exclamation-triangle" size={18} color="#ffffff" />
+        <View style={{flexWrap:'wrap', maxWidth:'100%'}}>
+        <Text style={{color: '#ffffff', fontSize:16, flexWrap:'wrap', fontFamily: 'AdventPro-Regular'}}>{this.props.error}</Text>
+        </View>
+        </View>
         :
         null
       }
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-around'}}>
-      <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
+      <View style={{height: 50, width: deviceWidth, fontFamily: 'AdventPro-Medium', color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
       autoCapitalize='none'
       autoCorrect={false}
@@ -133,10 +139,10 @@ class LoginScreen extends React.Component {
       textContentType='emailAddress'
       placeholder='Email'
       onChangeText={(email)=> this.setState({email})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
-      <View style={{height: 50, width: deviceWidth, color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
+      <View style={{height: 50, width: deviceWidth, fontFamily: 'AdventPro-Medium', color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
       <TextInput
       autoCapitalize='none'
       autoCorrect={false}
@@ -145,7 +151,7 @@ class LoginScreen extends React.Component {
       textContentType='password'
       placeholder='Password'
       onChangeText={(password)=> this.setState({password})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, fontFamily: 'AdventPro-Medium', backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
       <TouchableHighlight
@@ -161,7 +167,7 @@ class LoginScreen extends React.Component {
       }
          style={{alignItems: 'center', height: 50, marginBottom: 15, width: deviceWidth, elevation: 3, backgroundColor: '#FFBF71', paddingBottom: 8, paddingTop: 12}}
         >
-         <Text style={{fontSize: 20, color: 'white'}}> Login </Text>
+         <Text style={{fontSize: 25, color: 'white', fontFamily: 'AdventPro-Medium'}}> Login </Text>
         </TouchableHighlight>
         <View style={{marginTop: -10, flexDirection: 'row', marginBottom: 10}}>
         <View style={{marginLeft: 2, paddingRight: 5, height: 47, width: 180}}>
@@ -200,9 +206,9 @@ class LoginScreen extends React.Component {
           } }/>
         </View>
         </View>
-        <Text style={{alignItems: 'center', fontSize: 16, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Need an account? <Text onPress={() => this.props.navigation.navigate('SignUp')} style={{fontWeight: 'bold'}}>Register</Text></Text>
-        <Text style={{alignItems: 'center', fontSize: 16, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Locked Out? <Text onPress={() => this.props.navigation.navigate("ForgotPassword")} style={{fontWeight: 'bold', fontSize: 17}}>Reset Password</Text></Text>
-        <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} cancelable={false} animation="fade"/>
+        <Text style={{alignItems: 'center', fontFamily: 'AdventPro-Regular', fontSize: 18, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Need an account? <Text onPress={() => this.props.navigation.navigate('SignUp')} style={{fontWeight: 'bold', fontFamily: 'AdventPro-Regular' }}>Register</Text></Text>
+        <Text style={{alignItems: 'center', fontFamily: 'AdventPro-Regular', fontSize: 18, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Locked Out? <Text onPress={() => this.props.navigation.navigate("ForgotPassword")} style={{fontWeight: 'bold', fontSize: 17, fontFamily: 'AdventPro-Bold'}}>Reset Password</Text></Text>
+        <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF', fontFamily: 'AdventPro-Regular'}} cancelable={false} animation="fade"/>
       </View>
       </ImageBackground>
       </KeyboardAvoidingView>
@@ -217,6 +223,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#86e2d5',
+    fontFamily: 'AdventPro-Regular', 
   },
   logo: {
     width: 120,
@@ -234,6 +241,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     textAlign: 'center',
     marginBottom: 16,
+    fontFamily: 'AdventPro-Regular',
   }
 });
 
@@ -246,6 +254,12 @@ function mapper(state) {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+      clearError: () =>
+    {
+      dispatch(
+        clearErrorCall()
+      )
+    },
       facebookLogin: (url, email, userId, accessToken, e) => {
         dispatch(
           facebookLoginUserCall(url, email, userId, accessToken, e)

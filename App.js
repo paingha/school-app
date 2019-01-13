@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, AsyncStorage, StatusBar, View, Text, Image } from 'react-native';
+import { StyleSheet, AsyncStorage, ToastAndroid, BackHandler, StatusBar, View, Text, Image } from 'react-native';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import {Provider} from 'react-redux';
 import jwtDecode from 'jwt-decode';
@@ -9,6 +9,8 @@ import {login, getUser} from './settings'
 import { isSignedIn } from "./lib/auth";
 import {errorLogin, requestUser, receiveUser} from './actions/user';
 import Wrapper from './wrapper';
+import OfflineNotice from './components/offline';
+import { withNetworkConnectivity } from 'react-native-offline';
 
 async function decode(a){
   try {
@@ -25,7 +27,7 @@ const store = prepareStore({
     //user: {token}
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props){
     super(props)
   this.state = {
@@ -34,10 +36,14 @@ export default class App extends React.Component {
     boardedState: null,
     signedIn: null,
     boardedState: null,
-    checkedSignIn: null
+    checkedSignIn: null,
+    connected: this.props.isConnected,
+    backClickCount: 0
   }
 }
 componentWillMount(){
+  BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  if(this.props.isConnected){
   isSignedIn(store)
       .then(res => this.setState({ signedIn: res, checkedSignIn: true}, ()=>{
         AsyncStorage.getItem('@OnBoarded', (err, result) => {
@@ -54,47 +60,56 @@ componentWillMount(){
         });
       }))
       .catch(err => alert("An error occurred"));
-}
-componentDidMount(){
-  /*if(token) {
-    store.dispatch(requestUser());
-    fetch(getUser.replace('{user_id}', user.id), {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token,
-        },
-    })
-    .then(response=>response.json())
-    .then(json=>{
-        if (json.error)
-            throw new Error(json.error.message);
-        store.dispatch(receiveUser(json));
-        //alert(json)
-    })
-    .then(e =>{
-      //this.props.navigation.navigate('App');
-      this.setState({hasToken: true})
     }
-  
-    )
-    .catch(error=>store.dispatch(errorLogin(error.message)))
-    // .then(()=>
-    // );
-  }*/
-  }
+}
+
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+}
+countNow = () =>{
+  this.setState({backClickCount: this.state.backClickCount + 1}, ()=>{
+    ToastAndroid.showWithGravityAndOffset(
+      'Press the back button again to exit app',
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM,
+      25,
+      50,
+    );
+  })
+}
+handleBackButton = () => {
+  this.state.backClickCount == 1 ? BackHandler.exitApp() : this.countNow();
+
+  return true;
+};
   render() {
     if(this.state.loadingNow){
     return <Loading />
     }
     else{
+    if (this.props.isConnected || this.state.connected){
     return(
       <Provider store={store} >
        <Wrapper boardState={this.state.boardedState} signedIn={this.state.signedIn} checkedSignIn={this.state.checkedSignIn} />
       </Provider>
     )
+  }
+    else{
+      return <OfflineNotice />
+    }
     }
 
   } 
 }
 
+export default withNetworkConnectivity({
+  withRedux: false,
+  timeout: 4000,
+  pingServerUrl: 'https://www.google.com/',
+  withExtraHeadRequest: true,
+  checkConnectionInterval: 3000,
+  checkIntervalOfflineOnly: false,
+  checkInBackground: false,
+  httpMethod: 'HEAD',
+})(App);

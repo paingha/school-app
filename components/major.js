@@ -363,6 +363,7 @@ class MajorScreen extends React.Component {
             keyExtractor={item => item.id.toString()}
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
+            extraData={this.state.loadMore}
             ItemSeparatorComponent={this.renderSeparator}
             renderItem={({item}) => 
             <TouchableOpacity onPress={()=> this.moreData(item.id)}> 
@@ -509,7 +510,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   modal5: {
-    height: 550
+    height: height - 200
   },
   modal6: {
     height: 250

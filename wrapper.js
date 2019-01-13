@@ -4,6 +4,7 @@ import { createRootNavigator } from "./router";
 import { isSignedIn } from "./lib/auth";
 import AppIntroSlider from 'react-native-app-intro-slider';
 import OfflineNotice from './components/offline';
+import { withNetworkConnectivity } from 'react-native-offline';
 
 const styles = StyleSheet.create({
   image1: {
@@ -94,25 +95,16 @@ const slides = [
 ];
 
 
-export default class Wrapper extends React.Component {
+class Wrapper extends React.Component {
   constructor(props){
     super(props)
   this.state = {
     signedIn: null,
     checkedSignIn: false,
     boardingState: this.props.boardState,
-    isConnected: true
+    isConnected: false
   }
 }
-componentWillMount() {
-  NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
-  }
-  componentWillUnmount() {
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
- }
-  handleConnectivityChange = isConnected => {
-    this.setState({ isConnected });
-  }
   _onDone = () => {
     AsyncStorage.setItem('@OnBoarded', "true").then(()=>
       this.setState({boardingState: "true"})
@@ -120,13 +112,12 @@ componentWillMount() {
   }
   render() { 
     const { checkedSignIn, signedIn } = this.props;
-    const {isConnected} = this.state;
     if (!checkedSignIn) {
       return null;
     }
       if(this.state.boardingState == "true") {
         const Layout = createRootNavigator(signedIn);
-        if (isConnected){
+        if (this.props.isConnected){
           return <Layout />
         }else{
           return <OfflineNotice />
@@ -138,3 +129,13 @@ componentWillMount() {
   } 
 }
 
+export default withNetworkConnectivity({
+  withRedux: false,
+  timeout: 4000,
+  pingServerUrl: 'https://www.google.com/',
+  withExtraHeadRequest: true,
+  checkConnectionInterval: 3000,
+  checkIntervalOfflineOnly: false,
+  checkInBackground: false,
+  httpMethod: 'HEAD',
+})(Wrapper);

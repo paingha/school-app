@@ -3,6 +3,7 @@ const urls = {
     "login": `${baseUrl}api/v1/user/login`,
     "register": `${baseUrl}api/v1/user/register`,
     "getUser": `${baseUrl}api/v1/user/{user_id}`,
+    "show_info": `${baseUrl}api/v1/user/show-info/{user_id}`,
     "updateUser": `${baseUrl}api/v1/user/{user_id}`,
     "forgot": `${baseUrl}api/v1/user/forgot-password`,
     "loginFacebook": `${baseUrl}api/v1/user/facebook-login`,
@@ -28,7 +29,8 @@ const urls = {
     "newReply": `${baseUrl}api/v1/reply`,
     "searchForum": `${baseUrl}api/v1/forum/search`,
     "no_coin": `${baseUrl}api/v1/scholarship/no-coin`,
-    "verify_android": `${baseUrl}services/verify-android`
+    "verify_android": `${baseUrl}services/verify-android`,
+    "get_started": `${baseUrl}services/getstarted/{user_id}`
 }
 
 module.exports = urls;

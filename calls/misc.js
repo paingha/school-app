@@ -58,6 +58,10 @@ export function getMajorsCall(url){
 
 export function getStatesCall(url){
     return (dispatch) => {
+        let firstMajor = {
+            label: 'All',
+            value: 'All'
+        }
         dispatch(requestStates())
         fetch(`${url}`, {
                          method: 'GET',  
@@ -68,7 +72,7 @@ export function getStatesCall(url){
             .then(json=>{
                 if (json.error)
                     throw new Error(json.error.message);
-                    dispatch(receiveStates(json))
+                    dispatch(receiveStates([firstMajor, ...json]))
             })
             .catch(error=>dispatch(errorStates(error.message)));
         }

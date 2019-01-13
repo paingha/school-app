@@ -33,19 +33,19 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A1</Text>
-                <Text>1 - 1.99</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A1</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>1 - 1.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B2</Text>
-                <Text>2 - 2.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B2</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>2 - 2.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B3</Text>
-                <Text>3 - 3.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B3</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>3 - 3.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
                 <Text>C4</Text>

@@ -90,9 +90,9 @@ static navigationOptions = ({ navigation }) =>{
                 <React.Fragment>
                 <Image source={{uri: `${this.props.blog.featuredImage}`}} style={{width: '100%', height:200, backgroundColor:'white'}}/>
                     <View style={{flex:1, justifyContent:'center', paddingHorizontal:10}}>
-                    <Text style={{alignSelf:'center', fontSize:16, fontWeight:"bold", color:'black', marginVertical:10}}>{this.props.blog.topic}</Text>
+                    <Text style={{alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', color:'black', marginVertical:10}}>{this.props.blog.topic}</Text>
                     <View style={{alignSelf:'center', marginTop:-10, paddingHorizontal:10}}>
-                    <HTML ptSize={12} html={this.props.blog.content} imagesMaxWidth={Dimensions.get('window').width} />
+                    <HTML ptSize={18} html={this.props.blog.content}  baseFontStyle={{fontSize:18, fontFamily:'AdventPro-Regular'}} imagesMaxWidth={Dimensions.get('window').width} />
                     </View>
                     </View>
                   </React.Fragment>

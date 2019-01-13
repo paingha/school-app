@@ -1,6 +1,31 @@
-import {requestLogin, receiveLogin, errorLogin, receiveUser, requestUser, errorRegister, registerUser, errorForgot, forgotUser} from '../actions/user';
+import {requestLogin, clearError, receiveLogin, errorLogin, receiveUser, requestUser, errorRegister, registerUser, errorForgot, forgotUser} from '../actions/user';
 import { AsyncStorage } from "react-native"
 
+export function clearErrorCall(){
+    return (dispatch)=> {
+        dispatch(clearError());
+    }
+}
+
+export function getStartedCall(url, token, user_id, major, applicantCountry, scholarshipCountry, gpa, criteria, level, firstLogin, nav){
+    return (dispatch) => {
+    fetch(url.replace('{user_id}', user_id ), {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Authorization': token},
+        mode: 'cors',
+        body: JSON.stringify({major, applicantCountry, scholarshipCountry, gpa, criteria, level, firstLogin})
+    })
+    .then(
+        response => response.json()
+    )
+    .then(json=>{
+        if (json.error)
+            throw Error(json.error.message || 'Unknown fetch error');
+        nav.navigate("SignedIn")
+    })
+    .catch(error=>alert(error.message));
+}
+}
 export function getUserCall(userID, token){
     return (dispatch) => {
         dispatch(requestUser())
@@ -77,7 +102,12 @@ export function loginUserCall(url, email, password, nav){
                 AsyncStorage.setItem('TOKEN', json.token, ()=> {
                     dispatch(receiveLogin(json))
                     //if first sign in redirect to setup screen else signedIn screen (json.user.firstLogin)
-                    nav.navigate("SignedIn")
+                    if(json.user.firstLogin){
+                        nav.navigate("FirstLogin")
+                    }
+                    else{
+                        nav.navigate("SignedIn")
+                    }
                   })
                 //alert(json.token);
             })
@@ -101,7 +131,12 @@ export function facebookLoginUserCall(url, email, userId, token, nav){
                         throw new Error(json.error.message);
                     AsyncStorage.setItem('TOKEN', json.token, ()=> {
                         dispatch(receiveLogin(json))
-                        nav.navigate("SignedIn")
+                        if(json.user.firstLogin){
+                            nav.navigate("FirstLogin")
+                        }
+                        else{
+                            nav.navigate("SignedIn")
+                        }
                       })
                     //alert(json.token);
                 })
@@ -124,7 +159,12 @@ export function googleLoginUserCall(url, email, nav){
                     throw new Error(json.error.message);
                 AsyncStorage.setItem('TOKEN', json.token, ()=> {
                     dispatch(receiveLogin(json))
-                    nav.navigate("SignedIn")
+                    if(json.user.firstLogin){
+                        nav.navigate("FirstLogin")
+                    }
+                    else{
+                        nav.navigate("SignedIn")
+                    }
                   })
                 //alert(json.token);
             })

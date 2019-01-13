@@ -69,7 +69,11 @@ export function user(state=init, action) {
                 is_fetching: false,
                 sent: true
             };
-
+            case 'CLEAR_ERROR':
+                return {
+                    ...state,
+                    error: undefined
+                }
             case 'ERROR_FORGOT':
                 return {
                     ...state,

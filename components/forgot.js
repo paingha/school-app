@@ -33,7 +33,7 @@ class ForgotScreen extends React.Component {
       textContentType='emailAddress'
       placeholder='Email'
       onChangeText={(email)=> this.setState({email})}
-        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', width: deviceWidthinner, fontFamily: 'AdventPro-Medium', fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
       <TouchableHighlight
@@ -49,9 +49,9 @@ class ForgotScreen extends React.Component {
       }
          style={{alignItems: 'center', height: 50, marginBottom: 25, width: deviceWidth, elevation: 3, backgroundColor: '#FFBF71', paddingBottom: 8, paddingTop: 12}}
         >
-         <Text style={{fontSize: 20, color: 'white'}}> Reset Password </Text>
+         <Text style={{fontSize: 25, fontFamily: 'AdventPro-Medium', color: 'white'}}> Reset Password </Text>
         </TouchableHighlight>
-        <Text style={{alignItems: 'center', fontSize: 16, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Already have an account? <Text onPress={() => this.props.navigation.navigate("SignIn")} style={{fontWeight: 'bold'}}>Login</Text></Text>
+        <Text style={{alignItems: 'center', fontFamily: 'AdventPro-Regular', fontSize: 18, marginTop: -15, marginBottom: 10, color: '#ffffff'}}>Already have an account? <Text onPress={() => this.props.navigation.navigate("SignIn")} style={{fontWeight: 'bold'}}>Login</Text></Text>
         <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} cancelable={false} animation="fade"/>
     </ImageBackground>
     
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     textAlign: 'center',
     marginBottom: 16,
+    fontFamily: 'AdventPro-Regular'
   }
 });
 
