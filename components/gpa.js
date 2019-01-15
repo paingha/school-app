@@ -114,7 +114,7 @@ class GpaScreen extends React.Component {
     })
   }
   renderHeader = () => {
-  return <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> {this.props.schools.count} {this.props.schools.count == 1 ? <Text>School Found</Text>:  <Text>Schools Found</Text> }</Text>;
+  return <Text style={{alignSelf:'center', paddingVertical:10, fontFamily:'AdventPro-Regular', fontSize:18}}> {this.props.schools.count} {this.props.schools.count == 1 ? <Text>School Found</Text>:  <Text>Schools Found</Text> }</Text>;
   };
   renderFooter = () => {
     //console.log(e)
@@ -136,7 +136,7 @@ class GpaScreen extends React.Component {
       >
         <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, color:"white"}}>Load More</Text>
+      <Text style={{fontSize:20, color:"white", fontFamily:'AdventPro-Bold'}}>Load More</Text>
       </View>
       </TouchableOpacity>
       </View>
@@ -147,12 +147,12 @@ class GpaScreen extends React.Component {
     return (
       <View
         style={{
-          height: 1,
-          marginTop:10,
-          marginBottom:10,
+          height: 10,
+          marginTop:5,
+          marginBottom:5,
           width: "100%",
-          backgroundColor: "#CED0CE"
         }}
+    
       />
     );
   };
@@ -275,7 +275,7 @@ class GpaScreen extends React.Component {
         barStyle="light-content"
         backgroundColor="#085078"
         />
-        <View style={{flex: 0.30, Height: '100%', padding: 0, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
+        <View style={{flex: 0.30, width:'90%', marginBottom:5, marginTop:10, Height: '100%', padding: 0, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
         
       <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row'}} >
         <View style={{flex: 1, width: btnWidth1+80, paddingRight:0, paddingLeft:10}}>
@@ -283,6 +283,8 @@ class GpaScreen extends React.Component {
         label='GPA'
         baseColor='#085078'
         textColor='#085078'
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
         fontSize={18}
         data={gpas}
         onChangeText={this.gpaChange.bind(this)}
@@ -293,7 +295,9 @@ class GpaScreen extends React.Component {
         label='Level'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={18}
         data={levels}
         onChangeText={this.levelChange.bind(this)}
       />
@@ -306,7 +310,9 @@ class GpaScreen extends React.Component {
         label='State'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={18}
         data={this.props.statesData}
         onChangeText={this.stateChange.bind(this)}
       />:
@@ -314,7 +320,9 @@ class GpaScreen extends React.Component {
         label='State'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={18}
         data={states}
         onChangeText={this.stateChange.bind(this)}
       />
@@ -335,43 +343,46 @@ class GpaScreen extends React.Component {
     >
     <React.Fragment>
     <Icon style={{textAlign: 'center', marginRight:15}} name="search" size={25} color="#085078" />
-     <Text style={{fontSize: 20, color: '#085078'}}>Search </Text>
+     <Text style={{fontSize: 20, fontFamily:'AdventPro-Bold', color: '#085078'}}>Search </Text>
      </React.Fragment>
     </TouchableHighlight>
       </View>
       </View>
       
         </View>
-        <View style={{flex:0.70, alignSelf: 'stretch', height: 50, marginTop:4, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
+        <View style={{flex:0.70, width:'90%', alignSelf: 'center', height: 50, marginTop:4, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
         {this.props.schools ?
         <FlatList
-        style={{alignSelf: 'center', paddingRight:5, paddingLeft:5, fontSize:25, width:'90%'}}
+        style={{alignSelf: 'center', fontSize:25, width:'100%'}}
             data={this.props.schools.rows}
             keyExtractor={item => item.id.toString()}
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
             extraData={this.state.loadMore}
             ItemSeparatorComponent={this.renderSeparator}
+            showsVerticalScrollIndicator={false}
             renderItem={({item}) =>
-            <TouchableOpacity onPress={()=> this.moreData(item.id)}> 
-            <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
-            <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
+            <TouchableOpacity 
+            style={{marginBottom: 5, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
+            onPress={()=> this.moreData(item.id)}> 
+            <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row'}} key={item.id}>
+            <View styles={{color:'#085078', fontSize:20, fontFamily:'AdventPro-Regular', marginBottom: 5, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text >SAT: {item.sat}</Text>
-            <Text>ACT: {item.act}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>{item.level == "Undergraduate"? <React.Fragment>SAT: {item.sat? <React.Fragment>{item.sat}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>: <React.Fragment>GRE: {item.gre? <React.Fragment>{item.gre}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>{item.level == "Undergraduate"? <React.Fragment>ACT: {item.sat? <React.Fragment>{item.act}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>: <React.Fragment>GMAT: {item.gmat? <React.Fragment>{item.gmat}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text>Level: {item.level}</Text>
-            <Text>GPA: {item.gpa.toFixed(2)}</Text>
+        <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Level: {item.level? <React.Fragment>{item.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>GPA: {item.gpa? <React.Fragment>{item.gpa.toFixed(2)}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
             <TouchableOpacity onPress={()=> this.setState({shows: true})}>
             <View style={{flex: 1, justifyContent: 'space-between', alignContent:'space-between', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="share-alt" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Share</Text>
+            <Icon style={{textAlign: 'center', marginRight:3}} name="share-alt" size={20} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>Share</Text>
             </View>
             </TouchableOpacity>
             <View style={{flex: 1, justifyContent: 'flex-end', alignContent:'flex-end', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="link" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>More</Text>
+            <Icon style={{textAlign: 'center', marginRight:3}} name="link" size={15} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>More</Text>
             </View>
             </View>
             </View>
@@ -380,7 +391,7 @@ class GpaScreen extends React.Component {
             />
          
             :
-            <Text style={{fontSize: 20, marginTop:20, alignSelf:'center'}}>No Search Results </Text>
+            <Text style={{fontSize: 20, marginTop:20, fontFamily:'AdventPro-Bold', alignSelf:'center'}}>No Search Results </Text>
         }
         </View>
     </View>

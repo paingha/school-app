@@ -34,7 +34,7 @@ class LoginScreen extends React.Component {
     
       _configureGoogleSignIn() {
         GoogleSignin.configure({
-          webClientId: '638073687773-j6bcon34q7jv0tkobs98ip8v9n6j8ups.apps.googleusercontent.com',
+          webClientId: '746777980095-uedkcnv4qfdg9ss9nb847cgl4o70472q.apps.googleusercontent.com',
           offlineAccess: false,
           forceConsentPrompt: true,
         });

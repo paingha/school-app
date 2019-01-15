@@ -48,34 +48,34 @@ export default class GpaScale extends Component{
                 <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C4</Text>
-                <Text>4 - 4.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C4</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>4 - 4.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C5</Text>
-                <Text>5 - 5.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C5</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>5 - 5.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C6</Text>
-                <Text>6 - 6.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C6</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>6 - 6.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>D7</Text>
-                <Text>7 - 7.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D7</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>7 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>E8</Text>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E8</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>F9</Text>
-                <Text>9</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F9</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -84,34 +84,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>70 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>60 - 60.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 60.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>50 - 50.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 50.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>45 - 49.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>45 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>40 - 44.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 44.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 39.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -120,29 +120,29 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A</Text>
-                <Text>90 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>90 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B</Text>
-                <Text>80 - 89.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 89.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C</Text>
-                <Text>70 - 79.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>D</Text>
-                <Text>60 - 69.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>F</Text>
-                <Text>0 - 59.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -151,59 +151,59 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A+</Text>
-                <Text>16 - 20</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>16 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A</Text>
-                <Text>15 - 15.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>15 - 15.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A-</Text>
-                <Text>14 - 14.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 14.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B+</Text>
-                <Text>13 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>13 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B</Text>
-                <Text>12 - 12.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 12.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B-</Text>
-                <Text>11 - 11.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C+</Text>
-                <Text>10 - 10.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C</Text>
-                <Text>9 - 9.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C-</Text>
-                <Text>8 - 8.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>D</Text>
-                <Text>7 - 7.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>7 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>F</Text>
-                <Text>0 - 6.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 6.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -212,34 +212,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A</Text>
-                <Text>80 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B</Text>
-                <Text>70 - 79.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C</Text>
-                <Text>60 - 69.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>D</Text>
-                <Text>50 - 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>E</Text>
-                <Text>40 - 49.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>F</Text>
-                <Text>0 - 39.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -248,40 +248,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -290,28 +290,28 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>15 - 20</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>15 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>13 - 14.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>13 - 14.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 12.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 12.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10 - 10.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 9.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -320,20 +320,20 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>16 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>16 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>13 - 15.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>13 - 15.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10 - 12.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 12.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>1 - 9.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>1 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -342,28 +342,28 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>15 - 20</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>15 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>13 - 14.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>13 - 14.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 12.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 12.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10 - 10.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 9.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -372,34 +372,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A</Text>
-                <Text>80 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B+</Text>
-                <Text>70 - 79.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B</Text>
-                <Text>60 - 69.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C+</Text>
-                <Text>55 - 59.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>55 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C</Text>
-                <Text>50 - 54.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 54.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>D+</Text>
-                <Text>45 - 49.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>45 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -408,28 +408,28 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>A</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>B</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>C</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>D</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>E</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>F</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -438,36 +438,36 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -476,36 +476,36 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -514,44 +514,44 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>16 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>16 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>14 - 15.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 15.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -560,40 +560,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -602,28 +602,28 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>90 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>90 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>80 - 89.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 89.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>70 - 79.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>60 - 69.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>50 - 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-around'}}>
-                <Text>0 - 49.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -632,34 +632,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>90 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>90 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>80 - 89.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 89.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>65 - 79.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>50 - 64.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>35 - 49.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>35 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 34.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 34.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -668,34 +668,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>85 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>85 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>80 - 84.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 84.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>65 - 79.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>50 - 64.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>30 - 49.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>30 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 29.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -704,49 +704,49 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>85 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>85 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>80 - 84.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 84.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>75 - 79.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>75 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>70 - 74.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 74.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B-</Text>
-                <Text>65 - 69.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>60 - 64.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>55 - 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>55 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>30 - 54.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>30 - 54.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 29.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -755,29 +755,29 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>75 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>75 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>65 - 74.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 74.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>50 - 64.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>40 - 49.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 39.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -786,32 +786,32 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -820,29 +820,29 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>90 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>90 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>80 - 89.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 89.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>60 - 79.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>50 - 59.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>0 - 49.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -851,36 +851,36 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -889,40 +889,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A1</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A1</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B2</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B2</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B3</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B3</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C4</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C4</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C5</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C5</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C6</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C6</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D7</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D7</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E8</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E8</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F9</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F9</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -931,34 +931,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>80 - 100</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>75 - 79.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>75 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>65 - 74.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 74.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>60 - 64.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>50- 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50- 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 49.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -967,40 +967,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1009,34 +1009,34 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>70 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>65 - 69.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>60 - 64.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>50 - 59.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>40 - 44.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 44.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 39.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1045,29 +1045,29 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>70 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>60 - 69.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>50 - 59.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>40 - 49.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>0 - 39.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1076,64 +1076,64 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>80 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>75 - 79.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>75 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>70 - 74.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 74.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>65 - 69.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B-</Text>
-                <Text>60 - 64.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>55 - 59.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>55 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>50 - 54.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 54.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C-</Text>
-                <Text>45 - 49.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>45 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D+</Text>
-                <Text>40 - 44.99</Text>
-                <Text>D+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 44.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>35 - 39.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>35 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D-</Text>
-                <Text>30 - 34.99</Text>
-                <Text>D-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>30 - 34.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0 - 29.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1142,54 +1142,54 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>12</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>11 - 11.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>10 - 10.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>9 - 9.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B-</Text>
-                <Text>8 - 8.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>7 - 7.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>7 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>6 - 6.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>6 - 6.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C-</Text>
-                <Text>5 - 5.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>5 - 5.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D+</Text>
-                <Text>4 - 4.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>4 - 4.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>1 - 1.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>1 - 1.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1198,24 +1198,24 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>90 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>90 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>80 - 89.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 89.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>70 - 79.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>60 - 69.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 59.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1224,49 +1224,49 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A1</Text>
-                <Text>1 - 1.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A1</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>1 - 1.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B2</Text>
-                <Text>2 - 2.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B2</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>2 - 2.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B3</Text>    
-                <Text>3 - 3.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B3</Text>    
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>3 - 3.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C4</Text>    
-                <Text>4 - 4.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C4</Text>    
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>4 - 4.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C5</Text>
-                <Text>5 - 5.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C5</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>5 - 5.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C6</Text>
-                <Text>6 - 6.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C6</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>6 - 6.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C7</Text>
-                <Text>7 - 7.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C7</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>7 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E8</Text>
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E8</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F9</Text>
-                <Text>9</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F9</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1275,40 +1275,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1317,40 +1317,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1359,40 +1359,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1401,36 +1401,36 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>15 - 20</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>15 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>13 - 14.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>13 - 14.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 12.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 12.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1439,20 +1439,20 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>15 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>15 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 14.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 14.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 11.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 9.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1461,29 +1461,29 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>80 - 100</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>70 - 79.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>60 - 69.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>50 - 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>0- 49.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0- 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1492,49 +1492,49 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A*</Text>
-                <Text>90 - 100</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A*</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>90 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>80 - 89.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 89.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>70 - 79.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>60 - 69.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>50 - 59.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>40 - 49.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>F</Text>
-                <Text>30 - 39.99</Text>
-                <Text>D+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>30 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>G</Text>
-                <Text>20 - 29.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>G</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>20 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>U</Text>
-                <Text>0- 19.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>U</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0- 19.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1543,40 +1543,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1585,40 +1585,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1627,24 +1627,24 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>75 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>75 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>70 - 74.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 74.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>60 - 69.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>50 - 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 49.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1653,20 +1653,20 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1675,24 +1675,24 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>16 - 20</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>16 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 15.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 15.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 9.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1701,40 +1701,40 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>14 - 20</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>14 - 20</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>12 - 13.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>12 - 13.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>11 - 11.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>11 - 11.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.5 - 10.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 10.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10.1 - 10.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.1 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>10 - 10.09</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10 - 10.09</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9 - 9.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9 - 9.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>8 - 8.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8 - 8.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>0 - 7.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 7.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1743,24 +1743,24 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1769,49 +1769,49 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>10.5 - 11</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>10.5 - 11</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>9.5 - 10.49</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9.5 - 10.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>8.5 - 9.49</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>8.5 - 9.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>7.5 - 8.49</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>7.5 - 8.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B-</Text>
-                <Text>6.5 - 7.49</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>6.5 - 7.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>5.5 - 6.49</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>5.5 - 6.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>4.5 - 5.49</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>4.5 - 5.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C-</Text>
-                <Text>3.5 - 4.49</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>3.5 - 4.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>1.5 - 3.49</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>1.5 - 3.49</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1820,49 +1820,49 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>85 - 100</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>85 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A-</Text>
-                <Text>80 - 84.99</Text>
-                <Text>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>80 - 84.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>75 - 79.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>75 - 79.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>70 - 74.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>70 - 74.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B-</Text>
-                <Text>65 - 69.99</Text>
-                <Text>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>65 - 69.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>60 - 64.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>60 - 64.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>55 - 59.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>55 - 59.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C-</Text>
-                <Text>50 - 54.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>50 - 54.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>40 - 49.99</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>40 - 49.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1871,54 +1871,54 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A+</Text>
-                <Text>86 - 100</Text>
-                <Text>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>86 - 100</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>A</Text>
-                <Text>76 - 85.99</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>76 - 85.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B+</Text>
-                <Text>66 - 75.99</Text>
-                <Text>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>66 - 75.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>B</Text>
-                <Text>56 - 65.99</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>56 - 65.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C+</Text>
-                <Text>46 - 55.99</Text>
-                <Text>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>46 - 55.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C+</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>C</Text>
-                <Text>36 - 39.99</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>36 - 39.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>CP</Text>
-                <Text>30 - 35.99</Text>
-                <Text>C-</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>CP</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>30 - 35.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C-</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D+</Text>
-                <Text>0 - 29.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D+</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>D</Text>
-                <Text>0 - 29.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>E</Text>
-                <Text>0 - 29.99</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>E</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>0 - 29.99</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )
@@ -1927,24 +1927,24 @@ export default class GpaScale extends Component{
             scaleBlock = (
                 <React.Fragment>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>1 - 2</Text>
-                <Text>A</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>1 - 2</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>A</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>3 - 4</Text>
-                <Text>B</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>3 - 4</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>B</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>5 - 6</Text>
-                <Text>C</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>5 - 6</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>C</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>7 - 8</Text>
-                <Text>D</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>7 - 8</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>D</Text>
                 </View>
                 <View  style={{flex:1, flexDirection:'row', justifyContent:'space-around'}} >
-                <Text>9</Text>
-                <Text>F</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>9</Text>
+                <Text style={{fontFamily:'AdventPro-Regular', fontSize:18}}>F</Text>
                 </View>
                 </React.Fragment>
             )

@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "638073687773-3s88jg4vtggeulbsq0854nln1kt00scm.apps.googleusercontent.com",
+          "client_id": "638073687773-3km4utl3kcdpjj150veptp8d3njn604v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theacademist_app",
+            "certificate_hash": "c597f9a7f60f3559fe1fb16827e14091fa76406e"
+          }
+        },
+        {
+          "client_id": "638073687773-phlkktfm4ppas81427ddg6nd1v6tp54a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.theacademist_app",
             "certificate_hash": "7b70b0f79d0598e94ae6b19d68542db152012cc7"
-          }
-        },
-        {
-          "client_id": "638073687773-j6bcon34q7jv0tkobs98ip8v9n6j8ups.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theacademist_app",
-            "certificate_hash": "529adb44d42e7cd0a39372eee3940e1ce7bd551d"
           }
         },
         {
