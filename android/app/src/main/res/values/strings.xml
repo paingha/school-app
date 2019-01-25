@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">The Academist</string>
     <string name="facebook_app_id">198600234003675</string>
+    <string name="fb_login_protocol_scheme">fb198600234003675</string>
 </resources>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text, Linking, StatusBar, AsyncStorage, FlatList, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Platform, View, ScrollView, Text, Linking, StatusBar, AsyncStorage, FlatList, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import { onSignOut } from "../lib/auth";
 import NavCard from "./card"
 import {connect} from 'react-redux';
@@ -12,6 +12,7 @@ import {scholarshipSearchCall, noCoinCall, scholarshipUnSaveCall, scholarshipSav
 import {updateUserCall} from '../calls/user'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
+import ImagePicker from 'react-native-image-picker';
 const { height } = Dimensions.get('window');
 
 const options = [
@@ -20,6 +21,14 @@ const options = [
   <Text style={{color: '#000', fontSize: 20}}>Last Name</Text>,
   //<Text style={{color: '#000', fontSize: 20}}>Profile Picture</Text>
 ]
+
+const imgOptions = {
+  title: 'Select Avatar',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
 
 class HomeScreen extends React.Component {
   constructor(props){
@@ -37,8 +46,11 @@ class HomeScreen extends React.Component {
       token: '',
       firstName: '',
       lastName: '',
-      avatarSource: '',
+      file: '',
       screenHeight: height,
+      signedRequest: '',
+      key: '',
+      isloading: false
     }
   }
     static navigationOptions = ({ navigation }) =>{
@@ -67,8 +79,9 @@ class HomeScreen extends React.Component {
             />),
         headerTintColor: '#fff',
         headerTitleStyle: {
-          textAlign: 'center',
-          fontFamily: 'AdventPro-Medium',
+          fontWeight: '200',
+          fontFamily: 'AdventPro-Bold',
+          textAlign: 'center'
         },
       }
       };
@@ -137,6 +150,66 @@ class HomeScreen extends React.Component {
   scholarshipCountryChange(value){
     this.setState({scholarshipCountry: value})
   }
+   getFileExtension3 = (filename) => {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+  }
+uploadImg = (file, filename) => {
+            // Upload image to S3
+            
+            const picture = Platform.OS !== "android" ? file : file.replace("file://", "")
+            const fileKey = Date.now() + Math.random().toString(36).substr(2, 25) + filename;
+            const extension = `.${this.getFileExtension3(fileKey)}`;
+            const contentType = extension;
+            //console.log(picture)
+            //console.log(fileKey)
+            console.log(extension)
+            console.log('////////////////////////////////')
+            console.log(contentType)
+        //const {key, signedRequest, featuredImage} = this.state;
+        this.setState({isloading: true});
+        //change to put
+            fetch('https://www.theacademist.com/services/aws-signed-url', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': this.state.token},
+                mode: 'cors',
+                body: JSON.stringify({contentType, extension, fileKey})
+            })
+            .then(
+                response => response.json()
+            )
+            .then(
+                data => this.setState({isloading: false, key: data.key, signedRequest: data.signedRequest}, ()=>{
+                   
+                    let thingy = picture;
+                    let uri = data.url;
+                    console.log(uri)
+        const {signedRequest} = this.state;
+        this.setState({isloading: true}, ()=>{
+            //console.log("2nd");
+        });
+        
+        //change to put
+            fetch(signedRequest, {
+                method: 'PUT',
+                headers: {'Content-Type': `image/${this.getFileExtension3(fileKey)}`},
+                body: thingy
+            })   ////////////
+            
+                .then(response=>{
+                    
+                        
+                            let image = uri;
+                            const {id} = this.props.currentUser;
+                            //console.log(this.props.userId)
+                              //console.log(JSON.stringify({firstName, lastName, gpa, criteria, level, major, applicantCountry, scholarshipCountry}))
+                              this.props.updateProfile(updateUser, id, this.state.token, "image", image)
+                })
+            }))
+            .catch(err=>{
+              console.log(err)
+            })
+        
+}
   render() {
     const scrollEnabled = this.state.screenHeight > 550;
     const {id, firstName, lastName, coin, major, image, referralToken, scholarshipCountry, gpa, applicantCountry, saved, criteria, level} = this.props.currentUser;
@@ -148,7 +221,7 @@ class HomeScreen extends React.Component {
     const btnWidth1 = width - 45;
     const deviceWidthinner = width - 40;
     const navWidth = ((width/3) - (10 + 10));
-    const navHeight = (height/3) - 40;
+    const navHeight = (height/3) - 20;
     const BContent = <Icon style={[styles.btn, styles.btnModal]} name='close' size={30} color="#085078" />;
     let levels = [{
       value: 'Graduate',
@@ -246,14 +319,39 @@ class HomeScreen extends React.Component {
         />
         <View style={{flex: 1, alignSelf: 'stretch', minHeight:bannerHeight, marginBottom: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', elevation: 3}}>
         <ImageBackground source={require('../assets/banner-img.png')} style={{backgroundColor:'#085078', flex: 1, width: '100%', height: '100%', flexDirection: 'column', alignItems: 'center', justifyContent:'space-evenly'}}>
+        <TouchableOpacity
+        activeOpacity={0.4}
+        onPress={()=> 
+          ImagePicker.showImagePicker(imgOptions, (response) => {
+            console.log('Response = ', response);
+          
+            if (response.didCancel) {
+              alert('You cancelled Image upload');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+              alert('An error occured, please try again')
+             } else {
+              const source = { uri: response.uri };
+              console.log(response)
+              //alert(source.toString())
+              // You can also display the image using data:
+              // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          
+                //upload image to server here
+                this.uploadImg(response.uri, response.fileName);
+            }
+          })
+        }
+        >
           <Image source={{uri: `${image}`}} style={{width: 120, height:120, borderRadius: 60, backgroundColor:'white', marginTop:12}}/>
-          <View style={{flex: 1, width: '100%', flexDirection: 'row', justifyContent:'space-between', marginTop:-20, paddingLeft:15, paddingRight:15}}>
-          <View style={{}}>
+        </TouchableOpacity>
+          <View style={{flex: 1, alignItems: 'flex-end', width: '100%', flexDirection: 'row', justifyContent:'space-between', marginBottom: 5, paddingLeft:15, paddingRight:15}}>
+          <View style={{alignSelf:'flex-start'}}>
             <Text onPress={() => this.refs.modal4.open()} style={{alignSelf:'center', color:'white', fontSize: 25, fontFamily: 'AdventPro-Regular',}}>
               {firstName} {lastName}
             </Text>
             </View>
-            <View style={{}}>
+            <View style={{alignSelf:'flex-end'}}>
             <Text onPress={() => this.refs.modal9.open()} style={{alignSelf:'center',color:'white', fontSize: 25, fontFamily: 'AdventPro-Regular',}}>
               {coin} {coin > 0 ? <React.Fragment>coins</React.Fragment>: <React.Fragment>coin</React.Fragment>}
             </Text>
@@ -263,22 +361,22 @@ class HomeScreen extends React.Component {
         </View>
         <View style={{flex: 1, marginTop: 0, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', fontFamily: 'AdventPro-Regular',}} >
        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal4.open()}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="graduation-cap" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="graduation-cap" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>Level</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular',}}>{level? <React.Fragment>{level}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal5.open()}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="book" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="book" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>Major</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{major? <React.Fragment>{major}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal6.open()}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="globe" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="globe" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>Scholarship's Country</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{scholarshipCountry? <React.Fragment>{scholarshipCountry}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
@@ -286,15 +384,15 @@ class HomeScreen extends React.Component {
        </View>
        <View style={{flex: 1, marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
        <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal7.open()}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="trophy" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="trophy" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>My GPA</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{gpa? <React.Fragment>{gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal8.open()}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="clipboard" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="clipboard" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>Criteria</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{criteria? <React.Fragment>{criteria}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
@@ -302,8 +400,8 @@ class HomeScreen extends React.Component {
         <TouchableOpacity style={{flex:1}} onPress={()=> {
           this.refs.savedModal.open()
         }}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="download" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="download" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>Saved</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{savedNumber? <React.Fragment>{savedNumber}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
@@ -311,23 +409,23 @@ class HomeScreen extends React.Component {
        </View>
        <View style={{flex: 1, height: '100%', marginBottom: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
        <TouchableOpacity style={{flex:1}} >
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="tachometer" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="tachometer" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>My Referral</Text>
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>Points</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{referralToken? <React.Fragment>{referralToken}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity style={{flex:1}} onPress={()=> this.refs.modal9.open()}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="flag" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="flag" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold'}}>My Country</Text>
           <Text style={{textAlign: 'center', flexWrap: 'nowrap', fontSize: 18, fontFamily: 'AdventPro-Regular'}}>{applicantCountry? <React.Fragment>{applicantCountry}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
         </View>
         </TouchableOpacity>
         <TouchableOpacity style={{flex:1}} onPress={this.showActionSheet}>
-        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 25, marginBottom: 15, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
-          <Icon style={{textAlign: 'center'}} name="ellipsis-h" size={30} color="#085078" />
+        <View style={{flex: 1, justifyContent: 'center', textAlign:'center', alignItems:'center', flexDirection: 'column', marginRight: 10, marginLeft: 10, marginTop: 10, marginBottom: 0, width: navWidth, height: navHeight, backgroundColor: '#ffffff', elevation: 3}}>
+          <Icon style={{textAlign: 'center'}} name="ellipsis-h" size={22} color="#085078" />
           <Text style={{textAlign: 'center', color:'#211a23', flexWrap: 'wrap', fontFamily: 'AdventPro-Bold' }}>More</Text>
         </View>
         </TouchableOpacity>

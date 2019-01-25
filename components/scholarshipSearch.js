@@ -3,6 +3,7 @@ import { StyleSheet, FlatList, Clipboard,
   ToastAndroid,
   AlertIOS,
   Alert,
+  ActivityIndicator,
   Platform, View, Text, StatusBar, AsyncStorage, Linking, ScrollView, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
@@ -39,8 +40,13 @@ class ScholarshipScreen extends React.Component {
       loadMore: false,
       screenHeight: height,
       refresh: false,
-      refreshUnsave: false
+      refreshUnsave: false,
+      loading: true,
+      count: 0,
+      serverData: [],
+      fetching_from_server: false
     }
+    this.offset = 0;
   }
     static navigationOptions = ({ navigation }) =>{
       return {
@@ -67,7 +73,8 @@ class ScholarshipScreen extends React.Component {
             />),
         headerTintColor: '#fff',
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: '200',
+          fontFamily: 'AdventPro-Bold',
           textAlign: 'center'
         },
       }
@@ -76,6 +83,68 @@ class ScholarshipScreen extends React.Component {
     
     this.props.clearScholarship()
   }   
+  loadMore = () => {
+    this.setState({ fetching_from_server: true }, () => {
+      const {token, major, amount, gpa, level, criteria, applicantCountry, scholarshipCountry} = this.state
+      const {id} = this.props.currentUser;
+      let user_id = id;
+      let country = scholarshipCountry;
+      let offset = this.offset
+      fetch(`${scholarship_search}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+        mode: 'cors',
+        body: JSON.stringify({major, gpa, amount, level, criteria, applicantCountry, country, user_id, offset})
+    })
+      //Sending the currect offset with get request
+          .then(response => response.json())
+          .then(responseJson => {
+          //Successful response from the API Call 
+            this.offset = this.offset + 15;
+            //After the response increasing the offset for the next API call.
+            this.setState({
+              serverData: [...this.state.serverData, ...responseJson.rows],
+          //adding the new data with old one available in Data Source of the List
+          fetching_from_server: false,
+          count: responseJson.count
+          //updating the loading state to false
+            });           
+            // alert('bbbb' + this.state.serverData[1].topic);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    });
+  }
+  fetchScholarship = (token, major, amount, gpa, level, criteria, applicantCountry, country, user_id) => { 
+    //alert(token + ' ' + major + ' ' + level + ' ' + state + ' ' + country)   
+    let offset = this.offset
+      fetch(`${scholarship_search}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+        mode: 'cors',
+        body: JSON.stringify({major, gpa, amount, level, criteria, applicantCountry, country, user_id, offset})
+    })
+      //Sending the currect offset with get request
+          .then(response => response.json())
+          .then(responseJson => {
+          //Successful response from the API Call 
+            this.offset = this.offset + 15;
+            //After the response increasing the offset for the next API call.
+            //alert(responseJson.count)
+            this.setState({
+              serverData: [...this.state.serverData, ...responseJson.rows],
+              //adding the new data with old one available in Data Source of the List
+               loading: false,
+               count: responseJson.count
+              //updating the loading state to false
+            });           
+            // alert('bbbb' + this.state.serverData[1].topic);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+  }
   componentDidMount(){
     //alert(this.props.firstName.toString())
     const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
@@ -94,30 +163,14 @@ class ScholarshipScreen extends React.Component {
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight });
   };
-  loadMore = () => {
-    const {offset} = this.state;
-    const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
-    this.setState({offset: offset + 10}, ()=>{
-      if (this.props.scholarships.rows){
-        let data = this.props.scholarships.rows
-        this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, data)
-        this.setState({loadMore: true})
-      }
-      else{
-        let data = []
-        this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, data)
-      
-      }
-      
-    })
-  }
+  
   moreData = (e) => {
     this.props.singleScholarship(singleScholarship, this.state.token, e)
     this.refs.savedModal.open()
   }
   renderHeader = () => {
-    return <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> {this.props.scholarships.count} {this.props.scholarships.count == 1 ? <Text>Scholarship Found</Text>:  <Text>Scholarships Found</Text> }</Text>;
-  };
+    return <Text style={{alignSelf:'center', paddingVertical:10, fontFamily:'AdventPro-Regular', fontSize:18}}> {this.state.count} {this.state.count == 1 ? <Text>Scholarship Found</Text>:  <Text>Scholarships Found</Text> }</Text>;
+    };
   renderHeaderNoCoin = (e) => {
     let {id, name, amount, description, criteria, level, applicantCountry, country, gpa, deadline, institution, comment, url} = e;
     return (
@@ -164,39 +217,48 @@ class ScholarshipScreen extends React.Component {
     this.setState({shows:true});
   }
   renderFooter = () => {
-    if (this.state.offset >= this.props.scholarships.count){
-      return null
-    }
-    else {
-    return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          marginVertical: 20,
-          borderColor: "#CED0CE",
-          alignSelf: 'center'
-        }}
+    return(
+    <React.Fragment>
+    {this.state.loading? 
+      null
+      :
+      <React.Fragment>
+        {this.state.serverData.length >= 15 && this.state.serverData.length%15 == 0 ?
+            <View
+            style={{
+              paddingVertical: 20,
+              borderTopWidth: 1,
+              marginVertical: 20,
+              borderColor: "#CED0CE",
+              alignSelf: 'center'
+            }}
       >
-        <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+        <TouchableOpacity activeOpacity={0.9}  onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, color:"white"}}>Load More</Text>
+      <Text style={{fontSize:20, fontFamily:'AdventPro-Regular', color:"white"}}>Load More</Text>
+      {this.state.fetching_from_server ? (
+        <ActivityIndicator color="white" style={{ marginLeft: 8 }} />
+      ) : null}
       </View>
       </TouchableOpacity>
       </View>
-    )
+      :null
+    } 
+    </React.Fragment>
   }
+  </React.Fragment>
+)
   };
   renderSeparator = () => {
     return (
       <View
         style={{
-          height: 1,
-          marginTop:10,
-          marginBottom:10,
+          height: 10,
+          marginTop:5,
+          marginBottom:5,
           width: "100%",
-          backgroundColor: "#CED0CE"
         }}
+    
       />
     );
   };
@@ -342,20 +404,23 @@ class ScholarshipScreen extends React.Component {
     
     if(this.state.hide){
         return(
-            <React.Fragment>
-    <View style={styles.mainContent}>
-    <StatusBar
-        barStyle="light-content"
-        backgroundColor="#085078"
-        />
-        <View style={{flex: 0.25, height: 50, padding: 0, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
-        <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
-        <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
+          <React.Fragment>
+          <View style={styles.mainContent1}>
+          <StatusBar
+              barStyle="light-content"
+              backgroundColor="#085078"
+              />
+              <View style={{flex: 1, padding: 0, alignSelf:'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
+              <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+              <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
+          
         <Dropdown
         label='Level'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={levels}
         onChangeText={this.levelChange.bind(this)}
       />
@@ -365,7 +430,9 @@ class ScholarshipScreen extends React.Component {
         label='Major'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={majors}
         onChangeText={this.majorChange.bind(this)}
       />
@@ -379,39 +446,46 @@ class ScholarshipScreen extends React.Component {
       </TouchableOpacity>
         </View>
     
-        <View style={{flex: 0.75, alignSelf: 'stretch', height: 50, marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
-        {this.props.scholarships ?
-        <View style={{paddingVertical: 15, backgroundColor:'white'}}>
+       
+    </View>
+    <View style={{flex:0.75, alignSelf: 'center', width:'90%', height: '100%', marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+    {this.state.serverData.length > 0 ?
         
         <FlatList
-        style={{alignSelf: 'center', paddingRight:25, paddingLeft:25, fontSize:25, maxWidth:'100%', width:'100%'}}
-            data={this.props.scholarships.rows}
+        style={{alignSelf: 'center', fontSize:25, width:'100%'}}
+        data={this.state.serverData}
             keyExtractor={item => item.id.toString()}
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
-            extraData={this.state.loadMore}
+            showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={this.renderSeparator}
             renderItem={({item}) => 
-            <TouchableOpacity onPress={()=> this.moreData(item.id)}> 
-            <View styles={{flex: 1, maxWidth:'90%', width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}} key={item.id}>
-            <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
+            <TouchableOpacity 
+            style={{marginBottom: 5, minHeight:50, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
+        onPress={()=> this.moreData(item.id)}>
+            <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
+            <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text >Major: {item.major ? <React.Fragment>{item.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
-            <Text>Criteria: {item.criteria}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Major: {item.major ? <React.Fragment>{item.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Criteria: {item.criteria}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text>Level: {item.level}</Text>
-            <Text>Amount: {item.amount}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Level: {item.level}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Amount: {item.amount}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-            <TouchableOpacity onPress={()=> this.setState({shows: true})}>
+            <TouchableOpacity 
+            style={{borderColor: '#085078', borderWidth: 1, padding:6}}
+            onPress={()=> this.setState({shows: true})}>
             <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="share-alt" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>Share</Text>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="share-alt" size={15} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>Share</Text>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=> this.moreData(item.id)}>
+            <TouchableOpacity 
+            style={{borderColor: '#085078', borderWidth: 1, padding:6}}
+            onPress={()=> this.moreData(item.id)}>
             <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:5}} name="eye" size={25} color="#085078" /><Text style={{marginLeft:5, fontSize:20}}>View More</Text>
+            <Icon style={{textAlign: 'center', marginRight:5}} name="eye" size={15} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>View More</Text>
             </View>
             </TouchableOpacity>
             </View>
@@ -419,7 +493,6 @@ class ScholarshipScreen extends React.Component {
             </TouchableOpacity>
         }
             />
-            </View>
             :
             <React.Fragment>
               {this.props.noCoins?
@@ -471,7 +544,6 @@ class ScholarshipScreen extends React.Component {
             </React.Fragment>
         }
         </View>
-    </View>
     <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
     
     {
@@ -626,14 +698,16 @@ class ScholarshipScreen extends React.Component {
         barStyle="light-content"
         backgroundColor="#085078"
         />
-        <View style={{flex: 0.60, Height: '100%', padding: 0, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
+        <View style={{flex: 1, padding: 0, alignSelf:'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
         <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
         <Dropdown
         label='Level'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={levels}
         onChangeText={this.levelChange.bind(this)}
       />
@@ -643,7 +717,9 @@ class ScholarshipScreen extends React.Component {
         label='Major'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={majors}
         onChangeText={this.majorChange.bind(this)}
       />
@@ -656,7 +732,9 @@ class ScholarshipScreen extends React.Component {
         label='Scholarship Country'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={18}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={scholarshipCountries}
         onChangeText={this.scholarshipCountryChange.bind(this)}
       />
@@ -666,7 +744,9 @@ class ScholarshipScreen extends React.Component {
         label='GPA'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={gpas}
         onChangeText={this.gpaChange.bind(this)}
       />
@@ -678,7 +758,9 @@ class ScholarshipScreen extends React.Component {
         label='Criteria'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={criterias}
         onChangeText={this.criteriaChange.bind(this)}
       />
@@ -688,19 +770,24 @@ class ScholarshipScreen extends React.Component {
         label='Country'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={countries}
         onChangeText={this.applicantCountryChange.bind(this)}
       />
       </View>
+      
       </View>
-      <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+      <View style={{marginTop: 2, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
       <Dropdown
         label='Amount'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={16}
         data={amounts}
         onChangeText={this.amountChange.bind(this)}
       />
@@ -711,7 +798,7 @@ class ScholarshipScreen extends React.Component {
         this.setState({visible: true}, ()=>{
           setTimeout(()=>{
           this.setState({visible: false, hide: true})
-          this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, [], coin, this.props.navigation)
+          this.fetchScholarship(this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id)
           
         },3000)
     })
@@ -721,14 +808,15 @@ class ScholarshipScreen extends React.Component {
         >
         <React.Fragment>
         <Icon style={{textAlign: 'center', marginRight:15}} name="search" size={25} color="#085078" />
-         <Text style={{fontSize: 20, color: '#085078'}}>Search </Text>
+         <Text style={{fontSize: 18, fontFamily:'AdventPro-Bold', color: '#085078'}}>Search </Text>
          </React.Fragment>
         </TouchableHighlight>
       </View>
       </View>
       
         </View>
-        <View style={{flex:0.4, alignSelf: 'stretch', height: 50, marginTop:4, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
+    </View>
+    <View style={{flex:0.40, alignSelf: 'center', width:'90%', height: '100%', marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
         {this.props.scholarships ?
         <FlatList
         style={{alignSelf: 'center', marginTop:25, fontSize:20}}
@@ -736,10 +824,9 @@ class ScholarshipScreen extends React.Component {
             renderItem={({item}) => <Text>{item.key}</Text>}
             />
             :
-            <Text style={{fontSize: 20, marginTop:20, alignSelf:'center'}}>No Search Results </Text>
+            <Text style={{fontSize: 20, marginTop:20, fontFamily:'AdventPro-Bold', alignSelf:'center'}}>No Search Results </Text>
         }
         </View>
-    </View>
     <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
     
     {
@@ -879,9 +966,18 @@ const styles = StyleSheet.create({
     height: 250
   },
   mainContent: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'rgba(211,211,211,0.3)',
+    flex: 0.58,
+    width:'90%',
+    marginTop: 10,
+    alignSelf: 'center',
+    backgroundColor: 'white',
+  },
+  mainContent1: {
+    flex: 0.25,
+    width:'90%',
+    marginTop: 10,
+    alignSelf: 'center',
+    backgroundColor: 'white',
   },
   title:{
     fontSize: 30,

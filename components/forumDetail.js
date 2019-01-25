@@ -60,7 +60,8 @@ static navigationOptions = ({ navigation }) =>{
               />),
     headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: 'bold',
+      fontWeight: '200',
+      fontFamily: 'AdventPro-Bold',
       textAlign: 'center'
     },
   }

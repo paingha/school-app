@@ -53,7 +53,8 @@ static navigationOptions = ({ navigation }) =>{
         />),
     headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: 'bold',
+      fontWeight: '200',
+      fontFamily: 'AdventPro-Bold',
       textAlign: 'center'
     },
   }
@@ -178,7 +179,7 @@ static navigationOptions = ({ navigation }) =>{
                 <View style={{borderBottomWidth: 4, borderBottomColor:'#085078', alignItems:'center', marginHorizontal:10, marginVertical: 10, backgroundColor:'white', height:200, elevation:2, width:'80%'}}>
                     <Text style={{marginTop:10, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Two Coins</Text>
                     <Text style={{fontSize:30, color:'black', fontFamily: 'AdventPro-Bold', marginTop:10}}>$2.99</Text>
-                    <View style={{paddingLeft: 12, paddingRight: 12, alignItems:'center'}}><Text style={{marginTop:2, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Buy a bundle of 2 coins with a discount of 25%</Text></View>
+                    <View style={{paddingLeft: 12, paddingRight: 12, alignItems:'center'}}><Text style={{textAlign: 'center', marginTop:2, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Buy a bundle of 2 coins with a discount of 25%</Text></View>
                     <TouchableOpacity onPress={this.buyTwoCoin} style={{height: 35, marginTop:15, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'center', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
                     <Icon name="shopping-cart" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", fontFamily: 'AdventPro-Bold', marginHorizontal:10}}>Buy Coins</Text>
                     </TouchableOpacity>
@@ -194,7 +195,7 @@ static navigationOptions = ({ navigation }) =>{
                 <View style={{borderBottomWidth: 4, borderBottomColor:'#085078', alignItems:'center', marginHorizontal:10, marginVertical: 10, backgroundColor:'white', height:200, elevation:2, width:'80%'}}>
                     <Text style={{marginTop:10, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Three Coins</Text>
                     <Text style={{fontSize:30, color:'black', fontFamily: 'AdventPro-Bold', marginTop:10}}>$3.99</Text>
-                    <View style={{paddingLeft: 12, paddingRight: 12, alignItems:'center'}}><Text style={{marginTop:2, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Buy a bundle of 3 coins with a discount of 33%</Text></View>
+                    <View style={{paddingLeft: 12, paddingRight: 12, alignItems:'center'}}><Text style={{textAlign: 'center', marginTop:2, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Buy a bundle of 3 coins with a discount of 33%</Text></View>
                     <TouchableOpacity onPress={this.buyThreeCoin} style={{height: 35, marginTop:15, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'center', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
                     <Icon name="shopping-cart" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", fontFamily: 'AdventPro-Bold', marginHorizontal:10}}>Buy Coins</Text>
                     </TouchableOpacity>
@@ -208,7 +209,7 @@ static navigationOptions = ({ navigation }) =>{
                 <View style={{borderBottomWidth: 4, borderBottomColor:'#085078', alignItems:'center', marginHorizontal:10, marginVertical: 10, backgroundColor:'white', height:200, elevation:2, width:'80%'}}>
                     <Text style={{marginTop:10, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Four Coins</Text>
                     <Text style={{fontSize:30, color:'black', fontFamily: 'AdventPro-Bold', marginTop:10}}>$4.99</Text>
-                    <View style={{paddingLeft: 12, paddingRight: 12, alignItems:'center'}}><Text style={{marginTop:2, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Buy a bundle of 4 coins with a discount of 38%</Text></View>
+                    <View style={{paddingLeft: 12, paddingRight: 12, alignItems:'center'}}><Text style={{textAlign: 'center', marginTop:2, fontSize:20, fontFamily: 'AdventPro-Regular'}}>Buy a bundle of 4 coins with a discount of 38%</Text></View>
                     <TouchableOpacity onPress={this.buyFourCoin} style={{height: 35, marginTop:15, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'center', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
                     <Icon name="shopping-cart" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", fontFamily: 'AdventPro-Bold', marginHorizontal:10}}>Buy Coins</Text>
                     </TouchableOpacity>

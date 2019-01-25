@@ -164,7 +164,8 @@ class CalculatorScreen extends React.Component {
             />),
         headerTintColor: '#fff',
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: '200',
+          fontFamily: 'AdventPro-Bold',
           textAlign: 'center'
         },
       }
@@ -2116,7 +2117,7 @@ class CalculatorScreen extends React.Component {
         backgroundColor="#085078"
         />
     
-        <View style={{flex: 0.3, height: '100%', marginTop:-2, padding: 0, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
+        <View style={{flex: 0.3, height: '90%', marginTop:-2, padding: 0, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
         
       <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row'}} >
         <View style={{flex: 1, paddingRight:20, paddingLeft:20}}>
@@ -2124,6 +2125,8 @@ class CalculatorScreen extends React.Component {
         label='Country'
         baseColor='#085078'
         textColor='#085078'
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
         fontSize={18}
         data={COUNTRIES}
         onChangeText={this.handleCountryChange.bind(this)}
@@ -2131,44 +2134,38 @@ class CalculatorScreen extends React.Component {
       </View>
       </View>
       <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
-        <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
+        <View style={{flex: 1, paddingRight:20, paddingLeft:20}}>
         {!this.state.isHidden ?
           <Dropdown
         label='Grade System'
         baseColor='#085078'
         textColor='#085078'
-        fontSize={20}
+        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+        style={{fontFamily:'AdventPro-Bold'}}
+        fontSize={18}
         data={options}
         onChangeText={this.handleOptionChange.bind(this)}
         />
         :
-        <Dropdown
-        disabled={true}
-        label='Grade System'
-        baseColor='#085078'
-        textColor='#085078'
-        fontSize={20}
-        data={options}
-        onChangeText={this.handleOptionChange.bind(this)}
-      />
+        null
         }
       </View>
       </View>
         </View>
 
-        <View style={{flex: 1, width:'100%', alignSelf: 'stretch', height: '100%', marginTop:5, paddingLeft:10, paddingRight:10, paddingBottom:15, backgroundColor:'white', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
+        <View style={{flex: 1, width:'100%', alignSelf: 'stretch', height: '100%', marginTop:5, paddingLeft:10, paddingRight:10, paddingBottom:15, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
               <View style={{flex:1, width:'100%', marginTop:3, flexDirection:'row', paddingLeft:5, paddingRight:10}}>
-              <Text style={{fontSize: 14, fontWeight:'bold', marginTop:4, color:'#085078', marginRight:10}}>#</Text>
-              <Text style={{fontSize: 14, width: (deviceWidthinner/2)-65, fontWeight:'bold', marginTop:4, color:'#085078', marginRight:10}}>Class (optional)</Text>
+              <Text style={{fontSize: 14, fontFamily:'AdventPro-Bold', marginTop:4, color:'#085078', marginRight:10}}>#</Text>
+              <Text style={{fontSize: 14, width: (deviceWidthinner/2)-65, fontFamily:'AdventPro-Bold', marginTop:4, color:'#085078', marginRight:10}}>Class (optional)</Text>
               {(this.state.country == "Nigeria" && this.state.option == "Waec") || (this.state.country == "Ghana" && this.state.option == "Waec") || (this.state.country == "Liberia" && this.state.option == "Wassce")?
                 null
                 :
-              <Text style={{fontSize: 14, width: (deviceWidthinner/2)-95, fontWeight:'bold', marginTop:4, color:'#085078', marginRight:10}}>Credits <Text style={{color:'red'}}>*</Text></Text>
+              <Text style={{fontSize: 14, width: (deviceWidthinner/2)-95, fontFamily:'AdventPro-Bold', marginTop:4, color:'#085078', marginRight:10}}>Credits <Text style={{color:'red'}}>*</Text></Text>
               }
-              <Text style={{fontSize: 14, width: (deviceWidthinner/2)-95, fontWeight:'bold', marginTop:4, color:'#085078', marginRight:10}}>Grade <Text style={{color:'red'}}>*</Text></Text>
+              <Text style={{fontSize: 14, width: (deviceWidthinner/2)-95, fontFamily:'AdventPro-Bold', marginTop:4, color:'#085078', marginRight:10}}>Grade <Text style={{color:'red'}}>*</Text></Text>
               </View>
             {this.state.rows.map((row, index) =>
-              <View key={row.id} style={{flex:1, width:'100%', marginTop:-4, flexDirection:'row', paddingLeft:5, paddingRight:10}}>
+              <View key={row.id} style={{flex:1, width:'100%', elevation: 2, backgroundColor:'white', marginBottom:6, marginTop:6, flexDirection:'row', paddingLeft:5, paddingRight:10}}>
               <Text style={{fontSize: 14, fontWeight:'bold', marginTop:36, color:'#085078', marginRight:10}}>{index + 1}</Text>
               <View style={{width: (deviceWidthinner/2)-65, fontSize: 30, marginRight:15}}>
               <TextField
@@ -2176,6 +2173,8 @@ class CalculatorScreen extends React.Component {
               name={`${row.id}`}
               baseColor='#085078'
               textColor='#085078'
+              labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+              style={{fontFamily:'AdventPro-Bold'}}
               onChangeText={(value) => this.handleCourse.bind(row.id, value)}
               />
               </View>
@@ -2188,6 +2187,8 @@ class CalculatorScreen extends React.Component {
               name={`${row.id}`} 
               baseColor='#085078'
               textColor='#085078'
+              labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+              style={{fontFamily:'AdventPro-Bold'}}
               onChangeText={(value) => this.handleCredit(row.id, value)}
               />
               </View>
@@ -2198,12 +2199,14 @@ class CalculatorScreen extends React.Component {
               label='Grade'
               baseColor='#085078'
               textColor='#085078'
+              labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
+              style={{fontFamily:'AdventPro-Bold'}}
               onChangeText={(e) => this.handleChange(row.id, e)}
               />
               </View>
-              <View style={{width: 35, fontSize: 30, marginRight:15, marginTop:35}}>
+              <View style={{width: 35, fontSize: 30, marginRight:15, marginTop:15}}>
               <TouchableOpacity onPress={this.removeRow.bind(this, row.id)}>
-              <Icon style={{textAlign: 'center'}} name="times-circle" size={25} color="#085078" />
+              <Icon style={{textAlign: 'center'}} name="times-circle" size={15} color="#085078" />
               </TouchableOpacity>
               </View>
               </View>
@@ -2212,25 +2215,25 @@ class CalculatorScreen extends React.Component {
             
             <View style={{height: 35,  flexDirection:'row', marginTop:10}}>
             <TouchableOpacity onPress={this.addRow} style={{height: 35, marginRight: 10, flexDirection:'row', padding:4, alignSelf:'flex-end', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
-            <Icon name="plus" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", marginHorizontal:10}}>ADD ROW</Text>
+            <Icon name="plus" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", fontFamily:'AdventPro-Bold', marginHorizontal:10}}>ADD ROW</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.clearRows} style={{height: 35, marginRight:10, flexDirection:'row', padding:4, alignSelf:'flex-end', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
-            <Icon name="undo" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", marginHorizontal:10}}>CLEAR GRADE</Text>
+            <Icon name="undo" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", fontFamily:'AdventPro-Bold', marginHorizontal:10}}>CLEAR GRADE</Text>
             </TouchableOpacity>
             </View>
             <View style={{height: 35,  flexDirection:'row', marginTop:10}}>
             <TouchableOpacity onPress={this.calcGpa} style={{height: 35, marginRight:10, flexDirection:'row', padding:4, alignSelf:'flex-end', borderRadius: 2, borderColor: '#085078', borderWidth: 1}}>
-            <Icon name="calculator" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", marginHorizontal:10}}>Calculate GPA</Text>
+            <Icon name="calculator" size={15} style={{color:'#085078', marginTop: 5}}/><Text style={{fontSize:18, color:"#085078", fontFamily:'AdventPro-Bold', marginHorizontal:10}}>Calculate GPA</Text>
             </TouchableOpacity>
             </View>
         </View>
         
-        <View style={{flex: 0.10, width:'100%', flexDirection:'row', alignContent: 'center', alignItems: 'center', marginVertical: 5, backgroundColor:'white', elevation: 1}}>
+        <View style={{flex: 0.10, width:'100%', flexDirection:'row', alignContent: 'center', alignText:'center', alignItems: 'center', marginVertical: 5, elevation: 1}}>
         <View style={{width:'80%'}}>
-        <Text style={{fontSize: 20, color:'#085078', marginLeft: 15, marginRight:20}}>Cumulative GPA:</Text>
+        <Text style={{fontSize: 20, color:'#085078', marginLeft: 15, fontFamily:'AdventPro-Bold', marginRight:20}}>Cumulative GPA:</Text>
         </View>
         <View style={{alignContent:'flex-end', width:'20%'}}>
-        <Text style={{color:'#085078', marginTop: 5, marginRight:5, fontSize:19, fontWeight:'bold'}}>
+        <Text style={{color:'#085078', marginTop: 5, marginRight:5, fontSize:19, fontFamily:'AdventPro-Bold'}}>
         {!this.state.result ?
         <React.Fragment>
         0.00

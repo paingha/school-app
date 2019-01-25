@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, FlatList, View, Text, ScrollView, StatusBar, AsyncStorage, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, ActivityIndicator, FlatList, View, Text, ScrollView, StatusBar, AsyncStorage, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Button, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextField } from 'react-native-material-textfield';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -19,8 +19,12 @@ constructor(props){
         visible: false,
         loading: true,
         payload: this.props.forums,
-        searchTerm: ''
+        searchTerm: '',
+        count: 0,
+        serverData: [],
+        fetching_from_server: false
     }
+    this.offset = 0;
 }
 static navigationOptions = ({ navigation }) =>{
   return {
@@ -49,7 +53,8 @@ static navigationOptions = ({ navigation }) =>{
         </TouchableOpacity>),
     headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: 'bold',
+      fontWeight: '200',
+      fontFamily: 'AdventPro-Bold',
       textAlign: 'center'
     },
   }
@@ -58,29 +63,48 @@ static navigationOptions = ({ navigation }) =>{
     this.setState({ screenHeight: contentHeight });
   };
   loadMore = () => {
-    const {offset} = this.state;
-    this.setState({offset: offset + 20}, ()=>{
-      if (this.props.forums.rows){
-        let data = this.props.forums.rows
-        this.props.getForum(getForums, this.state.offset, data);
-      }
-      else{
-        let data = []
-        this.props.getForum(getForums, this.state.offset, data);
-      }
-      
-    })
+    this.setState({ fetching_from_server: true }, () => {
+      fetch('https://www.theacademist.com/api/v1/forum?offset=' + this.offset)
+      //Sending the currect offset with get request
+          .then(response => response.json())
+          .then(responseJson => {
+            this.offset = this.offset + 10;
+            //After the response increasing the offset for the next API call.
+            this.setState({
+              serverData: [...this.state.serverData, ...responseJson.rows],
+              //adding the new data with old one available in Data Source of the List
+              fetching_from_server: false,
+              count: responseJson.count
+              //updating the loading state to false
+            });                      
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    });
   }
-  componentDidMount(){
-    //call getForum here
-    this.props.getForum(getForums, this.state.offset, []);
+  componentDidMount(){    
+      fetch('https://www.theacademist.com/api/v1/forum?offset=' + this.offset)
+      //Sending the currect offset with get request
+          .then(response => response.json())
+          .then(responseJson => {
+          //Successful response from the API Call 
+            this.offset = this.offset + 10;
+            //After the response increasing the offset for the next API call.
+            this.setState({
+              serverData: [...this.state.serverData, ...responseJson.rows],
+              //adding the new data with old one available in Data Source of the List
+               loading: false,
+               count: responseJson.count
+              //updating the loading state to false
+            });           
+            // alert('bbbb' + this.state.serverData[1].topic);
+          })
+          .catch(error => {
+            console.error(error);
+          });
   }
-  /*componentWillReceiveProps(nextProps){
-    if(nextProps.forums !== this.props.forums){
-      this.setState({payload: nextProps.forums})
-    }
-  }*/
-//TODO: Implement load more button
+
     render(){
         const scrollEnabled = this.state.screenHeight > height;
         const scrollEnabled1 = this.state.screenHeight > 500;
@@ -97,7 +121,7 @@ static navigationOptions = ({ navigation }) =>{
                 onContentSizeChange={this.onContentSizeChange}
                 >
             <View style={{flex:1, flexDirection:'column', alignItems:'center', width:'100%'}}>
-                <View style={{backgroundColor:'white', height:120, elevation:2, width:'100%'}}>
+                <View style={{backgroundColor:'white', height:120, elevation:2, marginTop:10, width:'90%'}}>
                     <View style={{flexDirection:'row', width:'100%', alignContent:'center', alignItems:'center'}}>
                     <View style={{width:'60%', marginHorizontal:10, alignContent:'center'}}>
                     <TextField
@@ -121,9 +145,9 @@ static navigationOptions = ({ navigation }) =>{
                 <View style={{marginHorizontal:10, alignContent:'center', alignItems:'center', marginVertical: 10, backgroundColor:'white', flex:1, elevation:2, width:'90%'}}>
                     <Text style={{fontSize:20, fontFamily:'AdventPro-Bold', marginVertical:10}}>Recent Articles</Text>
                     <View style={{flexDirection:'column', width:'80%'}}>
-                    {this.props.forums ?
+                    {this.state.serverData ?
                     <React.Fragment>
-                    {this.props.forums.rows.map((forum, index) =>{
+                    {this.state.serverData.map((forum, index) =>{
                   return (
                     <TouchableOpacity key={`${index}`}
                       onPress={() => {
@@ -145,27 +169,34 @@ static navigationOptions = ({ navigation }) =>{
 
 
                     </View>
-                    {this.props.forums ?
-        <React.Fragment>
-        {this.props.forums.rows.length >= 5 ?
-            <View
-        style={{
-          paddingVertical: 5,
-          marginVertical: 5,
-          alignSelf: 'center'
-        }}
-      >
-        <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, fontFamily:'AdventPro-Bold', color:"white"}}>Load More</Text>
-      </View>
-      </TouchableOpacity>
-      </View>
-      :null
-      }
-      </React.Fragment>
-      :null
-      }
+                   
+                    {this.state.loading ?
+              null
+              :
+              <React.Fragment>
+                {this.state.serverData.length >= 10 && this.state.serverData.length%10 == 0 ?
+                    <View
+                style={{
+                  paddingVertical: 5,
+                  marginVertical: 5,
+                  alignSelf: 'center'
+                }}
+              >
+                <TouchableOpacity activeOpacity={0.9}  onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+              <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+              <Text style={{fontSize:20, fontFamily:'AdventPro-Regular', color:"white"}}>Load More</Text>
+              {this.state.fetching_from_server ? (
+                <ActivityIndicator color="white" style={{ marginLeft: 8 }} />
+              ) : null}
+              </View>
+              </TouchableOpacity>
+              </View>
+              :null
+              } 
+            </React.Fragment>
+        
+          }
+
                 </View>                
             </View>
             

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, FlatList, Clipboard,
   ToastAndroid,
   AlertIOS,
+  ActivityIndicator,
   Platform, View, Text, StatusBar, Linking, AsyncStorage, ScrollView, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Image, TextInput, Dimensions, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
@@ -29,10 +30,14 @@ class GpaScreen extends React.Component {
       gpa: '',
       usState: '',
       token: '',
-      offset: 0,
       loadMore: false,
       screenHeight: height,
+      loading: true,
+      count: 0,
+      serverData: [],
+      fetching_from_server: false
     }
+    this.offset = 0;
   }
     static navigationOptions = ({ navigation }) =>{
       return {
@@ -59,7 +64,8 @@ class GpaScreen extends React.Component {
             />),
         headerTintColor: '#fff',
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: '200',
+          fontFamily: 'AdventPro-Bold',
           textAlign: 'center'
         },
       }
@@ -80,27 +86,68 @@ class GpaScreen extends React.Component {
       onContentSizeChange = (contentWidth, contentHeight) => {
         this.setState({ screenHeight: contentHeight });
       };
-      loadMore = () => {
-        const {offset} = this.state;
-        const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
-        this.setState({offset: offset + 10}, ()=>{
-          if (this.props.schools.rows){
-            let data = this.props.schools.rows
-            this.props.gpaSearch(gpa_search, this.state.token, this.state.gpa, this.state.level, this.state.usState, id, this.state.offset, data)
-       
-             this.setState({loadMore: true})
-          }
-          else{
-            let data = []
-            this.props.gpaSearch(gpa_search, this.state.token, this.state.gpa, this.state.level, this.state.usState, id, this.state.offset, data)
-       
-          }
-          
-        })
-      }
+      
       componentWillUnmount(){
     
         this.props.clearGpa()
+      }
+      loadMore = () => {
+        this.setState({ fetching_from_server: true }, () => {
+          const {token, gpa, level, state, user_id} = this.state
+          let offset = this.offset
+          fetch(`${gpa_search}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+            mode: 'cors',
+            body: JSON.stringify({state, gpa, level, user_id, offset: this.offset})
+        })
+          //Sending the currect offset with get request
+              .then(response => response.json())
+              .then(responseJson => {
+              //Successful response from the API Call 
+                this.offset = this.offset + 15;
+                //After the response increasing the offset for the next API call.
+                this.setState({
+                  serverData: [...this.state.serverData, ...responseJson.rows],
+              //adding the new data with old one available in Data Source of the List
+              fetching_from_server: false,
+              count: responseJson.count
+              //updating the loading state to false
+                });           
+                // alert('bbbb' + this.state.serverData[1].topic);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+        });
+      }
+      fetchSchool = (token, gpa, level, state, user_id) => { 
+        //alert(token + ' ' + gpa + ' ' + level + ' ' + state + ' ' + user_id)   
+        let offset = this.offset
+          fetch(`${gpa_search}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
+            mode: 'cors',
+            body: JSON.stringify({state, gpa, level, user_id, offset})
+        })
+          //Sending the currect offset with get request
+              .then(response => response.json())
+              .then(responseJson => {
+              //Successful response from the API Call 
+                this.offset = this.offset + 15;
+                //After the response increasing the offset for the next API call.
+                this.setState({
+                  serverData: [...this.state.serverData, ...responseJson.rows],
+                  //adding the new data with old one available in Data Source of the List
+                   loading: false,
+                   count: responseJson.count
+                  //updating the loading state to false
+                });           
+                // alert('bbbb' + this.state.serverData[1].topic);
+              })
+              .catch(error => {
+                console.error(error);
+              });
       }
   async componentDidMount(){
     //alert(this.props.firstName.toString())
@@ -114,34 +161,40 @@ class GpaScreen extends React.Component {
     })
   }
   renderHeader = () => {
-  return <Text style={{alignSelf:'center', paddingVertical:10, fontFamily:'AdventPro-Regular', fontSize:18}}> {this.props.schools.count} {this.props.schools.count == 1 ? <Text>School Found</Text>:  <Text>Schools Found</Text> }</Text>;
+  return <Text style={{alignSelf:'center', paddingVertical:10, fontFamily:'AdventPro-Regular', fontSize:18}}> {this.state.count} {this.state.count == 1 ? <Text>School Found</Text>:  <Text>Schools Found</Text> }</Text>;
   };
   renderFooter = () => {
-    //console.log(e)
-    //console.log(this.state.offset)
-    //console.log(this.props.schools.count)
-    if (this.state.offset >= this.props.schools.count){
-      return null
-    }
-    else {
-    return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          marginVertical: 20,
-          borderColor: "#CED0CE",
-          alignSelf: 'center'
-        }}
+    return(
+    <React.Fragment>
+    {this.state.loading? 
+      null
+      :
+      <React.Fragment>
+        {this.state.serverData.length >= 15 && this.state.serverData.length%15 == 0 ?
+            <View
+            style={{
+              paddingVertical: 20,
+              borderTopWidth: 1,
+              marginVertical: 20,
+              borderColor: "#CED0CE",
+              alignSelf: 'center'
+            }}
       >
-        <TouchableOpacity onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
+        <TouchableOpacity activeOpacity={0.9}  onPress={this.loadMore} style={{paddingVertical: 10, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, color:"white", fontFamily:'AdventPro-Bold'}}>Load More</Text>
+      <Text style={{fontSize:20, fontFamily:'AdventPro-Regular', color:"white"}}>Load More</Text>
+      {this.state.fetching_from_server ? (
+        <ActivityIndicator color="white" style={{ marginLeft: 8 }} />
+      ) : null}
       </View>
       </TouchableOpacity>
       </View>
-    );
+      :null
+    } 
+    </React.Fragment>
   }
+  </React.Fragment>
+)
   };
   renderSeparator = () => {
     return (
@@ -181,7 +234,7 @@ class GpaScreen extends React.Component {
       url: `https://www.theacademist.com/register?ref=${referralCode}`,
       subject: "Find Schools by GPA on The Academist" //  for email
     };
-    const scrollEnabled = this.state.screenHeight > 550;
+    const scrollEnabled = this.state.screenHeight < 50;
     const bannerHeight = height/20;
     const btnWidth = width/2;
     const btnWidth1 = width - 200;
@@ -334,7 +387,7 @@ class GpaScreen extends React.Component {
         this.setState({visible: true}, ()=>{
           setTimeout(()=>{
           this.setState({visible: false, hide: true})
-          this.props.gpaSearch(gpa_search, this.state.token, this.state.gpa, this.state.level, this.state.usState, id, this.state.offset, [])
+          this.fetchSchool(this.state.token, this.state.gpa, this.state.level, this.state.usState, id)
         },3000)
     })
     }
@@ -351,22 +404,21 @@ class GpaScreen extends React.Component {
       
         </View>
         <View style={{flex:0.70, width:'90%', alignSelf: 'center', height: 50, marginTop:4, alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
-        {this.props.schools ?
+        {this.state.serverData.length > 0 ?
         <FlatList
         style={{alignSelf: 'center', fontSize:25, width:'100%'}}
-            data={this.props.schools.rows}
+            data={this.state.serverData}
             keyExtractor={item => item.id.toString()}
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
-            extraData={this.state.loadMore}
             ItemSeparatorComponent={this.renderSeparator}
             showsVerticalScrollIndicator={false}
             renderItem={({item}) =>
             <TouchableOpacity 
-            style={{marginBottom: 5, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
+            style={{marginBottom: 5, minHeight:50, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
             onPress={()=> this.moreData(item.id)}> 
             <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row'}} key={item.id}>
-            <View styles={{color:'#085078', fontSize:20, fontFamily:'AdventPro-Regular', marginBottom: 5, paddingRight:5, paddingLeft:5}}><Text>{item.name}</Text></View>
+            <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
             <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>{item.level == "Undergraduate"? <React.Fragment>SAT: {item.sat? <React.Fragment>{item.sat}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>: <React.Fragment>GRE: {item.gre? <React.Fragment>{item.gre}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>}</Text>
             <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>{item.level == "Undergraduate"? <React.Fragment>ACT: {item.sat? <React.Fragment>{item.act}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>: <React.Fragment>GMAT: {item.gmat? <React.Fragment>{item.gmat}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>}</Text>
@@ -376,14 +428,20 @@ class GpaScreen extends React.Component {
             <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>GPA: {item.gpa? <React.Fragment>{item.gpa.toFixed(2)}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-            <TouchableOpacity onPress={()=> this.setState({shows: true})}>
+            <TouchableOpacity 
+            style={{borderColor: '#085078', borderWidth: 1, padding:6}}
+            onPress={()=> this.setState({shows: true})}>
             <View style={{flex: 1, justifyContent: 'space-between', alignContent:'space-between', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
-            <Icon style={{textAlign: 'center', marginRight:3}} name="share-alt" size={20} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>Share</Text>
+            <Icon style={{textAlign: 'center', marginRight:3}} name="share-alt" size={15} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>Share</Text>
             </View>
             </TouchableOpacity>
-            <View style={{flex: 1, justifyContent: 'flex-end', alignContent:'flex-end', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
+            
+            <TouchableOpacity 
+            onPress={()=> this.moreData(item.id)}>
+            <View style={{flex: 1, borderColor: '#085078', borderWidth: 1, padding:6, justifyContent: 'flex-end', alignContent:'flex-end', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
             <Icon style={{textAlign: 'center', marginRight:3}} name="link" size={15} color="#085078" /><Text style={{marginLeft:2, fontFamily:'AdventPro-Regular', fontSize:20}}>More</Text>
             </View>
+            </TouchableOpacity>
             </View>
             </View>
             </TouchableOpacity>
@@ -456,37 +514,34 @@ class GpaScreen extends React.Component {
               },300);
             }}>More</Button>
         </ShareSheet>
-        <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+        <Modal style={[styles.modal, styles.modal5]} swipeArea={20} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
     
     {
       this.props.singleSchool?
       <ScrollView 
                 style={{flex:1}}
-                contentContainerStyle={{flexGrow: 1, marginBottom: 15, alignContent:'center', paddingLeft:15, paddingRight:15}}
-                scrollEnabled={scrollEnabled}
-                onContentSizeChange={this.onContentSizeChange}
                 >
-      <Text style={{fontSize: 25, color: 'black', marginTop:10, marginBottom:10, paddingBottom:0}}>{this.props.singleSchool.name}</Text>
+      <View style={{color:'#085078', marginTop:6, marginBottom: 15}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{this.props.singleSchool.name}</Text></View>
       <View style={{flex:1, width:'90%', marginHorizontal:5}}>
-    <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Description:</Text> {this.props.singleSchool.description? <React.Fragment>{this.props.singleSchool.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Span:</Text> {this.props.singleSchool.span? <React.Fragment>{this.props.singleSchool.span}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>Level:</Text> {this.props.singleSchool.level? <React.Fragment>{this.props.singleSchool.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GPA:</Text> {this.props.singleSchool.gpa? <React.Fragment>{this.props.singleSchool.gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>SAT:</Text> {this.props.singleSchool.sat? <React.Fragment>{this.props.singleSchool.sat}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>ACT:</Text> {this.props.singleSchool.act? <React.Fragment>{this.props.singleSchool.act}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GRE:</Text> {this.props.singleSchool.gre? <React.Fragment>{this.props.singleSchool.gre}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>GMAT:</Text> {this.props.singleSchool.gmat? <React.Fragment>{this.props.singleSchool.gmat}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>TOEFL:</Text> {this.props.singleSchool.toefl? <React.Fragment>{this.props.singleSchool.toefl}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>IELTS:</Text> {this.props.singleSchool.ielts? <React.Fragment>{this.props.singleSchool.ielts}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>ADDRESS:</Text> {this.props.singleSchool.address? <React.Fragment>{this.props.singleSchool.address}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>CITY:</Text> {this.props.singleSchool.city? <React.Fragment>{this.props.singleSchool.city}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>STATE:</Text> {this.props.singleSchool.state? <React.Fragment>{this.props.singleSchool.state}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
-        <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>ZIP:</Text> {this.props.singleSchool.zip? <React.Fragment>{this.props.singleSchool.zip}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+    <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>Description:</Text> {this.props.singleSchool.description? <React.Fragment>{this.props.singleSchool.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>Span:</Text> {this.props.singleSchool.span? <React.Fragment>{this.props.singleSchool.span}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>Level:</Text> {this.props.singleSchool.level? <React.Fragment>{this.props.singleSchool.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>GPA:</Text> {this.props.singleSchool.gpa? <React.Fragment>{this.props.singleSchool.gpa}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>SAT:</Text> {this.props.singleSchool.sat? <React.Fragment>{this.props.singleSchool.sat}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>ACT:</Text> {this.props.singleSchool.act? <React.Fragment>{this.props.singleSchool.act}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>GRE:</Text> {this.props.singleSchool.gre? <React.Fragment>{this.props.singleSchool.gre}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>GMAT:</Text> {this.props.singleSchool.gmat? <React.Fragment>{this.props.singleSchool.gmat}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>TOEFL:</Text> {this.props.singleSchool.toefl? <React.Fragment>{this.props.singleSchool.toefl}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>IELTS:</Text> {this.props.singleSchool.ielts? <React.Fragment>{this.props.singleSchool.ielts}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>ADDRESS:</Text> {this.props.singleSchool.address? <React.Fragment>{this.props.singleSchool.address}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>CITY:</Text> {this.props.singleSchool.city? <React.Fragment>{this.props.singleSchool.city}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>STATE:</Text> {this.props.singleSchool.state? <React.Fragment>{this.props.singleSchool.state}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
+        <Text style={{fontSize: 16, fontFamily:'AdventPro-Regular', marginVertical:5}}><Text style={{fontFamily:'AdventPro-Bold', fontSize:18}}>ZIP:</Text> {this.props.singleSchool.zip? <React.Fragment>{this.props.singleSchool.zip}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
         <TouchableOpacity onPress={
           ()=>{ Linking.openURL(`${this.props.singleSchool.website}`)}
         } style={{paddingVertical: 10, marginBottom: 20, backgroundColor:'#085078', width:150, textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'center'}}>
-      <Text style={{fontSize:20, color:"white"}}>Visit Website</Text>
+      <Text style={{fontSize:20, fontFamily:'AdventPro-Bold', color:"white"}}>Visit Website</Text>
       </View>
       </TouchableOpacity>
       </View>
@@ -512,7 +567,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   modal5: {
-    height: height - 200
+    height: height - 140
   },
   modal6: {
     height: 250

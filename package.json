@@ -21,6 +21,7 @@
     "react-native-fbsdk": "^0.8.0",
     "react-native-google-signin": "^1.0.0-rc6",
     "react-native-iap": "^2.3.19",
+    "react-native-image-picker": "^0.28.0",
     "react-native-keyboard-aware-scroll-view": "^0.7.3",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-material-dropdown": "^0.11.1",
@@ -53,7 +54,7 @@
   },
   "rnpm": {
     "assets": [
-	"./assets/fonts/"
+      "./assets/fonts/"
     ]
-}
+  }
 }
