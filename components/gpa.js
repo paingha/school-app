@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RNPickerSelect from 'react-native-picker-select';
 import {getStates, getCountries, gpa_search, singleGpa} from '../settings'
 import {getStatesCall, getApplicantCountriesCall} from '../calls/misc'
 import {gpaSearchCall, singleGpaCall, clearGpaCall} from '../calls/gpaSchool'
@@ -35,7 +36,16 @@ class GpaScreen extends React.Component {
       loading: true,
       count: 0,
       serverData: [],
-      fetching_from_server: false
+      fetching_from_server: false,
+      slideText: [
+        "The more scholarships you apply to, the more funding you could be awarded. Apply! Apply! Apply!",
+        "Most scholarships require you to be admitted/accepted into a US or Canadian school to qualify.",
+        "Save your scholarship results by hitting the Save button, come back later once you're prepared to apply.",
+        "Divide and concur! Plan for scholarships with similar requirements which will allow you to cover more scholarships in a short period of time.",
+        "Compose a general letter, specifically about yourself, goals, academic background and uniqueness, to alleviate having to write multiple letters while applying for multiple scholarships."
+      ],
+      currentIndex: 0,
+      currentText: 'The more scholarships you apply to, the more funding you could be awarded. Apply! Apply! Apply!'
     }
     this.offset = 0;
   }
@@ -90,6 +100,7 @@ class GpaScreen extends React.Component {
       componentWillUnmount(){
     
         this.props.clearGpa()
+
       }
       loadMore = () => {
         this.setState({ fetching_from_server: true }, () => {
@@ -149,6 +160,7 @@ class GpaScreen extends React.Component {
                 console.error(error);
               });
       }
+  
   async componentDidMount(){
     //alert(this.props.firstName.toString())
     await this.props.fetchStates(getStates)
@@ -156,7 +168,9 @@ class GpaScreen extends React.Component {
     await AsyncStorage.getItem('TOKEN', (err, result)=>{
       if (result){
         //get user here
-        this.setState({token: result})
+        this.setState({token: result}, ()=>{
+          //this.setSlider();
+        })
       }
     })
   }
@@ -332,56 +346,88 @@ class GpaScreen extends React.Component {
         
       <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row'}} >
         <View style={{flex: 1, width: btnWidth1+80, paddingRight:0, paddingLeft:10}}>
-      <Dropdown
-        label='GPA'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={gpas}
-        onChangeText={this.gpaChange.bind(this)}
-      />
+        <RNPickerSelect
+                    placeholder={{
+                        label: 'GPA',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={gpas}
+                    placeholderTextColor='#085078'
+                    hideIcon={true}
+                    onValueChange={(value) => {
+                      this.setState({gpa: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.gpa}
+                    /*ref={(el) => {
+                        this.inputRefs.picker3 = el;
+                    }} */
+                />
       </View>
       <View style={{flex: 1, width: btnWidth1-80, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Level'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={levels}
-        onChangeText={this.levelChange.bind(this)}
-      />
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Level',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    placeholderTextColor='#085078'
+                    items={levels}
+                    onValueChange={(value) => {
+                      this.setState({level: value})
+                    }}
+                    hideIcon={true}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.level}
+                    /*ref={(el) => {
+                        this.inputRefs.picker1 = el;
+                    }} */
+                />
       </View>
       </View>
-      <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+      <View style={{marginTop: 10, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
       {this.props.statesData?
-      <Dropdown
-        label='State'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={this.props.statesData}
-        onChangeText={this.stateChange.bind(this)}
-      />:
-      <Dropdown
-        label='State'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={states}
-        onChangeText={this.stateChange.bind(this)}
+      <RNPickerSelect
+      placeholder={{
+          label: 'State',
+          value: null,
+          color: '#085078',
+      }}
+      placeholderTextColor='#085078'
+      items={this.props.statesData}
+      onValueChange={(value) => {
+        this.setState({usState: value})
+      }}
+      hideIcon={true}
+      style={{ ...pickerSelectStyles }}
+      value={this.state.usState}
+      /*ref={(el) => {
+          this.inputRefs.picker1 = el;
+      }} */
+  />:
+      <RNPickerSelect
+          placeholder={{
+              label: 'State',
+              value: null,
+              color: '#085078',
+          }}
+          placeholderTextColor='#085078'
+          items={states}
+          onValueChange={(value) => {
+            this.setState({usState: value})
+          }}
+          hideIcon={true}
+          style={{ ...pickerSelectStyles }}
+          value={this.state.usState}
+          /*ref={(el) => {
+              this.inputRefs.picker1 = el;
+          }} */
       />
       }
       </View>
-      <View style={{flex: 1, width: btnWidth1, marginRight:10, paddingLeft:10}}>
+      <View style={{flex: 1, width: btnWidth1, marginTop:10, marginRight:10, paddingLeft:10}}>
       <TouchableHighlight
       onPress={()=>{
         this.setState({visible: true}, ()=>{
@@ -452,6 +498,7 @@ class GpaScreen extends React.Component {
             <Text style={{fontSize: 20, marginTop:20, fontFamily:'AdventPro-Bold', alignSelf:'center'}}>No Search Results </Text>
         }
         </View>
+        
     </View>
     
     <ShareSheet visible={this.state.shows} onCancel={this.onCancel.bind(this)}>
@@ -514,7 +561,13 @@ class GpaScreen extends React.Component {
               },300);
             }}>More</Button>
         </ShareSheet>
-        <Modal style={[styles.modal, styles.modal5]} swipeArea={20} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+        <Modal 
+          style={[styles.modal, styles.modal5]}
+          position={"bottom"}
+          ref={"savedModal"} 
+          swipeToClose={false}
+          backdropContent={BContent}
+        >
     
     {
       this.props.singleSchool?
@@ -559,6 +612,7 @@ class GpaScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  
   modal: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -615,6 +669,28 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   },
 
+});
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
+  inputAndroid: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
 });
 const TWITTER_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAABvFBMVEUAAAAA//8AnuwAnOsAneoAm+oAm+oAm+oAm+oAm+kAnuwAmf8An+0AqtUAku0AnesAm+oAm+oAnesAqv8An+oAnuoAneoAnOkAmOoAm+oAm+oAn98AnOoAm+oAm+oAmuoAm+oAmekAnOsAm+sAmeYAnusAm+oAnOoAme0AnOoAnesAp+0Av/8Am+oAm+sAmuoAn+oAm+oAnOoAgP8Am+sAm+oAmuoAm+oAmusAmucAnOwAm+oAmusAm+oAm+oAm+kAmusAougAnOsAmukAn+wAm+sAnesAmeoAnekAmewAm+oAnOkAl+cAm+oAm+oAmukAn+sAmukAn+0Am+oAmOoAmesAm+oAm+oAm+kAme4AmesAm+oAjuMAmusAmuwAm+kAm+oAmuoAsesAm+0Am+oAneoAm+wAmusAm+oAm+oAm+gAnewAm+oAle0Am+oAm+oAmeYAmeoAmukAoOcAmuoAm+oAm+wAmuoAneoAnOkAgP8Am+oAm+oAn+8An+wAmusAnuwAs+YAmegAm+oAm+oAm+oAmuwAm+oAm+kAnesAmuoAmukAm+sAnukAnusAm+oAmuoAnOsAmukAqv9m+G5fAAAAlHRSTlMAAUSj3/v625IuNwVVBg6Z//J1Axhft5ol9ZEIrP7P8eIjZJcKdOU+RoO0HQTjtblK3VUCM/dg/a8rXesm9vSkTAtnaJ/gom5GKGNdINz4U1hRRdc+gPDm+R5L0wnQnUXzVg04uoVSW6HuIZGFHd7WFDxHK7P8eIbFsQRhrhBQtJAKN0prnKLvjBowjn8igenQfkQGdD8A7wAAAXRJREFUSMdjYBgFo2AUDCXAyMTMwsrGzsEJ5nBx41HKw4smwMfPKgAGgkLCIqJi4nj0SkhKoRotLSMAA7Jy8gIKing0KwkIKKsgC6gKIAM1dREN3Jo1gSq0tBF8HV1kvax6+moG+DULGBoZw/gmAqjA1Ay/s4HA3MISyrdC1WtthC9ebGwhquzsHRxBfCdUzc74Y9UFrtDVzd3D0wtVszd+zT6+KKr9UDX749UbEBgULIAbhODVHCoQFo5bb0QkXs1RAvhAtDFezTGx+DTHEchD8Ql4NCcSyoGJYTj1siQRzL/JKeY4NKcSzvxp6RmSWPVmZhHWnI3L1TlEFDu5edj15hcQU2gVqmHTa1pEXJFXXFKKqbmM2ALTuLC8Ak1vZRXRxa1xtS6q3ppaYrXG1NWjai1taCRCG6dJU3NLqy+ak10DGImx07LNFCOk2js6iXVyVzcLai7s6SWlbnIs6rOIbi8ViOifIDNx0uTRynoUjIIRAgALIFStaR5YjgAAAABJRU5ErkJggg==";
 

@@ -7,6 +7,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import {getMajors, getCountries, updateUser, get_started} from '../settings'
 import {getMajorsCall, getApplicantCountriesCall} from '../calls/misc'
 import {updateUserCall, getStartedCall} from '../calls/user'
+import RNPickerSelect from 'react-native-picker-select';
 
 class FirstLoginScreen extends React.Component{
   static navigationOptions = {
@@ -175,77 +176,139 @@ class FirstLoginScreen extends React.Component{
             <Text style={styles.title}>Get Started</Text>
             
             <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-            <Dropdown
-                label='Criteria'
-                baseColor='#FFFFFF'
-                itemColor='#085078'
-                textColor='#FFFFFF'
-                selectedItemColor='#085078'
-                fontSize={20}
-                data={criterias}
-                onChangeText={this.criteriaChange.bind(this)}
-            />
+            <RNPickerSelect
+                    placeholder={{
+                        label: 'Criteria',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={criterias}
+                    onValueChange={(value) => {
+                      this.setState({criteria: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.criteria}
+                />
             </View>
             <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-            <Dropdown
-            label='Level'
-            baseColor='#FFFFFF'
-            itemColor='#085078'
-            textColor='#FFFFFF'
-            selectedItemColor='#085078'
-            fontSize={20}
-            data={levels}
-            onChangeText={this.levelChange.bind(this)}
-            />
+            <RNPickerSelect
+                    placeholder={{
+                        label: 'Level',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={levels}
+                    onValueChange={(value) => {
+                      this.setState({level: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.level}
+                />
             </View>
             <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-            <Dropdown
-                label='GPA'
-                baseColor='#FFFFFF'
-                itemColor='#085078'
-                textColor='#FFFFFF'
-                selectedItemColor='#085078'
-                fontSize={20}
-                data={gpas}
-                onChangeText={this.gpaChange.bind(this)}
-            />
+            <RNPickerSelect
+                    placeholder={{
+                        label: 'GPA',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={gpas}
+                    onValueChange={(value) => {
+                      this.setState({gpa: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.gpa}
+                />
             </View>
             <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-            <Dropdown
-                label='Major'
-                baseColor='#FFFFFF'
-                itemColor='#085078'
-                textColor='#FFFFFF'
-                selectedItemColor='#085078'
-                fontSize={20}
-                data={majors}
-                onChangeText={this.majorChange.bind(this)}
-            />
+            {majors?
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Major',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={majors}
+                    onValueChange={(value) => {
+                      this.setState({major: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.major}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                :
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Major',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={[{'label': 'Loading...', 'key': 'Loading..'}]}
+                    onValueChange={(value) => {
+                      this.setState({major: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.major}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                  }
             </View>
             
-                <View style={{flex: 1, width: btnWidth1, paddingRight:0, paddingLeft:10}}>
-            <Dropdown
-                label='Scholarship Country'
-                baseColor='#FFFFFF'
-                itemColor='#085078'
-                textColor='#FFFFFF'
-                selectedItemColor='#085078'
-                fontSize={18}
-                data={scholarshipCountries}
-                onChangeText={this.scholarshipCountryChange.bind(this)}
-            />
+            <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Scholarship Country',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={scholarshipCountries}
+                    onValueChange={(value) => {
+                      this.setState({scholarshipCountry: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.scholarshipCountry}
+                />
             </View>
             <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-            <Dropdown
-                label='Your Country'
-                baseColor='#FFFFFF'
-                itemColor='#085078'
-                textColor='#FFFFFF'
-                selectedItemColor='#085078'
-                fontSize={20}
-                data={countries}
-                onChangeText={this.applicantCountryChange.bind(this)}
-            />
+            {countries?
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Applicant Country',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={countries}
+                    onValueChange={(value) => {
+                      this.setState({applicantCountry: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.applicantCountry}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                :
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Applicant Country',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={[{'label': 'Loading...', 'key': 'Loading..'}]}
+                    onValueChange={(value) => {
+                      this.setState({applicantCountry: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.applicantCountry}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                  }
             </View>
             <TouchableHighlight
               onPress={()=> {
@@ -297,6 +360,30 @@ const styles = StyleSheet.create({
     marginTop: -10,
   }
 });
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
+  inputAndroid: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
+});
+
 function mapper(state) {
     return {
         majors: state.major.data,

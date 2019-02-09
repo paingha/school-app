@@ -28,6 +28,11 @@ import ForumDetailScreen from "./components/forumDetail";
 import ForumScreen from "./components/forum";
 import AboutScreen from "./components/about";
 import LegalScreen from "./components/legal";
+import DisclaimerScreen from "./components/disclaimer";
+import TermsScreen from "./components/terms";
+import ContactScreen from "./components/contact-us";
+import RewardScreen from "./components/reward";
+import NewForumScreen from "./components/new-forum";
 //import Profile from "./screens/Profile";
 
 const headerStyle = {
@@ -121,6 +126,21 @@ const Stack = {
   },
   MajorView: {
     screen: MajorScreen
+  },
+  DisclaimerView: {
+    screen: DisclaimerScreen
+  },
+  TermsView: {
+    screen: TermsScreen
+  },
+  ContactView: {
+    screen: ContactScreen
+  },
+  RewardView: {
+    screen: RewardScreen
+  },
+  NewForumView: {
+    screen: NewForumScreen
   }
 };
 
@@ -176,7 +196,27 @@ const DrawerRoutes = {
   ThirteenthViewStack: {
 		name: 'ThirteenthViewStack',
 		screen: createStackNavigator(Stack, { initialRouteName: 'MajorView' })
-	},
+  },
+  FourthteenViewStack: {
+		name: 'FourthteenViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'DisclaimerView' })
+  },
+  FifteenthViewStack: {
+		name: 'FifteenthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'TermsView' })
+  },
+  SixteenthViewStack: {
+		name: 'SixteenthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'ContactView' })
+  },
+  SeventeenthViewStack: {
+		name: 'SeventeenthViewStack',
+		screen: createStackNavigator(Stack, { initialRouteName: 'RewardView' })
+  },
+  EightteenViewStack: {
+    name: 'EightteenViewStack',
+    screen : createStackNavigator(Stack, { initialRouteName: 'NewForumView' })
+  }
 };
 
 export const SignedIn = createStackNavigator({

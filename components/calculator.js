@@ -117,6 +117,14 @@ class CalculatorScreen extends React.Component {
       token: '',
       offset: 0,
       clearingRows: false,
+      slideText: [
+        "Institutions using WAEC/NECO/GRE/WASSCE grade scale.",
+        "The “Credit” column refers to the weight of each course. Some institutions use credit hour, credit unit, or unit.",
+        "Alpha-numeric (A1, B2, C4), numeric (7.99, 14, 16), or alphabetic (A, B+, C) grading scales should be entered exactly how they appear on your result sheet, in the Grade column ",
+        "Use your converted GPA to search through a wide range of scholarships, using the Scholarship search section.",
+      ],
+      currentIndex: 0,
+      currentText: 'Institutions using WAEC/NECO/GRE/WASSCE grade scale.',
       rowNumber: 4,
             rows: [{
               id: 1,
@@ -170,6 +178,20 @@ class CalculatorScreen extends React.Component {
         },
       }
       };
+      setSlider(){
+        /*setTimeout(()=>{
+          for(let i = this.state.currentIndex; i <= this.state.slideText.length; i++){
+            //this.setState({currentIndex: i + 1, currentText: this.state.slideText[i]})
+            alert(i + 1)
+          }
+        }, 100000) */
+        const interval = setInterval(()=>{
+          this.setState({currentIndex: this.state.currentIndex + 1, currentText: this.state.slideText[this.state.currentIndex]})
+            if (this.state.currentIndex >= this.state.slideText.length){
+              this.setState({currentIndex: 0})
+            }
+        }, 5000)
+      }
       onContentSizeChange = (contentWidth, contentHeight) => {
         this.setState({ screenHeight: contentHeight });
       };
@@ -2036,7 +2058,9 @@ class CalculatorScreen extends React.Component {
     await AsyncStorage.getItem('TOKEN', (err, result)=>{
       if (result){
         //get user here
-        this.setState({token: result})
+        this.setState({token: result},()=>{
+          this.setSlider();
+        })
       }
     })
   }
@@ -2105,12 +2129,15 @@ class CalculatorScreen extends React.Component {
     let options = this.state.countryOptions;
     
     return (
+      <React.Fragment>
+      
       <ScrollView 
-      style={{flex:1}}
-      contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
+      style={{flex:0.85}}
+      contentContainerStyle={{flexGrow: 0.85, alignContent:'center'}}
       scrollEnabled={scrollEnabled}
       onContentSizeChange={this.onContentSizeChange}
       >
+      
     <View style={styles.mainContent}>
     <StatusBar
         barStyle="light-content"
@@ -2255,15 +2282,46 @@ class CalculatorScreen extends React.Component {
         </View>
         </View>
         <View style={[styles.modal, styles.modal4]}>
-        <Text style={{fontSize: 22, color: '#085078', marginTop:25, marginBottom:0, paddingBottom:0}}>The Grade Scale</Text>
-        <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
+        <Text style={{fontSize: 22, color: '#085078', marginTop:8, marginBottom:0, paddingBottom:0}}>The Grade Scale</Text>
+        <View style={{ flex: 0.9, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
         <GpaScale gpaCountry={this.state.country} gpaOption={this.state.option}/>
         </View>
+        
+
         </View>
+        
     </View>
+    
     <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} cancelable={false} animation="fade"/>
   
     </ScrollView>
+    <View style={{flex:0.15, width:'100%', padding: 6, backgroundColor: '#085078', alignSelf: 'center',  marginTop:0, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
+        <Text style={{textAlign: 'center', alignSelf:'center', fontFamily:'AdventPro-Bold', color:'#ffffff'}}>{this.state.currentText}</Text>
+        <View style={{flexDirection:'row', marginTop: 8, justifyContent:'space-evenly', alignContent:'space-between'}}>
+        {this.state.slideText.map((item, index)=>{
+          if(this.state.currentIndex == index){
+            return <View style={{
+              width: 10, 
+              height: 10, 
+              borderRadius: 5, 
+              backgroundColor:'#ffffff', 
+              marginRight: 10,
+            }}/>
+            
+          }
+          else{
+            return <View style={{
+              width: 10, 
+              height: 10, 
+              borderRadius: 5, 
+              backgroundColor:'grey', 
+              marginRight: 10
+            }}/>
+          }
+        })}
+        </View>
+        </View>
+    </React.Fragment>
     )
 }
 }
@@ -2285,7 +2343,7 @@ const styles = StyleSheet.create({
     height: 250
   },
   mainContent: {
-    flex: 1,
+    flex: 0.75,
     alignItems: 'center',
     backgroundColor: 'rgba(211,211,211,0.3)',
   },

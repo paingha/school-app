@@ -115,8 +115,8 @@ android {
         applicationId "com.theacademist_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 27
-        versionName "1.25"
+        versionCode 43
+        versionName "1.43"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -152,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-webview')
     compile project(':react-native-image-picker')
     compile project(':react-native-share')
     compile project(':react-native-iap')

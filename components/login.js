@@ -34,7 +34,7 @@ class LoginScreen extends React.Component {
     
       _configureGoogleSignIn() {
         GoogleSignin.configure({
-          webClientId: '746777980095-uedkcnv4qfdg9ss9nb847cgl4o70472q.apps.googleusercontent.com',
+          webClientId: '638073687773-flr8fq4sifc9eue2bs4001dr23rjjtb4.apps.googleusercontent.com',
           offlineAccess: false,
           forceConsentPrompt: true,
         });
@@ -74,12 +74,10 @@ class LoginScreen extends React.Component {
               (data) => {
                 //console.log(data)
                 this.setState({token: data.accessToken})
-                const infoRequest = new GraphRequest(
-                  '/me?fields=name,email,first_name, last_name',
-                  null,
+                const infoRequest = new GraphRequest('/me', { parameters: { fields: { string: 'email,name,first_name,last_name' } } },
                   (error, result)=>{
                     if (error) {
-                      alert(error.toString());
+                      alert(JSON.stringify(error))
                     } else {
                       //console.log(result);
                       this.setState({email: result.email, userId: result.id}, ()=>{
@@ -121,10 +119,10 @@ class LoginScreen extends React.Component {
       <Text style={styles.title}>Login</Text>
       {
         this.props.error?
-        <View style={{flexDirection:'column', padding:10, marginBottom: 6, flexWrap:'wrap', alignContent:'center', alignItems:'center', justifyContent:'space-between', maxWidth:'95%', backgroundColor:'red'}}>
-         <Icon style={{textAlign: 'center', fontWeight: 200, marginBottom:7}} name="exclamation-triangle" size={18} color="#ffffff" />
+        <View style={{flexDirection:'column', padding:10, marginBottom: 6, flexWrap:'wrap', alignContent:'center', alignItems:'center', justifyContent:'space-between', maxWidth:'95%'}}>
+         <Icon style={{textAlign: 'center', fontWeight: 200, marginBottom:7}} name="exclamation-triangle" size={18} color="red" />
         <View style={{flexWrap:'wrap', maxWidth:'100%'}}>
-        <Text style={{color: '#ffffff', fontSize:16, flexWrap:'wrap', fontFamily: 'AdventPro-Regular'}}>{this.props.error}</Text>
+        <Text style={{color: 'red', fontSize:16, flexWrap:'wrap', fontFamily: 'AdventPro-Regular'}}>{this.props.error}</Text>
         </View>
         </View>
         :
@@ -139,7 +137,7 @@ class LoginScreen extends React.Component {
       textContentType='emailAddress'
       placeholder='Email'
       onChangeText={(email)=> this.setState({email})}
-        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, backgroundColor: 'white', fontFamily: 'AdventPro-Medium', width: deviceWidthinner, fontSize: 16, paddingBottom: 1, paddingTop: 1, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
       <View style={{height: 50, width: deviceWidth, fontFamily: 'AdventPro-Medium', color: 'grey', backgroundColor: '#F5F5F5', borderColor: '#F5F5F5', borderWidth: 5, borderRadius: 3}}>
@@ -151,7 +149,7 @@ class LoginScreen extends React.Component {
       textContentType='password'
       placeholder='Password'
       onChangeText={(password)=> this.setState({password})}
-        style={{height: 40, fontFamily: 'AdventPro-Medium', backgroundColor: 'white', width: deviceWidthinner, fontSize: 20, paddingBottom: 8, paddingTop: 12, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
+        style={{height: 40, fontFamily: 'AdventPro-Medium', backgroundColor: 'white', width: deviceWidthinner, fontSize: 16, paddingBottom: 1, paddingTop: 1, paddingRight: 20, paddingLeft: 20, color: 'grey', borderColor: '#ccc', borderWidth: 1}}
       />
       </View>
       <TouchableHighlight

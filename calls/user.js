@@ -7,11 +7,12 @@ export function clearErrorCall(){
     }
 }
 
-export function getStartedCall(url, token, user_id, major, applicantCountry, scholarshipCountry, gpa, criteria, level, firstLogin, nav){
+export function getStartedCall(url, token, user_id, major, applicantCountry, scholarshipCountry, gpa, criteria, level, firstLOgin, nav){
     return (dispatch) => {
+    let firstLogin = false;
     fetch(url.replace('{user_id}', user_id ), {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Authorization': token},
+        headers: {'Content-Type': 'application/json', 'Authorization': `${token}`},
         mode: 'cors',
         body: JSON.stringify({major, applicantCountry, scholarshipCountry, gpa, criteria, level, firstLogin})
     })
@@ -21,6 +22,8 @@ export function getStartedCall(url, token, user_id, major, applicantCountry, sch
     .then(json=>{
         if (json.error)
             throw Error(json.error.message || 'Unknown fetch error');
+        //refresh user data
+        dispatch(refreshUserCall(user_id, token))
         nav.navigate("SignedIn")
     })
     .catch(error=>alert(error.message));
@@ -75,8 +78,10 @@ export function updateUserCall(url, userID, token, to, change){
                      })
             .then(response=>response.json())
             .then(json=>{
+               console.log(json)
                 if (json.error)
                     throw new Error(json.error.message);
+                    dispatch(refreshUserCall(userID, token))
                     dispatch(receiveUser(json))
                     //alert(json)
                 //alert(json.token);

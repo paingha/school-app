@@ -52,7 +52,7 @@ componentWillMount(){
               this.setState({loadingNow: false, boardedState: result},()=>{
                 
               })
-            }, 2000)
+            }, 7000)
           //}
           /*if(err){
             this.setState({loadingNow: true})

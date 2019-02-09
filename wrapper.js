@@ -24,17 +24,17 @@ const styles = StyleSheet.create({
     height: 220,
   },
   title:{
-    fontSize: 30,
+    fontSize: 20,
     color: '#ffffff',
     //fontWeight: 'bold'
   },
   title2:{
-    fontSize: 28,
+    fontSize: 20,
     color: '#ffffff',
     //fontWeight: 'bold'
   },
   text:{
-    fontSize: 25,
+    fontSize: 20,
     color: '#ffffff',
   },
   text2:{
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   text4:{
-    fontSize: 19,
+    fontSize: 20,
     color: '#ffffff',
     paddingBottom: 10
   }
@@ -66,7 +66,7 @@ const slides = [
     key: 'second',
     title: 'Search School by GPA / Major',
     titleStyle: styles.title2,
-    text: 'Personalize your evaluated GPA to search for schools you might qualify for and the opportunities abound. Search schools based by your GPA.',
+    text: 'Save time, use your profile to match the best fit school',
     textStyle: styles.text4,
     image: require('./assets/logo.png'),
     imageStyle: styles.image4,
@@ -76,7 +76,7 @@ const slides = [
     key: 'third',
     title: 'Scholarship Search',
     titleStyle: styles.title,
-    text: 'Over 3,000 scholarships are made available specifically for international students. Find out which you qualify for!',
+    text: 'Over 3,000 scholarships specifically for international students',
     textStyle: styles.text2,
     image: require('./assets/logo.png'),
     imageStyle: styles.image2,
@@ -86,7 +86,7 @@ const slides = [
     key: 'fourth',
     title: 'GPA Calculator',
     titleStyle: styles.title,
-    text: 'As an aspiring undergraduate/graduate student, evaluate your GPA to the US and Canada grade system; and it’s eligibility to your school of interest.',
+    text: 'Ensure you evaluate your results to the U.S. equivalents',
     textStyle: styles.text3,
     image: require('./assets/logo.png'),
     imageStyle: styles.image3,

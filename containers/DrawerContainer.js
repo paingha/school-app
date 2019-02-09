@@ -10,7 +10,7 @@ export default class DrawerContainer extends React.Component {
     this.state = {
         screenHeight: height,
         clicked: false,
-        paddingValue: 50
+        paddingValue: 65
     }
 }
 onContentSizeChange = (contentWidth, contentHeight) => {
@@ -19,7 +19,7 @@ onContentSizeChange = (contentWidth, contentHeight) => {
 
   render() {
     const { navigation } = this.props
-    const scrollEnabled = this.state.screenHeight > height - 150;
+    const scrollEnabled = this.state.screenHeight > height - 200;
     return (
       <ScrollView 
                 style={{flex:1, paddingBottom: this.state.paddingValue}}
@@ -75,24 +75,24 @@ onContentSizeChange = (contentWidth, contentHeight) => {
           About Us
         </Text>
         <Text
-          onPress={() => this.setState({clicked: !this.state.clicked, paddingValue: 90, scrollEnabled: true})/*navigation.navigate('TenthViewStack')*/}
+          onPress={() => this.setState({clicked: !this.state.clicked, paddingValue: 150, scrollEnabled: true})/*navigation.navigate('TenthViewStack')*/}
           style={styles.uglyDrawerItem}>
           Legal Terms
         </Text>
         {this.state.clicked?
         <View>
           <Text
-            onPress={() => this.setState({clicked: !this.state.clicked})/*navigation.navigate('TenthViewStack')*/}
+            onPress={() => this.setState({clicked: !this.state.clicked, paddingValue: 65}, ()=> navigation.navigate('FourthteenViewStack'))/*navigation.navigate('TenthViewStack')*/}
             style={styles.uglyDrawerItem}>
             Disclaimer
           </Text>
           <Text
-          onPress={() => this.setState({clicked: !this.state.clicked})/*navigation.navigate('TenthViewStack')*/}
+          onPress={() => this.setState({clicked: !this.state.clicked, paddingValue: 65}, ()=> navigation.navigate('TenthViewStack'))/*navigation.navigate('TenthViewStack')*/}
           style={styles.uglyDrawerItem}>
           Privacy Policy
         </Text>
         <Text
-          onPress={() => this.setState({clicked: !this.state.clicked})/*navigation.navigate('TenthViewStack')*/}
+          onPress={() => this.setState({clicked: !this.state.clicked, paddingValue: 65}, ()=> navigation.navigate('FifteenthViewStack'))/*navigation.navigate('TenthViewStack')*/}
           style={styles.uglyDrawerItem}>
           Terms and Conditions
         </Text>
@@ -100,6 +100,16 @@ onContentSizeChange = (contentWidth, contentHeight) => {
         :
         null
         }
+        <Text
+          onPress={() => this.setState({clicked: false, paddingValue: 65}, ()=> navigation.navigate('SixteenthViewStack'))/*navigation.navigate('TenthViewStack')*/}
+          style={styles.uglyDrawerItem}>
+          Contact Us
+        </Text>
+        <Text
+          onPress={() => this.setState({clicked: false, paddingValue: 65}, ()=> navigation.navigate('SeventeenthViewStack'))/*navigation.navigate('TenthViewStack')*/}
+          style={styles.uglyDrawerItem2}>
+          Win Big!
+        </Text>
         <Text
           onPress={()=> {
             let e = navigation;
@@ -134,14 +144,19 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   uglyDrawerItem1: {
-    fontSize: 19,
+    fontSize: 18,
     fontFamily: 'AdventPro-Medium',
     color: '#E73536',
     padding: 15,
-    margin: 3,
-    borderRadius: 2,
-    borderColor: '#E73536',
-    borderWidth: 1,
+    marginBottom: 10,
+    textAlign: 'center'
+  },
+  uglyDrawerItem2: {
+    fontSize: 18,
+    fontFamily: 'AdventPro-Medium',
+    color: 'green',
+    padding: 15,
+    margin: 5,
     textAlign: 'center'
   }
 })

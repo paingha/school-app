@@ -8,15 +8,11 @@ constructor(props){
     super(props)
     this.state = {
       screenHeight: height,
-      index: 3,
-      indexColor1:'#FFFFFF',
-      indexColor2:'#FFFFFF',
-      indexColor3:'#FFBF71',
     }
 }
 static navigationOptions = ({ navigation }) =>{
   return {
-    title: 'Legal',
+    title: 'Privacy Policy',
     headerStyle: {
       backgroundColor: '#085078',
       textAlign: 'center',
@@ -48,188 +44,6 @@ static navigationOptions = ({ navigation }) =>{
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight });
   };
-  onIndex = (e) => {
-    //where e is the tabe index number to navigate to
-    this.setState({index: e})
-  }
-  renderSection(){
-    const {index} = this.state;
-
-    if (index == 1){
-      return <Disclaimer />
-    }
-    else if(index == 2){
-      return <PrivacyPolicy />
-    }
-    else if(index == 3){
-      return <Terms />
-    }
-    else{
-      return <Disclaimer />
-    }
-  }
-
-    render(){
-      const scrollEnabled = this.state.screenHeight > height;
-      const {indexColor1, indexColor2, indexColor3} = this.state;
-      return(
-        <View style={{flex:1, width:'100%'}}>
-          <View style={{width:'100%', justifyContent:'space-evenly', alignItems:'stretch', paddingHorizontal:20, flexDirection:'row', height:50, backgroundColor:'#085078'}}>
-            <TouchableOpacity onPress={()=> this.setState({index: 3, indexColor3:'#FFBF71', indexColor2:'#FFFFFF', indexColor1:'#FFFFFF'})} style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
-            <View style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
-              <Text style={{color:`${indexColor3}`, fontSize:18}}>
-                Terms
-              </Text>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> this.setState({index: 1, indexColor1:'#FFBF71', indexColor3:'#FFFFFF', indexColor2:'#FFFFFF'})} style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
-            <View style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
-              <Text style={{color:`${indexColor1}`, fontSize:18}}>
-                Disclaimer
-              </Text>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> this.setState({index: 2, indexColor2:'#FFBF71', indexColor3:'#FFFFFF', indexColor1:'#FFFFFF'})} style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
-            <View style={{flex:1, flexDirection:'row', alignSelf:'center'}}>
-              <Text style={{color:`${indexColor2}`, fontSize:18}}>
-                Privacy Policy
-              </Text>
-            </View>
-            </TouchableOpacity>
-          </View>
-          {this.renderSection()}
-        </View>
-      )
-    }
-}
-
-class Terms extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      screenHeight: height,
-    }
-  }
-  render(){
-    const scrollEnabled = this.state.screenHeight > height - 50;
-    onContentSizeChange = (contentWidth, contentHeight) => {
-      this.setState({ screenHeight: contentHeight });
-    };
-    return(
-      <ScrollView 
-        style={{flex:1}}
-        contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
-        scrollEnabled={scrollEnabled}
-        onContentSizeChange={this.onContentSizeChange}
-        >
-        <View style={{flex:1, flexDirection:'column', marginBottom:15, alignItems:'center', alignContent:'space-between', width:'100%'}}>
-          <View style={{backgroundColor:'white', height:'100%', elevation:2, width:'100%'}}>
-            <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingHorizontal:10}}>
-            <Text style={{fontSize:16, color:'black', marginTop:5}}>The Academist Terms and Conditions</Text>
-            <Text style={{paddingHorizontal:15 , marginTop:10}}>
-            <Text style={{fontWeight:'bold', color:'black'}}>Introduction</Text>
-            <Text> {`\n`}{"\n"} </Text>
-
-These Site’s Terms and Conditions shall manage your use of this website. These Terms will be fully applied and determine how you use this Site. In using this Site, you consent to all terms and conditions written in here. You are obliged not use this Website in case of any misunderstanding with any of the mentioned Website Standard Terms.
-
-Minors or individuals below 18 years old are forbidden from this Website.
-
-<Text> {`\n`}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Intellectual Property Rights</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-Other than the content you own, under these Terms, The Academist and its licensors own all intellectual property rights and materials within this Website.
-
-You are granted a limited license only permitting viewing of the material contained on this Website.
-
-<Text> {`\n`}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Data Attribution</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-Directory Data is copyrighted material under license to Wintergreen Orchard House and which is reproduced by permission of Wintergreen Orchard House. All rights reserved.
-
-<Text> {`\n`}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Restrictions</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-The limitations are:
-<Text> {`\n`}{"\n"} </Text>
-
-from publishing any material from The Academist in any other media;
-from selling, commercializing and sub selling any material from The Academist;
-from publicly performing and showing any of The Academist material;
-from using The Academist in any way that is or may be damaging to the site;
-from using The Academist in any way that impacts user access to the site;
-from using The Academist in a way that is against applicable laws and regulations, or in any way may cause harm to the site, or to any individual or business;
-from engaging in any data mining activity, data harvesting, data extracting or any other activity that is similar to those above to The Academist
-from the use of The Academist for advertising or marketing purposes.
-Certain parts of this site are restricted from your access, and The Academist may further restrict your access to any areas of the site, at any time, at the administrator’s absolute discretion. Specific user ID and password created for The Academist are confidential, and confidentiality must exist.
-
-<Text> {`\n`}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Your Content</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-In these site’s Terms and Conditions, “Your Content” is referenced to mean any sound clip, visual, images or by extension any other material displayed on the site. By posting Your Content, you grant The Academist a non-exclusive, worldwide, irrevocable, sublicense to utilize, recreate, adapt, print, translate and distribute it in all media.
-
-Your Content must be your own and must not be invading any third-party’s rights. The Academist reserves the inherent right to withdraw any of Your Content from the site at any time without warning.
-<Text> {`\n`}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>No warranties</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-The Academist is provided “as is,” with all faults, and The Academist express no form of representation or warranty, in any way that is related to the site or the materials contained on the site.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Limitation of liability</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-In no event shall The Academist, its officers, its directors, and its employees be held liable for any occurrence from the use of the site whether such liability is under contract. Also, The Academist, its officers, its directors, and its employees will in no way be held liable in the case of any indirect, in consequence, or individual liability from your use of the site.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Indemnification</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-You at this moment are indemnified to the fullest extent to The Academist from and against all liabilities, expenses, demands, causes of action, damages and costs related to your actions in breach of any of the provisions given to these Terms and Conditions.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Severability</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-If any of the provisions provided in this Terms and Conditions is found to be in contravention under any applicable law, such provisions shall be repealed without affecting the remaining provisions herein.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Variation of Terms</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-The Academist can change these Terms and Conditions at the administrator’s discretion, and by using the site, you are expected to review these Terms and Conditions on a regular basis.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Assignment</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-The Academist is permitted to assign, transfer, and subcontract its rights, privileges, and obligations under these Terms and Conditions without any notification. However, you as the user are not allowed to assign, transfer, or subcontract any of your rights and obligations under these Terms.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Entire Agreement</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-These Terms and Conditions contain the full agreement between The Academist and you as the user about your use of the site and in turn supersede all previous terms of understanding.
-<Text> {"\n"}{"\n"} </Text>
-<Text style={{fontWeight:'bold', color:'black'}}>Governing Law & Jurisdiction</Text>
-<Text> {`\n`}{"\n"} </Text>
-
-These Terms and Conditions will be governed by and interpreted by the constitutional laws of the State of Texas, and as the user, you submit to the non-exclusive jurisdiction of the specified state and federal courts in Texas for the resolution of any disputes.
-            </Text>
-            <Text> {`\n`}{"\n"} </Text>
-            </View>
-          </View>
-          
-        </View>
-        </ScrollView>
-    )
-  }
-}
-
-class Disclaimer extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      screenHeight: height,
-    }
-  }
   render(){
     const scrollEnabled = this.state.screenHeight > height - 50;
     onContentSizeChange = (contentWidth, contentHeight) => {
@@ -245,61 +59,8 @@ class Disclaimer extends React.Component{
         <View style={{flex:1, flexDirection:'column', alignItems:'center', alignContent:'space-between', width:'100%'}}>
           <View style={{backgroundColor:'white', height:'100%', elevation:2, width:'100%'}}>
             <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingHorizontal:10}}>
-            <Text style={{fontSize:16, color:'black', marginTop:5}}>Disclaimer for The Academist</Text>
-            <Text style={{paddingHorizontal:15 , marginTop:10}}>
-            For more information or questions about our site’s disclaimer, please feel free to contact us by email at info@theacademist.com
-
-Disclaimers for theacademist.com
-
-All data on this website is published in good faith and for general information purpose only. theacademist.com and not warranty on the completeness, reliability, and accuracy of this information. Any action you take upon the information you find on this website (theacademist.com), is strictly at your risk. theacademist.com will not be liable for any losses and damages in connection with the use of our website.
-
-From The Academist, you can visit other websites through hyperlinks. While we do our best to provide only quality links to ethical websites that are relevant to your interests, we do not control their nature or content. The links are not an implication of our recommendation for their content which is privy to their terms. The links may connect to websites whose owners and content may change without notice without our opportunity to change their ‘bad’ links.
-
-You should also be aware that when leaving our website, other websites have different privacy policies and terms which are not in our control. Please beware of their Privacy Policies and their “Terms and Conditions” before engaging in any business or providing any data.
-
-Consent
-
-In using our website, you at this moment consent to our disclaimer terms and agree to them.
-
-Update
-
-If we make updates, amendments or changes to the disclaimer, those changes will be posted here promptly.
-            </Text>
-            <Text> {`\n`}{"\n"} </Text>
-            </View>
-          </View>
-          
-        </View>
-        </ScrollView>
-    )
-  }
-}
-
-class PrivacyPolicy extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      screenHeight: height
-  }
-}
-
-  render(){
-    const scrollEnabled = this.state.screenHeight > height - 50;
-    onContentSizeChange = (contentWidth, contentHeight) => {
-      this.setState({ screenHeight: contentHeight });
-    };
-    return(
-      <ScrollView 
-        style={{flex:1}}
-        contentContainerStyle={{flexGrow: 1, alignContent:'center'}}
-        scrollEnabled={scrollEnabled}
-        onContentSizeChange={this.onContentSizeChange}
-        >
-        <View style={{flex:1, flexDirection:'column', alignItems:'center', alignContent:'space-between', width:'100%'}}>
-          <View style={{backgroundColor:'white', height:'100%', elevation:2, width:'100%'}}>
-            <View style={{flex:1, alignItems:'center', justifyContent:'center', paddingHorizontal:10}}>
-            <Text style={{fontSize:16, color:'black', marginTop:5}}>The Academist Privacy Policy</Text>
-            <Text style={{paddingHorizontal:15 , marginTop:10}}>
+            <Text style={{fontSize: 18, fontFamily:'AdventPro-Bold', color:'black', marginTop:5}}>The Academist Privacy Policy</Text>
+            <Text style={{fontSize: 18, fontFamily:'AdventPro-Regular', paddingHorizontal:15 , marginTop:10}}>
             This privacy policy compilation is a service to those who mind on how their ‘Personally Identifiable Information’ (PII) is used on the internet. PII is described in the US privacy law and information security as the information usable individually or with more data to identify, contact, or locate an individual or in context. Please peruse through our privacy policy in detail to clearly understand how we collect, use, protect or otherwise handle what you offer as Personally Identifiable Information by within the website.
 
 What kind of personal information do we require from the people that visit our site?

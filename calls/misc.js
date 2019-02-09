@@ -3,6 +3,7 @@ import {errorStates, receiveStates, requestStates} from '../actions/state';
 import {errorCountry, receiveCountry, requestCountry} from '../actions/country';
 import { AsyncStorage, Alert } from "react-native"
 import {getUserCall, refreshUserCall} from './user';
+import _ from 'lodash';
 
 export function verifyAndroidCall(url, token, coin, receipt, packageName, product, user_id, nav, e){
     return (dispatch) => {

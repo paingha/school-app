@@ -7,6 +7,7 @@ import { StyleSheet, FlatList, Clipboard,
 import {connect} from 'react-redux';
 import Modal from 'react-native-modalbox';
 import Spinner from 'react-native-loading-spinner-overlay';
+import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {getStates, getCountries, major_search, singleMajor} from '../settings'
 import {getStatesCall, getApplicantCountriesCall} from '../calls/misc'
@@ -36,7 +37,17 @@ class MajorScreen extends React.Component {
       loading: true,
       count: 0,
       serverData: [],
-      fetching_from_server: false
+      fetching_from_server: false,
+      slideText: [
+        "The more scholarships you apply to, the more funding you could be awarded. Apply! Apply! Apply!",
+        "Most scholarships require you to be admitted/accepted into a US or Canadian school to qualify.",
+        "Save your scholarship results by hitting the Save button, come back later once you're prepared to apply.",
+        "Divide and concur! Plan for scholarships with similar requirements which will allow you to cover more scholarships in a short period of time.",
+        "Compose a general letter, specifically about yourself, goals, academic background and uniqueness, to alleviate having to write multiple letters while applying for multiple scholarships."
+      ],
+      currentIndex: 0,
+      currentText: 'The more scholarships you apply to, the more funding you could be awarded. Apply! Apply! Apply!'
+
     }
     this.offset = 0;
   }
@@ -144,6 +155,20 @@ class MajorScreen extends React.Component {
                 console.error(error);
               });
       }
+      setSlider(){
+        /*setTimeout(()=>{
+          for(let i = this.state.currentIndex; i <= this.state.slideText.length; i++){
+            //this.setState({currentIndex: i + 1, currentText: this.state.slideText[i]})
+            alert(i + 1)
+          }
+        }, 100000) */
+        setInterval(()=>{
+          this.setState({currentIndex: this.state.currentIndex + 1, currentText: this.state.slideText[this.state.currentIndex]})
+            if (this.state.currentIndex >= this.state.slideText.length){
+              this.setState({currentIndex: 0})
+            }
+        }, 5000)
+      }
   async componentDidMount(){
     //alert(this.props.firstName.toString())
     await this.props.fetchStates(getStates)
@@ -151,7 +176,9 @@ class MajorScreen extends React.Component {
     await AsyncStorage.getItem('TOKEN', (err, result)=>{
       if (result){
         //get user here
-        this.setState({token: result})
+        this.setState({token: result},()=>{
+          //this.setSlider();
+        })
       }
     })
   }
@@ -292,7 +319,7 @@ class MajorScreen extends React.Component {
       label: 'Prince Edward Island'
     },{
       value: 'QC',
-      label: 'Québec'
+      label: 'QuÃ©bec'
     },{
       value: 'SK',
       label: 'Saskatchewan'
@@ -327,89 +354,135 @@ class MajorScreen extends React.Component {
          
       <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row'}} >
         <View style={{flex: 1, width: btnWidth1+80, paddingRight:0, paddingLeft:10}}>
-      <Dropdown
-        label='Major'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={this.props.majors}
-        onChangeText={this.majorChange.bind(this)}
-      />
+        <RNPickerSelect
+                    placeholder={{
+                        label: 'Major',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={this.props.majors}
+                    onValueChange={(value) => {
+                      this.setState({major: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.major}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
       </View>
       <View style={{flex: 1, width: btnWidth1-80, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Level'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={levels}
-        onChangeText={this.levelChange.bind(this)}
-      />
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Level',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    placeholderTextColor='#085078'
+                    items={levels}
+                    onValueChange={(value) => {
+                      this.setState({level: value})
+                    }}
+                    hideIcon={true}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.level}
+                    /*ref={(el) => {
+                        this.inputRefs.picker1 = el;
+                    }} */
+                />
       </View>
       </View>
-      <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+      <View style={{marginTop: 10, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
         {this.props.statesData?
         <React.Fragment>
         {this.state.country !== "Canada"?
-      <Dropdown
-        label='State'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={this.props.statesData}
-        onChangeText={this.stateChange.bind(this)}
-      />
+        <RNPickerSelect
+        placeholder={{
+            label: 'State',
+            value: null,
+            color: '#085078',
+        }}
+        placeholderTextColor='#085078'
+        items={this.props.statesData}
+        onValueChange={(value) => {
+          this.setState({usState: value})
+        }}
+        hideIcon={true}
+        style={{ ...pickerSelectStyles }}
+        value={this.state.usState}
+        /*ref={(el) => {
+            this.inputRefs.picker1 = el;
+        }} */
+    />
       :
-      <Dropdown
-        label='State'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={canadaStates}
-        onChangeText={this.stateChange.bind(this)}
-      />
+      <RNPickerSelect
+        placeholder={{
+            label: 'State',
+            value: null,
+            color: '#085078',
+        }}
+        placeholderTextColor='#085078'
+        items={canadaStates}
+        onValueChange={(value) => {
+          this.setState({usState: value})
+        }}
+        hideIcon={true}
+        style={{ ...pickerSelectStyles }}
+        value={this.state.usState}
+        /*ref={(el) => {
+            this.inputRefs.picker1 = el;
+        }} */
+    />
         }
          </React.Fragment>
         :
-      <Dropdown
-        label='State'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={states}
-        onChangeText={this.stateChange.bind(this)}
-      />
+        <RNPickerSelect
+        placeholder={{
+            label: 'State',
+            value: null,
+            color: '#085078',
+        }}
+        placeholderTextColor='#085078'
+        items={states}
+        onValueChange={(value) => {
+          this.setState({usState: value})
+        }}
+        hideIcon={true}
+        style={{ ...pickerSelectStyles }}
+        value={this.state.usState}
+        /*ref={(el) => {
+            this.inputRefs.picker1 = el;
+        }} */
+    />
       }
       </View>
       <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Country'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={18}
-        data={countryOptions}
-        onChangeText={this.countryChange.bind(this)}
-      />
+      <RNPickerSelect
+        placeholder={{
+            label: 'Country',
+            value: null,
+            color: '#085078',
+        }}
+        placeholderTextColor='#085078'
+        items={countryOptions}
+        onValueChange={(value) => {
+          this.setState({country: value})
+        }}
+        hideIcon={true}
+        style={{ ...pickerSelectStyles }}
+        value={this.state.country}
+        /*ref={(el) => {
+            this.inputRefs.picker1 = el;
+        }} */
+    />
       </View>
       </View>
       <View style={{marginTop: 5, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
         
       </View>
-      <View style={{flex: 1, width: btnWidth1, marginRight:10, paddingLeft:10}}>
+      <View style={{flex: 1, width: btnWidth1, marginTop: 10, marginRight:10, paddingLeft:10}}>
       <TouchableHighlight
       onPress={()=>{
         this.setState({visible: true}, ()=>{
@@ -443,18 +516,11 @@ class MajorScreen extends React.Component {
         renderItem={({item}) =>
         <TouchableOpacity 
         style={{marginBottom: 5, minHeight:50, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
-        onPress={()=> this.moreData(item.id)}>
+        onPress={()=> this.setState({shows: true})}>
             <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
            
             <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{item.name}</Text></View>
-            <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>{item.level == "Undergraduate"? <React.Fragment>SAT: {item.sat? <React.Fragment>{item.sat}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>: <React.Fragment>GRE: {item.gre? <React.Fragment>{item.gre}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>}</Text>
-            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>{item.level == "Undergraduate"? <React.Fragment>ACT: {item.sat? <React.Fragment>{item.act}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>: <React.Fragment>GMAT: {item.gmat? <React.Fragment>{item.gmat}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</React.Fragment>}</Text>
-            </View>
-            <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-        <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Level: {item.level? <React.Fragment>{item.level}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
-            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>GPA: {item.gpa? <React.Fragment>{item.gpa.toFixed(2)}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
-            </View>
+            
             <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
             <TouchableOpacity 
             style={{borderColor: '#085078', borderWidth: 1, padding:6}}
@@ -473,6 +539,7 @@ class MajorScreen extends React.Component {
             <Text style={{fontSize: 20, marginTop:20, fontFamily:'AdventPro-Bold', alignSelf:'center'}}>No Search Results </Text>
         }
         </View>
+        
     </View>
    
     <ShareSheet visible={this.state.shows} onCancel={this.onCancel.bind(this)}>
@@ -535,7 +602,11 @@ class MajorScreen extends React.Component {
               },300);
             }}>More</Button>
         </ShareSheet>
-        <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+        <Modal 
+          style={[styles.modal, styles.modal5]} 
+          position={"bottom"} ref={"savedModal"} 
+          swipeToClose={false}
+          backdropContent={BContent}>
     
     {
       this.props.ourSchool?
@@ -639,6 +710,28 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   },
 
+});
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
+  inputAndroid: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
 });
 const TWITTER_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAABvFBMVEUAAAAA//8AnuwAnOsAneoAm+oAm+oAm+oAm+oAm+kAnuwAmf8An+0AqtUAku0AnesAm+oAm+oAnesAqv8An+oAnuoAneoAnOkAmOoAm+oAm+oAn98AnOoAm+oAm+oAmuoAm+oAmekAnOsAm+sAmeYAnusAm+oAnOoAme0AnOoAnesAp+0Av/8Am+oAm+sAmuoAn+oAm+oAnOoAgP8Am+sAm+oAmuoAm+oAmusAmucAnOwAm+oAmusAm+oAm+oAm+kAmusAougAnOsAmukAn+wAm+sAnesAmeoAnekAmewAm+oAnOkAl+cAm+oAm+oAmukAn+sAmukAn+0Am+oAmOoAmesAm+oAm+oAm+kAme4AmesAm+oAjuMAmusAmuwAm+kAm+oAmuoAsesAm+0Am+oAneoAm+wAmusAm+oAm+oAm+gAnewAm+oAle0Am+oAm+oAmeYAmeoAmukAoOcAmuoAm+oAm+wAmuoAneoAnOkAgP8Am+oAm+oAn+8An+wAmusAnuwAs+YAmegAm+oAm+oAm+oAmuwAm+oAm+kAnesAmuoAmukAm+sAnukAnusAm+oAmuoAnOsAmukAqv9m+G5fAAAAlHRSTlMAAUSj3/v625IuNwVVBg6Z//J1Axhft5ol9ZEIrP7P8eIjZJcKdOU+RoO0HQTjtblK3VUCM/dg/a8rXesm9vSkTAtnaJ/gom5GKGNdINz4U1hRRdc+gPDm+R5L0wnQnUXzVg04uoVSW6HuIZGFHd7WFDxHK7P8eIbFsQRhrhBQtJAKN0prnKLvjBowjn8igenQfkQGdD8A7wAAAXRJREFUSMdjYBgFo2AUDCXAyMTMwsrGzsEJ5nBx41HKw4smwMfPKgAGgkLCIqJi4nj0SkhKoRotLSMAA7Jy8gIKing0KwkIKKsgC6gKIAM1dREN3Jo1gSq0tBF8HV1kvax6+moG+DULGBoZw/gmAqjA1Ay/s4HA3MISyrdC1WtthC9ebGwhquzsHRxBfCdUzc74Y9UFrtDVzd3D0wtVszd+zT6+KKr9UDX749UbEBgULIAbhODVHCoQFo5bb0QkXs1RAvhAtDFezTGx+DTHEchD8Ql4NCcSyoGJYTj1siQRzL/JKeY4NKcSzvxp6RmSWPVmZhHWnI3L1TlEFDu5edj15hcQU2gVqmHTa1pEXJFXXFKKqbmM2ALTuLC8Ak1vZRXRxa1xtS6q3ppaYrXG1NWjai1taCRCG6dJU3NLqy+ak10DGImx07LNFCOk2js6iXVyVzcLai7s6SWlbnIs6rOIbi8ViOifIDNx0uTRynoUjIIRAgALIFStaR5YjgAAAABJRU5ErkJggg==";
 

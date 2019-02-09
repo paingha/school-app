@@ -9,6 +9,15 @@ import {getForums, searchForum} from '../settings';
 import {getForumCall, searchForumCall} from '../calls/forum';
 import Loader from '../disc/loader';
 const { height } = Dimensions.get('window');
+import { FloatingAction } from 'react-native-floating-action';
+
+const actions = [ {
+  text: 'New Post',
+  icon: <Icon name="plus" size={20} style={{color:'#ffffff'}}/>,
+  name: 'post',
+  color: '#085078',
+  position: 1
+}]
 
 class ForumScreen extends React.Component{
 constructor(props){
@@ -235,6 +244,17 @@ static navigationOptions = ({ navigation }) =>{
               </View>
             </ScrollView>
           </Modal>
+          <FloatingAction
+        actions={actions}
+        color='#085078'
+        onPressItem={
+          (name) => {
+            if(name == 'post'){
+              this.props.navigation.navigate('EightteenViewStack')
+            }
+          }
+        }
+      />
             </React.Fragment>
         )
     }

@@ -15,6 +15,7 @@ import {getUserCall, refreshUserCall} from '../calls/user'
 import {scholarshipSearchCall, noCoinCall, scholarshipUnSaveCall, scholarshipSaveCall, singleScholarshipCall, clearScholarshipCall, clearScholarshipsCall} from '../calls/scholarship'
 import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 import { Dropdown } from 'react-native-material-dropdown';
+import RNPickerSelect from 'react-native-picker-select';
 import Share, {ShareSheet, Button} from 'react-native-share';
 import _ from 'lodash';
 const { height } = Dimensions.get('window');
@@ -22,6 +23,7 @@ const { height } = Dimensions.get('window');
 class ScholarshipScreen extends React.Component {
   constructor(props){
     super(props)
+    this.inputRefs = {};
     this.state = {
       visible: false,
       shows: false,
@@ -44,7 +46,17 @@ class ScholarshipScreen extends React.Component {
       loading: true,
       count: 0,
       serverData: [],
-      fetching_from_server: false
+      fetching_from_server: false,
+      slideText: [
+        "Compose a general letter; specifically; about yourself, goals, academic background, and uniqueness, to alleviate having to write multiple letters while applying for multiple scholarships.",
+        "The more scholarships you apply to, the more funding you could be awarded. Apply! Apply! Apply!",
+        "Most scholarships require you to be admitted/accepted into a US or Canadian school to qualify.",
+        "Save your scholarships results by hitting the save button, come back later once you’re prepared to apply.",
+        "Divide and concur! Plan for scholarships with similar requirements which will allow you to cover more scholarships in a short period of time. "
+      ],
+      currentIndex: 0,
+      currentText: 'Compose a general letter; specifically; about yourself, goals, academic background, and uniqueness, to alleviate having to write multiple letters while applying for multiple scholarships.'
+  
     }
     this.offset = 0;
   }
@@ -145,6 +157,33 @@ class ScholarshipScreen extends React.Component {
             console.error(error);
           });
   }
+  setSlider(){
+    /*setTimeout(()=>{
+      for(let i = this.state.currentIndex; i <= this.state.slideText.length; i++){
+        //this.setState({currentIndex: i + 1, currentText: this.state.slideText[i]})
+        alert(i + 1)
+      }
+    }, 100000) */
+    setInterval(()=>{
+      this.setState({currentIndex: this.state.currentIndex + 1, currentText: this.state.slideText[this.state.currentIndex]})
+        if (this.state.currentIndex >= this.state.slideText.length){
+          this.setState({currentIndex: 0})
+        }
+    }, 5000)
+  }
+  setDefaults(){
+    const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
+    //alert(typeof(gpa))
+    this.setState({
+      level: level,
+      major: major,
+      gpa: gpa.toString(),
+      applicantCountry: applicantCountry,
+      scholarshipCountry: scholarshipCountry,
+      amount: '$0 - $5,000',
+      criteria: criteria,
+    })
+  }
   componentDidMount(){
     //alert(this.props.firstName.toString())
     const {id, firstName, lastName, coin, major, image, referralCode, referralToken, scholarshipCountry, gpa, applicantCountry, savedID, saved, criteria, level} = this.props.currentUser;
@@ -153,9 +192,12 @@ class ScholarshipScreen extends React.Component {
     this.props.fetchCountries(getCountries)
     AsyncStorage.getItem('TOKEN', (err, result)=>{
       if (result){
-        //get user here
+        //get user 
+        this.setDefaults();
         this.setState({token: result},()=>{
-          this.props.refreshUser(id, this.state.token)
+          this.props.refreshUser(id, this.state.token);
+          this.setSlider();
+          this.setDefaults();
         })
       }
     })
@@ -172,23 +214,24 @@ class ScholarshipScreen extends React.Component {
     return <Text style={{alignSelf:'center', paddingVertical:10, fontFamily:'AdventPro-Regular', fontSize:18}}> {this.state.count} {this.state.count == 1 ? <Text>Scholarship Found</Text>:  <Text>Scholarships Found</Text> }</Text>;
     };
   renderHeaderNoCoin = (e) => {
-    let {id, name, amount, description, criteria, level, applicantCountry, country, gpa, deadline, institution, comment, url} = e;
+    let {id, name, amount, description, major, criteria, level, applicantCountry, country, gpa, deadline, institution, comment, url} = e;
     return (
       <React.Fragment>
       <Text style={{fontSize: 14, alignSelf:'center', paddingVertical:10, fontWeight:'bold'}}> <Text>Buy Coin to Complete Search</Text></Text>
-      <TouchableOpacity onPress={()=> this.props.navigation.navigate('SixthView')}> 
-                  <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}}>
-                  <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text>{name}</Text></View>
-                  <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-                  <Text >Deadline: {deadline ? <React.Fragment>{deadline}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
-                   
-                    <Text>Criteria: {criteria}</Text>
-
-                  </View>
-                  <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-                  <Text>Level: {level}</Text>
-                  <Text>Amount: {amount}</Text>
-                  </View>
+      <TouchableOpacity 
+      style={{marginBottom: 5, minHeight:50, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
+        
+      onPress={()=> this.props.navigation.navigate('SixthView')}> 
+      <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}}>
+            <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{name}</Text></View>
+            <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
+            <Text style={{fontFamily:'AdventPro-Regular', flexWrap:'wrap', fontSize:20}}>Major: {major ? <React.Fragment>{major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Criteria: {criteria}</Text>
+            </View>
+            <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Level: {level}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Amount: {amount}</Text>
+            </View>
                   <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
                   <TouchableOpacity onPress={()=> {this.props.navigation.navigate('SixthView')}}>
                   <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
@@ -200,12 +243,12 @@ class ScholarshipScreen extends React.Component {
                   </TouchableOpacity>
                   <View
                     style={{
-                      height: 1,
-                      marginTop:10,
-                      marginBottom:10,
+                      height: 10,
+                      marginTop:5,
+                      marginBottom:5,
                       width: "100%",
-                      backgroundColor: "#CED0CE"
                     }}
+                
                   />
                   </React.Fragment>
     )
@@ -328,7 +371,9 @@ class ScholarshipScreen extends React.Component {
       value: 'Need',
       label: 'Need',
     }];
-    let countries = this.props.countries;
+    
+    let countries = this.props.countries
+
     let scholarshipCountries = [{
       value: 'US',
       label: 'US',
@@ -413,32 +458,43 @@ class ScholarshipScreen extends React.Component {
               <View style={{flex: 1, padding: 0, alignSelf:'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
               <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
               <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-          
-        <Dropdown
-        label='Level'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={levels}
-        onChangeText={this.levelChange.bind(this)}
-      />
+              <RNPickerSelect
+                    placeholder={{
+                        label: 'Level',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={levels}
+                    onValueChange={(value) => {
+                      this.setState({level: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.level}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
       </View>
       <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Major'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={majors}
-        onChangeText={this.majorChange.bind(this)}
-      />
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Major',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={majors}
+                    onValueChange={(value) => {
+                      this.setState({major: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.major}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
       </View>
       </View>
-      <TouchableOpacity style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'flex-end', marginRight:20}} onPress={()=> this.setState({hide: false})}>
+      <TouchableOpacity style={{textAlign: 'center', marginTop: 10, justifyContent:'space-around', flexDirection:'row',alignSelf: 'flex-end', marginRight:20}} onPress={()=> this.setState({hide: false})}>
       <View style={{textAlign: 'center', justifyContent:'space-around', flexDirection:'row',alignSelf: 'flex-end', marginRight:20}}>
       <Text style={{marginRight:5, fontSize:20, color:"#085078"}}>Filter</Text>
       <Icon Style={{marginLeft:5}}name="filter" size={30} color="#085078" />
@@ -448,9 +504,8 @@ class ScholarshipScreen extends React.Component {
     
        
     </View>
-    <View style={{flex:0.75, alignSelf: 'center', width:'90%', height: '100%', marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+    <View style={{flex:0.6, alignSelf: 'center', width:'90%', height: '100%', marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
     {this.state.serverData.length > 0 ?
-        
         <FlatList
         style={{alignSelf: 'center', fontSize:25, width:'100%'}}
         data={this.state.serverData}
@@ -466,7 +521,7 @@ class ScholarshipScreen extends React.Component {
             <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
             <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Major: {item.major ? <React.Fragment>{item.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', flexWrap:'wrap', fontSize:20}}>Major: {item.major ? <React.Fragment>{item.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
             <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Criteria: {item.criteria}</Text>
             </View>
             <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
@@ -496,16 +551,19 @@ class ScholarshipScreen extends React.Component {
             :
             <React.Fragment>
               {this.props.noCoins?
-              <View style={{paddingVertical: 15, backgroundColor:'white'}}>
+              <View style={{flex:1, alignSelf: 'center', width:'100%', height: '100%', marginTop:10, alignContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         
-              <FlatList
-              style={{alignSelf: 'center', paddingRight:25, paddingLeft:25, fontSize:25, width:'100%'}}
-                  data={this.props.noCoins.splice(1)}
+        <FlatList
+        style={{alignSelf: 'center', fontSize:25, width:'100%'}}
+            data={this.props.noCoins}
                   keyExtractor={item => item.id.toString()}
                   ListHeaderComponent={this.renderHeaderNoCoin(this.props.noCoins[0])}
+                  showsVerticalScrollIndicator={false}
                   ItemSeparatorComponent={this.renderSeparator}
                   renderItem={({item}) => 
-                  <TouchableOpacity onPress={()=> 
+                  <TouchableOpacity 
+                  style={{marginBottom: 5, minHeight:50, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
+                  onPress={()=> 
                     Alert.alert(
                       'Error!',
                       'Not Enough Coin to Complete Search!',
@@ -515,17 +573,16 @@ class ScholarshipScreen extends React.Component {
                       ]
                   )
                   }> 
-                  <View styles={{flex: 1, width:'90%', paddingBottom: 40, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:35, paddingLeft:35}} key={item.id}>
-                  <View styles={{color:'#085078', fontSize:20, paddingRight:5, paddingLeft:5}}><Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>{item.name}</Text></View>
-                  <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
-                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Major: {item.major}</Text>
-                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Criteria: {item.criteria}</Text>
-                  
-                  </View>
-                  <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
-                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Level: {item.level}</Text>
-                  <Text style={{textDecorationLine:'line-through', textDecorationStyle:'solid'}}>Amount: {item.amount}</Text>
-                  </View>
+                  <View styles={{flex: 1, width:'90%', paddingBottom: 40, opacity:0.8, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
+            <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{item.name}</Text></View>
+            <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Major: {item.major ? <React.Fragment>{item.major.map(s => s.trim()).join(", ")}</React.Fragment>: <React.Fragment>N/A</React.Fragment>}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Criteria: {item.criteria}</Text>
+            </View>
+            <View style={{flex: 1, paddingRight:5, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Level: {item.level}</Text>
+            <Text style={{fontFamily:'AdventPro-Regular', fontSize:20}}>Amount: {item.amount}</Text>
+            </View>
                   <View style={{flex: 1, paddingRight:5, marginVertical: 10, paddingLeft:5, flexDirection:'row', justifyContent:'space-between', alignContent:'space-between'}}>
                   <TouchableOpacity onPress={()=> this.props.navigation.navigate('SixthView')}>
                   <View style={{flex: 1, justifyContent: 'space-around', textAlign:'center', alignItems:'center', flexDirection: 'row', backgroundColor: '#ffffff'}}>
@@ -544,13 +601,44 @@ class ScholarshipScreen extends React.Component {
             </React.Fragment>
         }
         </View>
-    <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+        <View style={{flex:0.15, width:'100%', padding: 6, backgroundColor: '#085078', alignSelf: 'center',  marginTop:4, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
+        <Text style={{textAlign: 'center', alignSelf:'center', fontFamily:'AdventPro-Bold', color:'#ffffff'}}>{this.state.currentText}</Text>
+        <View style={{flexDirection:'row', marginTop: 8, justifyContent:'space-evenly', alignContent:'space-between'}}>
+        {this.state.slideText.map((item, index)=>{
+          if(this.state.currentIndex == index){
+            return <View style={{
+              width: 10, 
+              height: 10, 
+              borderRadius: 5, 
+              backgroundColor:'#ffffff', 
+              marginRight: 10,
+            }}/>
+            
+          }
+          else{
+            return <View style={{
+              width: 10, 
+              height: 10, 
+              borderRadius: 5, 
+              backgroundColor:'grey', 
+              marginRight: 10
+            }}/>
+          }
+        })}
+        </View>
+        </View>
+    <Modal 
+      style={[styles.modal, styles.modal5]}
+      position={"center"} 
+      ref={"savedModal"} 
+      swipeToClose={false}
+      backdropContent={BContent}>
     
     {
       this.props.singleOne?
       <ScrollView 
                 style={{flex:1}}
-                contentContainerStyle={{flexGrow: 1, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                contentContainerStyle={{flexGrow: 1, marginBottom:100, alignContent:'center', paddingLeft:15, paddingRight:15}}
                 scrollEnabled={scrollEnabled}
                 onContentSizeChange={this.onContentSizeChange}
                 >
@@ -607,7 +695,7 @@ class ScholarshipScreen extends React.Component {
       
     }
     </Modal>
-    <Modal style={[styles.modal, styles.modal4]} position={"bottom"} ref={"modal9"} backdropContent={BContent}>
+    <Modal style={[styles.modal, styles.modal4]} position={"center"} ref={"modal9"} backdropContent={BContent}>
     <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}>No Coin</Text>
     <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
     <Text>Not Enough Coin!</Text>
@@ -701,105 +789,200 @@ class ScholarshipScreen extends React.Component {
         <View style={{flex: 1, padding: 0, alignSelf:'center', alignContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 1}}>
         <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-        <Dropdown
-        label='Level'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={levels}
-        onChangeText={this.levelChange.bind(this)}
-      />
+        <RNPickerSelect
+                    placeholder={{
+                        label: 'Level',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    placeholderTextColor='#085078'
+                    items={levels}
+                    onValueChange={(value) => {
+                      this.setState({level: value})
+                    }}
+                    hideIcon={true}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.level}
+                    /*ref={(el) => {
+                        this.inputRefs.picker1 = el;
+                    }} */
+                />
       </View>
       <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Major'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={majors}
-        onChangeText={this.majorChange.bind(this)}
-      />
+      {majors?
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Major',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={majors}
+                    onValueChange={(value) => {
+                      this.setState({major: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.major}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                :
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Major',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={[{'label': 'Loading...', 'key': 'Loading..'}]}
+                    onValueChange={(value) => {
+                      this.setState({major: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.major}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                  }
       </View>
       </View>
       
-      <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row'}} >
-        <View style={{flex: 1, width: btnWidth1+80, paddingRight:0, paddingLeft:10}}>
-      <Dropdown
-        label='Scholarship Country'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={scholarshipCountries}
-        onChangeText={this.scholarshipCountryChange.bind(this)}
-      />
+      <View style={{marginTop: 7, marginBottom: 0.5, flexDirection: 'row'}} >
+        <View style={{flex: 1.3, width: btnWidth1+200, paddingRight:0, paddingLeft:10}}>
+        <RNPickerSelect
+                    placeholder={{
+                        label: 'Scholarship Country',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    placeholderTextColor='#085078'
+                    hideIcon={true}
+                    items={scholarshipCountries}
+                    onValueChange={(value) => {
+                      this.setState({scholarshipCountry: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.scholarshipCountry}
+                    /*ref={(el) => {
+                        this.inputRefs.picker3 = el;
+                    }} */
+                />
       </View>
-      <View style={{flex: 1, width: btnWidth1-80, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='GPA'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={gpas}
-        onChangeText={this.gpaChange.bind(this)}
-      />
+      <View style={{flex: 0.7, width: btnWidth1-200, paddingRight:10, paddingLeft:10}}>
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'GPA',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={gpas}
+                    placeholderTextColor='#085078'
+                    hideIcon={true}
+                    onValueChange={(value) => {
+                      this.setState({gpa: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.gpa}
+                    /*ref={(el) => {
+                        this.inputRefs.picker3 = el;
+                    }} */
+                />
       </View>
       </View>
-      <View style={{marginTop: 0, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+      <View style={{marginTop: 7, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Criteria'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={criterias}
-        onChangeText={this.criteriaChange.bind(this)}
-      />
+        <RNPickerSelect
+                    placeholder={{
+                        label: 'Criteria',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={criterias}
+                    placeholderTextColor='#085078'
+                    hideIcon={true}
+                    onValueChange={(value) => {
+                      this.setState({criteria: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.criteria}
+                    /*ref={(el) => {
+                        this.inputRefs.picker3 = el;
+                    }} */
+                />
       </View>
       <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Country'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={countries}
-        onChangeText={this.applicantCountryChange.bind(this)}
-      />
+      {countries?
+      <RNPickerSelect
+                    placeholder={{
+                        label: 'Applicant Country',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={countries}
+                    onValueChange={(value) => {
+                      this.setState({applicantCountry: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.applicantCountry}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                :
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Applicant Country',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={[{'label': 'Loading...', 'key': 'Loading..'}]}
+                    onValueChange={(value) => {
+                      this.setState({applicantCountry: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.applicantCountry}
+                    /*ref={(el) => {
+                        this.inputRefs.picker = el;
+                    }} */
+                />
+                  }
       </View>
       
       </View>
-      <View style={{marginTop: 2, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
+      <View style={{marginTop: 7, marginBottom: 0.5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}} >
         <View style={{flex: 1, width: btnWidth1, paddingRight:10, paddingLeft:10}}>
-      <Dropdown
-        label='Amount'
-        baseColor='#085078'
-        textColor='#085078'
-        labelTextStyle = {{fontFamily: 'AdventPro-Bold'}}
-        style={{fontFamily:'AdventPro-Bold'}}
-        fontSize={16}
-        data={amounts}
-        onChangeText={this.amountChange.bind(this)}
-      />
+        
+        <RNPickerSelect
+                    placeholder={{
+                        label: 'Amount',
+                        value: null,
+                        color: '#085078',
+                    }}
+                    items={amounts}
+                    placeholderTextColor='#085078'
+                    hideIcon={true}
+                    onValueChange={(value) => {
+                      this.setState({amount: value})
+                    }}
+                    style={{ ...pickerSelectStyles }}
+                    value={this.state.amount}
+                    ref={(el) => {
+                        this.inputRefs.picker3 = el;
+                    }}
+                />
       </View>
-      <View style={{flex: 1, width: btnWidth1, marginRight:10, paddingLeft:10}}>
+      <View style={{flex: 1, width: btnWidth1, marginTop: 10, marginRight:10, paddingLeft:10}}>
       <TouchableHighlight
       onPress={()=>{
         this.setState({visible: true}, ()=>{
           setTimeout(()=>{
           this.setState({visible: false, hide: true})
+          if(coin >= 0.5){
           this.fetchScholarship(this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id)
-          
+          }
+          else{
+            this.props.scholarshipSearch(scholarship_search, this.state.token, this.state.major, this.state.amount, this.state.gpa, this.state.level, this.state.criteria, this.state.applicantCountry, this.state.scholarshipCountry, id, this.state.offset, [], coin, this.props.navigation)
+          }
         },3000)
     })
     }
@@ -827,13 +1010,39 @@ class ScholarshipScreen extends React.Component {
             <Text style={{fontSize: 20, marginTop:20, fontFamily:'AdventPro-Bold', alignSelf:'center'}}>No Search Results </Text>
         }
         </View>
-    <Modal style={[styles.modal, styles.modal5]} position={"bottom"} ref={"savedModal"} backdropContent={BContent}>
+        <View style={{flex:0.15, width:'100%', padding: 6, backgroundColor: '#085078', alignSelf: 'center',  marginTop:4, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', elevation: 2}}>
+        <Text style={{textAlign: 'center', alignSelf:'center', fontFamily:'AdventPro-Bold', color:'#ffffff'}}>{this.state.currentText}</Text>
+        <View style={{flexDirection:'row', marginTop: 8, justifyContent:'space-evenly', alignContent:'space-between'}}>
+        {this.state.slideText.map((item, index)=>{
+          if(this.state.currentIndex == index){
+            return <View style={{
+              width: 10, 
+              height: 10, 
+              borderRadius: 5, 
+              backgroundColor:'#ffffff', 
+              marginRight: 10,
+            }}/>
+            
+          }
+          else{
+            return <View style={{
+              width: 10, 
+              height: 10, 
+              borderRadius: 5, 
+              backgroundColor:'grey', 
+              marginRight: 10
+            }}/>
+          }
+        })}
+        </View>
+        </View>
+    <Modal style={[styles.modal, styles.modal5]} position={"center"} ref={"savedModal"} backdropContent={BContent}>
     
     {
       this.props.singleOne?
       <ScrollView 
                 style={{flex:1}}
-                contentContainerStyle={{flexGrow: 1, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                contentContainerStyle={{flexGrow: 1, marginBottom:100, alignContent:'center', paddingLeft:15, paddingRight:15}}
                 scrollEnabled={scrollEnabled}
                 onContentSizeChange={this.onContentSizeChange}
                 >
@@ -924,7 +1133,7 @@ class ScholarshipScreen extends React.Component {
               },300);
             }}>More</Button>
         </ShareSheet>
-    <Modal style={[styles.modal, styles.modal4]} position={"bottom"} ref={"modal9"} backdropContent={BContent}>
+    <Modal style={[styles.modal, styles.modal4]} position={"center"} ref={"modal9"} backdropContent={BContent}>
     <Text style={{fontSize: 25, color: 'black', marginTop:25, marginBottom:0, paddingBottom:0}}>No Coin</Text>
     <View style={{ flex: 1, width:'100%', paddingBottom:20, paddingLeft:25, paddingRight:25 }}>
     <Text>Not Enough Coin!</Text>
@@ -1117,5 +1326,28 @@ const mapDispatchToProps = (dispatch) => {
       },
   };
 };
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
+  inputAndroid: {
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: '#085078',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: '#085078',
+  },
+});
 
 export default connect(mapper, mapDispatchToProps)(ScholarshipScreen);
