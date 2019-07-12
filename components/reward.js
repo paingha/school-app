@@ -109,7 +109,7 @@ class RewardScreen extends React.Component {
       url: `https://www.theacademist.com/register?ref=${referralCode}`,
       subject: "Find Schools by GPA on The Academist" //  for email
     };
-    const scrollEnabled = this.state.screenHeight < 100;
+    const scrollEnabled = true;
     const bannerHeight = height/20;
     const btnWidth = width/2;
     const btnWidth1 = width - 200;

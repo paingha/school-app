@@ -561,6 +561,15 @@ class ScholarshipScreen extends React.Component {
                   showsVerticalScrollIndicator={false}
                   ItemSeparatorComponent={this.renderSeparator}
                   renderItem={({item}) => 
+                  <ImageBackground 
+            source={require('../assets/completely-transparent-img.png')} 
+            imageStyle={{opacity: 1}}
+            style={{ 
+              width: '100%', 
+              minHeight:50,
+              opacity:1
+            }}
+            >
                   <TouchableOpacity 
                   style={{marginBottom: 5, minHeight:50, width:'100%', elevation: 1, padding:15, backgroundColor:'white',}}
                   onPress={()=> 
@@ -573,6 +582,8 @@ class ScholarshipScreen extends React.Component {
                       ]
                   )
                   }> 
+                  
+
                   <View styles={{flex: 1, width:'90%', paddingBottom: 40, opacity:0.8, backgroundColor:'white', elevation: 2, flexDirection:'row', paddingRight:5, paddingLeft:5}} key={item.id}>
             <View style={{color:'#085078', marginBottom: 5}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{item.name}</Text></View>
             <View style={{flex: 1, flexDirection:'row', paddingRight:5, paddingLeft:5, justifyContent:'space-between', alignContent:'space-between'}}>
@@ -592,6 +603,7 @@ class ScholarshipScreen extends React.Component {
                   </View>
                   </View>
                   </TouchableOpacity>
+                  </ImageBackground>
               }
                   />
                   </View>
@@ -638,11 +650,11 @@ class ScholarshipScreen extends React.Component {
       this.props.singleOne?
       <ScrollView 
                 style={{flex:1}}
-                contentContainerStyle={{flexGrow: 1, marginBottom:100, alignContent:'center', paddingLeft:15, paddingRight:15}}
-                scrollEnabled={scrollEnabled}
+                contentContainerStyle={{flexGrow: 1, minWidth:'100%', marginBottom:100, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                scrollEnabled={true}
                 onContentSizeChange={this.onContentSizeChange}
                 >
-      <View style={{flex:1, marginBottom:15}}>
+      <View style={{flex:1, minWidth:'100%', marginBottom:15}}>
       <Text style={{fontSize: 25, color: 'black', marginTop:10, marginBottom:10, paddingBottom:0}}>{this.props.singleOne.name}</Text>
       <View style={{flex:1, width:'90%', marginHorizontal:5}}>
     <Text style={{fontSize: 16, marginVertical:5}}><Text style={{fontWeight:'bold'}}>DESCRIPTION:</Text> {this.props.singleOne.description? <React.Fragment>{this.props.singleOne.description}</React.Fragment>: <React.Fragment>N/A</React.Fragment> }</Text>
@@ -1041,9 +1053,9 @@ class ScholarshipScreen extends React.Component {
     {
       this.props.singleOne?
       <ScrollView 
-                style={{flex:1}}
-                contentContainerStyle={{flexGrow: 1, marginBottom:100, alignContent:'center', paddingLeft:15, paddingRight:15}}
-                scrollEnabled={scrollEnabled}
+                style={{flex:1, minWidth:'100%',}}
+                contentContainerStyle={{flexGrow: 1, minWidth:'100%', marginBottom:100, alignContent:'center', paddingLeft:15, paddingRight:15}}
+                scrollEnabled={true}
                 onContentSizeChange={this.onContentSizeChange}
                 >
       <Text style={{fontSize: 25, color: 'black', marginTop:10, marginBottom:10, paddingBottom:0}}>{this.props.singleOne.name}</Text>

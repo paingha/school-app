@@ -573,6 +573,7 @@ class GpaScreen extends React.Component {
       this.props.singleSchool?
       <ScrollView 
                 style={{flex:1}}
+                scrollEnabled={true}
                 >
       <View style={{color:'#085078', marginTop:6, marginBottom: 15}}><Text style={{color:'#085078', alignSelf:'center', fontSize:20, fontFamily:'AdventPro-Bold', marginBottom: 5}}>{this.props.singleSchool.name}</Text></View>
       <View style={{flex:1, width:'90%', marginHorizontal:5}}>

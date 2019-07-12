@@ -46,7 +46,7 @@ static navigationOptions = ({ navigation }) =>{
   };
 
     render(){
-      const scrollEnabled = this.state.screenHeight > height - 250;
+      const scrollEnabled = true;
         return(
           <ScrollView 
           style={{flex:1, backgroundColor:'#fff'}}

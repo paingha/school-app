@@ -3,6 +3,7 @@ package com.theacademist_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.imagepicker.ImagePickerPackage;
 import cl.json.RNSharePackage;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeOneSignalPackage(),
             new RNCWebViewPackage(),
             new ImagePickerPackage(),
             new RNSharePackage(),

@@ -11,6 +11,7 @@ import {errorLogin, requestUser, receiveUser} from './actions/user';
 import Wrapper from './wrapper';
 import OfflineNotice from './components/offline';
 import { withNetworkConnectivity } from 'react-native-offline';
+import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
 async function decode(a){
   try {
@@ -30,6 +31,7 @@ const store = prepareStore({
 class App extends React.Component {
   constructor(props){
     super(props)
+    OneSignal.init("7efdc9c1-5698-427e-a375-da25a69d5734");
   this.state = {
     loadingNow: true,
     hasToken: false,
@@ -40,6 +42,9 @@ class App extends React.Component {
     connected: this.props.isConnected,
     backClickCount: 0
   }
+  //OneSignal.addEventListener('received', this.onReceived);
+  //OneSignal.addEventListener('opened', this.onOpened);
+  //OneSignal.addEventListener('ids', this.onIds);
 }
 componentWillMount(){
   BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -62,10 +67,27 @@ componentWillMount(){
       .catch(err => alert("An error occurred"));
     }
 }
+onReceived(notification) {
+  console.log("Notification received: ", notification);
+}
+
+onOpened(openResult) {
+  console.log('Message: ', openResult.notification.payload.body);
+  console.log('Data: ', openResult.notification.payload.additionalData);
+  console.log('isActive: ', openResult.notification.isAppInFocus);
+  console.log('openResult: ', openResult);
+}
+
+onIds(device) {
+  console.log('Device info: ', device);
+}
 
 
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    //OneSignal.removeEventListener('received', this.onReceived);
+    //OneSignal.removeEventListener('opened', this.onOpened);
+    //OneSignal.removeEventListener('ids', this.onIds);
 }
 countNow = () =>{
   this.setState({backClickCount: this.state.backClickCount + 1}, ()=>{

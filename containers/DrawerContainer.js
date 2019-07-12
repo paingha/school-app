@@ -19,7 +19,7 @@ onContentSizeChange = (contentWidth, contentHeight) => {
 
   render() {
     const { navigation } = this.props
-    const scrollEnabled = this.state.screenHeight > height - 200;
+    const scrollEnabled = true;
     return (
       <ScrollView 
                 style={{flex:1, paddingBottom: this.state.paddingValue}}
